@@ -18,9 +18,7 @@
 >
 
 >Ceci est une autre **zone de retrait**.
-
-Cette zone continue également dans la ligne suivante.
-Cependant, cette ligne n’est plus en retrait
+Cette zone continue également dans la ligne suivante.Cependant, cette ligne n’est plus en retrait
 
 afficher du code `sudo service nginx reload`
 
