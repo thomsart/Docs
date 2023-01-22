@@ -14,6 +14,13 @@
 1. Liste 1
 2. Liste 2
 
+>Ceci est une **zone en retrait**.
+>La zone continue ici
+
+>Ceci est une autre **zone de retrait**.
+Cette zone continue également dans la ligne suivante.
+Cependant, cette ligne n’est plus en retrait
+
 afficher du code `sudo service nginx reload`
 
 Encore écrit ici en texte ordinaire
