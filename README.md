@@ -19,10 +19,10 @@ _Texte qui sera_ en italique
 2. Liste 2
 3. Liste 3
 
-C’est le `sudo service nginx reload`
+afficher du code `sudo service nginx reload`
 
 Encore écrit ici en texte ordinaire
-  Ceci est la première ligne du bloc de code
-  La seconde ligne est encore plus en retrait
-  C’est une autre ligne du bloc de code
+    Ceci est la première ligne du bloc de code
+    La seconde ligne est encore plus en retrait
+    C’est une autre ligne du bloc de code
 C’est ici que le texte ordinaire recommence
