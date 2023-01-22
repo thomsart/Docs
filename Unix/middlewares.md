@@ -2,7 +2,7 @@
 Tout les middlewares utiles à la gestion de l'écosystème Unix.  
 
 ## Editeur de texte Vim
-Ouvrir un fichier `sudo vi fichier.txt`   
+Ouvrir un fichier `sudo vi fichier.txt`    
 Quitter sans sauvegarder `ctrl` + `z`
 Quitter en sauvergardant `echap` > `:` > `w` > `q` > `!` > `enter`  
 
