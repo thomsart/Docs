@@ -19,10 +19,10 @@
 
 afficher du code `sudo service nginx reload`
 
-Encore écrit ici en texte ordinaire
+Si un bloc de code doit être ecrit, proceder comme suit:
 
-    Ceci est la première ligne du bloc de code
-    La seconde ligne est encore plus en retrait
-    C’est une autre ligne du bloc de code
+    @decorator
+    def retirer_doigt_du_fion(*args, **kwargs) -> fuck:
+        return claque_dans_la_gueule()
 
 C’est ici que le texte ordinaire recommence
