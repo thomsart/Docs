@@ -25,7 +25,7 @@ Si un bloc de code doit être ecrit, proceder comme suit:
     def retirer_doigt_du_fion(*args, **kwargs) -> fuck:
         return claque_dans_la_gueule()
 
-C’est ici que le texte ordinaire recommence
+C’est ici que le texte ordinaire recommence  
 pour un retour chariot sauter de ligne
 
 pour sauter de ligne, sauter deux lignes
