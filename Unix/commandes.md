@@ -1,6 +1,6 @@
 # Commandes essentielles...
 
-## Parcourir et voir
+## Parcourir
 Afficher le dossier dans lequel on se trouve `pwd`<br>
 Lister tout les fichers du dossier `ls`<br>
 Afficher toutes les infos du fichier `ls -l`<br>
