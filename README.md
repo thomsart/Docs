@@ -17,13 +17,12 @@
 >Ceci est une **zone en retrait**.
 >
 
->Ceci est une autre **zone de retrait**.
-Cette zone continue également dans la ligne suivante.Cependant, cette ligne n’est plus en retrait
-
 afficher du code `sudo service nginx reload`
 
 Encore écrit ici en texte ordinaire
-    ```Ceci est la première ligne du bloc de code
+    ```
+    Ceci est la première ligne du bloc de code
     La seconde ligne est encore plus en retrait
-    C’est une autre ligne du bloc de code```
+    C’est une autre ligne du bloc de code
+    ```
 C’est ici que le texte ordinaire recommence
