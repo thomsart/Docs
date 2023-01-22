@@ -25,7 +25,9 @@ Si un bloc de code doit être ecrit, proceder comme suit:
     def retirer_doigt_du_fion(*args, **kwargs) -> fuck:
         return claque_dans_la_gueule()
 
-C’est ici que le texte ordinaire recommence  
-pour un retour chariot laissez deux espaces en fin de ligne  
-pour sauter de ligne, sauter deux lignes<br><br>
+C’est ici que le texte ordinaire recommence.  
+pour un retour chariot laissez deux espaces en fin de ligne ou utilisez la balise `<br>`.<br>
+
+pour sauter de ligne, sauter deux lignes ou utilisez `<br><br>` deux fois.<br><br>
+
 Ok ?
