@@ -1,30 +1,30 @@
 # Les Différentes clauses du langage SQL
 >TRES IMPORTANT => toute fin d'instruction en SQL se termine par le ';'  
 
-### SELECT
+## SELECT
 >Cette clause sert à retourner un ou des élément (avec ou sans conditions) dans une table  
 
-`SELECT * FROM table;` => TOUTES les colonnes de la table  
-`SELECT colone1, colonne2 FROM table;` => La colonne 1 et 2 de la table  
-`SELECT DISTINCT colone1 FROM table;` => La clause DISTINCT sert à avoir les différentes colone1 sans répéter les valeurs si doublons il y a.  
+    SELECT * FROM table; => TOUTES les colonnes de la table  
+    SELECT colone1, colonne2 FROM table; => La colonne 1 et 2 de la table  
+    SELECT DISTINCT colone1 FROM table; => La clause DISTINCT sert à avoir les différentes colone1 sans répéter les doublons.  
 
 ## WHERE
 >La clause WHERE définis une condition bien précise  
 
     SELECT name, address FROM user
         WHERE name='joe';
-        (ou) WHERE name='julien' AND age<50;
-        (ou) WHERE name='marie' OR name='pierre';
+        *ou* WHERE name='julien' AND age<50;
+        *ou* WHERE name='marie' OR name='pierre';
  
-        les opérateurs sont:
-			= égal à ...
-			> plus grand que …
-			>= plus grand ou égal à …
-			< plus petit que …
-			<= plus petit ou égal à …
-			<> ou != différent de …
-			AND opérateur logique ET
-			OR opérateur logique OU
+>Les opérateurs sont:
+>    = égal à ...
+>    > plus grand que …
+>    >= plus grand ou égal à …
+>    < plus petit que …
+>    <= plus petit ou égal à …
+>    <> ou != différent de …
+>    AND opérateur logique ET
+>    OR opérateur logique OU
 
 ## AS
 >La clause AS sert à renommer temporairement dans la même instruction une colonne ou table dans le but de différencier ou de clarifier les données que l'on manipule
