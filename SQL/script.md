@@ -16,7 +16,7 @@
     (ou)WHERE name='julien' AND age<50;
     (ou)WHERE name='marie' OR name='pierre';
  
->Les opérateurs sont:
+>Les opérateurs sont:  
     = égal à ...  
     > plus grand que ...  
     >= plus grand ou égal à ... 
@@ -37,12 +37,12 @@
 	SELECT COUNT * FROM table;
 	SELECT COUNT colonne1 FROM table;
 
->Ou le nombre total d 'éléments de la colonne1
+>Ou le nombre total d'éléments de la colonne1
 
 	TRES IMPORTANT == si valeurs NULL il y a elle ne seront pas comptées
 	SELECT COUNT (DISTINCT colonne1) FROM table;
 
->Ou encore le nombre total d 'éléments de la colonne1 sans compter les doublons
+>Ou encore le nombre total d'éléments de la colonne1 sans les doublons
 	...
 	SELECT name FROM  table LIMIT 5;
 	=> La clause LIMIT sert à retourner les 'n' premiers éléments d'une table, ici les 5 premiers
@@ -86,58 +86,52 @@
 
 
 
+## Les Jointures
+>Les jointures sont la puissance des bases de données dites relationnelles. Elles permettent de regrouper des requêtes faites sur des tables différentes en une seule et unique requête, permettant ainsi un gain de temps et d'économie.
 
-
-
-
-
-
-
-	LES JOINTURES
-	=> Les jointures sont la puissance des bases de données dites relationnelles. Elles permettent 	de regrouper des requêtes faites sur des tables différentes en une seule et unique requête, 	permettant ainsi un gain de temps et d'économie.
-
-	Voici les différents types de jointures:
+### Voici les différents types de jointures:
 
 image.png
 
+## INSERT INTO
+>Cette clause sert à insérer des valeurs dans une table.
 
-INSERT INTO
-=> Cette clause sert à insérer des valeurs dans une table.
-	
 	INSERT INTO user(name, address, tel)
 	VALUES('Joe', '10 rue du fion 75000 Paris', '555-623-458');
-	...
-	On peut aussi créer plusieurs lignes d'un coup:
+
+>On peut aussi créer plusieurs lignes d'un coup:
+
 	INSERT INTO user(name, address, tel)
 	VALUES('Joe', '10 rue du fion 75000 Paris', '555-623-458'),
-		    ('Jennifer', '8 avenue des nibards 9100 Evry', '588-624-558'),
-		    ('Marc', '25 rue du zgeg 45000 Montargis', '356-233-878');
-	
-UPDATE
-=> Cette clause va nous permettre de changer les valeurs de colonne choisis.
+		  ('Jennifer', '8 avenue des nibards 9100 Evry', '588-624-558'),
+		  ('Marc', '25 rue du zgeg 45000 Montargis', '356-233-878');
+
+## UPDATE
+>Cette clause va nous permettre de changer les valeurs de colonne choisis.
 
 	UPDATE table
 	SET colonne1='nouvelle valeur'
 	WHERE colonne2='valeur';
 
-DELETE
-=> Cette clause va nous permettre de supprimer les valeurs de colonne choisis.
+## DELETE
+>Cette clause va nous permettre de supprimer les valeurs de colonne choisis.
 
 	DELETE FROM table
 	WHERE colonne1='valeur';
 
-ALTER
-=> Cette clause va nous permettre de modifier selon le critère une table.
+## ALTER
+>Cette clause va nous permettre de modifier selon le critère une table.
 
 	ALTER TABLE table
 		ADD COLUMN 'nouvelle_colonne';
-	(ou)     DROP COLUMN ' ';
-	(ou)     RENAME COLUMN ' ';
-	(ou)     ADD CONSTRAINT ;
-            (ou)     RENAME COLUMN ' ';
+	(ou)DROP COLUMN 'name';
+	(ou)RENAME COLUMN 'age';
+	(ou)ADD CONSTRAINT;
+    (ou)RENAME COLUMN 'address';
 
-DROP TABLE
-=> Cette clause nous permet de supprimer une table
+## DROP TABLE
+>Cette clause nous permet de supprimer une table
 
 	DROP TABLE IF EXIST 'la table';
-	=> IF EXIST nous permet d'éviter une erreur si la table n'existe pas
+
+>IF EXIST nous permet d'éviter une erreur si la table n'existe pas
