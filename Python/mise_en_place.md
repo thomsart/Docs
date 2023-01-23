@@ -4,7 +4,7 @@ On ouvre un terminal et on se place à l'endroit ou on veut importer son projet 
 `git clone https://github.com/thomsart/monrepo.git`<br>
 On créer ensuite son environement virtuel grâce à la commande :<br>
 `python3 -m venv env`<br>
-Maintenant on créer notre '.gitignore' pour l'ignorer lors des push :
+Maintenant on créer notre '.gitignore' pour ignorer ce qu'on souhaite lors des push :
 
     env
     __pycahe__/
