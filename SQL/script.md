@@ -1,5 +1,5 @@
 # Les Différentes clauses du langage SQL
->TRES IMPORTANT => toute fin d'instruction en SQL se termine par le ';'  
+>TRES IMPORTANT => toute fin d'instruction en SQL se termine par un " ; "  
 
 ## SELECT
 >Cette clause sert à retourner un ou des élément (avec ou sans conditions) dans une table  
