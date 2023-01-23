@@ -48,11 +48,11 @@
 
     SELECT name FROM  table LIMIT 5;
 
->La clause ORDER BY sert à trier les éléments selon une colonne, ici la colonne name de manière ascendante par défaut ASC c'est à dire de A à Z.
+>La clause ORDER BY sert à trier les éléments selon une colonne, ici la colonne name de manière ascendante (par défaut) ASC donc de A à Z.
 
 	SELECT name, age FROM user ORDER BY name;
 
->Ou de Z à A donc de manière descendante DESC
+>Ou de manière descendante DESC de Z à A.
 
     ... ORDER BY name DESC;
 
@@ -60,22 +60,22 @@
 
     SELECT name FROM user ORDER BY age;
 
->La clause LIKE sert à sélectionner les éléments dont le début commence 'm' et sont suivis par autre chose d'où le '%' ou qui finissent par 'm' mais précédés par autre chose '%m' ou encore dont le deuxième élément est un 'm' soit '_m%'.
+>La clause LIKE sert à sélectionner les éléments dont le début commence par 'm' et sont suivis par autre chose d'où le '%' ou qui finissent par 'm' mais précédés par autre chose '%m' ou encore dont le deuxième élément est un 'm' soit '_m%'.
 
 	SELECT name, address FROM user WHERE name LIKE 'm%';
 
 >La clause IN sert à éviter les clauses OR ou AND à répétition, par exemple ici on évite d'écrire  
->… WHERE age=20 OR age=21 OR age=22 OR age=23 OR age=24 OR age=25.  
->Il est possible d'y ajouter NOT devant pour écarter toute les valeurs comprise dans cette intervalle bien sur: NOT IN.
+>WHERE age=20 OR age=21 OR age=22 OR age=23 OR age=24 OR age=25;  
+>Il est possible d'y ajouter NOT devant pour écarter toute les valeurs comprise dans cette intervalle avec NOT IN.
 
 	SELECT name, age FROM user WHERE age 
 	IN (20,21,22,23,24,25) ORDER BY name DESC;
 
->La clause BETWEEN sert à sélectionner les éléments compris entre telles et telles 	valeurs, on peut aussi exclure avec NOT BETWEEN bien sur.
+>La clause BETWEEN sert à sélectionner les éléments compris dans un interval de valeurs, on peut aussi exclure avec NOT BETWEEN.
 
 	SELECT name, address FROM user WHERE age BETWEEN 6 AND 12;
 
->La clause AVG permet d'avoir la moyenne totale de tout les éléments d'une table ou d'une 	portion grâce à la clause WHERE. On arrondis avec ROUND si besoin est.
+>La clause AVG permet d'avoir la moyenne totale de tout les éléments d'une table ou portion grâce à la clause WHERE. On arrondis avec ROUND au besoin.
 
 	SELECT AVG age FROM user;
 	SELECT ROUND(AVG(price),2) FROM sale;
@@ -85,22 +85,25 @@
 	La clause MIN le minimum.
 	On appelle ces clauses les Agrégations.
 
+>La clause GROUP BY sert à regroupe sous l'agrégation voulu, ici le total des achats, par utilisateur. Si aucune agrégation n'est utilisée il faut grouper par les même colonnes utilisées que pour le SELECT:
 
 	SELECT user_name, ROUND(SUM(sale_price), 2) FROM sale GROUP BY user_name;
-	=> La clause GROUP BY sert à regroupe sous l'agrégation voulu, ici le total des achats, par 	utilisateur. Si aucune agrégation n'est utilisée il faut grouper par les même colonnes utilisées 	que pour le SELECT soit => SELECT user_name, sale_price FROM sale GROUP BY 	user_name, sale_price;
+	SELECT user_name, sale_price FROM sale GROUP BY user_name, sale_price;
 	SELECT user_name, AVG(sale_price) FROM sale
+
+>Ici on veut retourner les users groupés selon la moyenne de leurs achats triés du plus grand montant au plus bas, '2' faisant référence ici à 'AVG(sale_price)'
+
 	GROUP BY user_name ORDER BY 2 DESC;
-	=> Ici on veut retourner les users groupés selon la moyenne de leurs achats triés du montant 	le plus haut au montant le plus bas, '2' faisant référence ici à  'AVG(sale_price)'
-	…
+
+>La clause HAVING qui s'utilise sur des groupes à l'inverse de WHERE qui s'utilise sur des lignes sert a sélectionner une portion dans un groupe donné, ici par exemple on veut les users qui ont dépensés plus de 200 euros dans le groupe que l'on a crée.
+
 	SELECT user_name, ROUND(SUM(sale_price), 2) FROM sale GROUP BY user_name
 	HAVING ROUND(SUM(sale_price), 2) > 200;
-	=> La clause HAVING qui s'utilise sur des groupes à l'inverse de WHERE qui s'utilise sur 	des lignes sert a sélectionner une portion dans un groupe donné, ici par exemple on veut les 	users qui ont dépensés plus de 200 euros dans le groupe que l'on a crée.
-	...
+
+>Ici nous avons un exemple simple de sous-requête. Elles sont très utiles afin d'économiser du temps et de l'énergie en termes d'opérations.
+
 	SELECT user_name, sale_price FROM sale
 	WHERE sale_price > (SELECT AVG(sale_price) FROM sale);
-	=> Ici nous avons un exemple simple de sous-requête. Elles sont très utiles afin 	d'économiser du temps et de l'énergie en termes d'opérations.
-
-
 
 ## Les Jointures
 >Les jointures sont la puissance des bases de données dites relationnelles. Elles permettent de regrouper des requêtes faites sur des tables différentes en une seule et unique requête, permettant ainsi un gain de temps et d'économie.
