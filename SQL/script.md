@@ -137,27 +137,27 @@ image.png
 ## UPDATE
 >Changer les valeurs d'une' colonne.
 
-	UPDATE table
+	UPDATE user
 	SET colonne1='nouvelle valeur'
 	WHERE colonne2='valeur';
 
 ## DELETE
 >Supprimer les valeurs d'une colonne.
 
-	DELETE FROM table
-	WHERE colonne1='valeur';
+	DELETE FROM user
+	WHERE age=10;
 
 ## ALTER
 >Modifier selon le critère une table.
 
 	ALTER TABLE user
 		ADD COLUMN 'nouvelle_colonne';
-	(ou)DROP COLUMN 'name';
-	(ou)RENAME COLUMN 'age';
-	(ou)ADD CONSTRAINT;
-    (ou)RENAME COLUMN 'address';
+        (ou)DROP COLUMN 'name';
+        (ou)RENAME COLUMN 'age';
+        (ou)ADD CONSTRAINT;
+        (ou)RENAME COLUMN 'address';
 
 ## DROP TABLE
 >Supprimer une table, IF EXIST permet d'éviter une erreur si la table n'existe pas
 
-	DROP TABLE IF EXIST 'la table';
+	DROP TABLE IF EXIST users;
