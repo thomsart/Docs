@@ -1,4 +1,4 @@
-## Manuel pour déployer sur Unix
+# Déployer sur Unix
 >On présume ici que le projet à été cloné et que les dépendances sont installées sur notre espace serveur.
 
 ## 1.Diriger le trafic entrant:
