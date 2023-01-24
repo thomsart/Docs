@@ -115,7 +115,7 @@ Voila le contenu que doit avoir notre fichier de configuration mon_site:
 		}
 	}
 
-explications:
+### explications:  
 `listen 80;` veut dire que nginx écoute à ce port car toutes les requêtes HTTP qui entrent sur notre VPS y arrivent.  
 `server_name mon_site.com 92.222.167.113;` veut dire qu'il cible toutes les requêtes dont le nom d'hôte est mon_site.com et si il ne les trouve pas il utilise le numero du serveur dans ce cas ci.  
 `root /home/ubuntu/mon_site/;` indique la racine du projet dans lequel les fichiers seront demandé. Ainsi tout les autres demande de fichier suivront ce chemin de manière relative.  
