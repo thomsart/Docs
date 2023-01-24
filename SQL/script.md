@@ -27,12 +27,12 @@
     OR opérateur logique OU
 
 ## AS
->La clause AS sert à renommer temporairement dans la même instruction une colonne ou table dans le but de différencier ou de clarifier les données que l'on manipule
+>Renommer temporairement dans la même instruction une colonne ou table dans le but de différencier ou de clarifier les données que l'on manipule
 
 	SELECT name AS 'user_name', age AS 'user_age' FROM user;
 
 ## COUNT
->La clause COUNT donne le nombre total d'éléments de la table
+>Donne le nombre total d'éléments de la table
 
 	SELECT COUNT * FROM table;
 
@@ -44,11 +44,13 @@
 
 	SELECT COUNT (DISTINCT colonne1) FROM table;
 
-> La clause LIMIT sert à retourner les 'n' premiers éléments d'une table, ici les 5 premiers
+## LIMIT
+>Retourne les 'n' premiers éléments d'une table, ici les 5 premiers
 
     SELECT name FROM  table LIMIT 5;
 
->La clause ORDER BY sert à trier les éléments selon une colonne, ici la colonne name de manière ascendante (par défaut) ASC donc de A à Z.
+## ORDER BY
+>Trie les éléments selon une colonne, ici la colonne name de manière ascendante (par défaut) ASC donc de A à Z.
 
 	SELECT name, age FROM user ORDER BY name;
 
@@ -60,22 +62,26 @@
 
     SELECT name FROM user ORDER BY age;
 
->La clause LIKE sert à sélectionner les éléments dont le début commence par 'm' et sont suivis par autre chose d'où le '%' ou qui finissent par 'm' mais précédés par autre chose '%m' ou encore dont le deuxième élément est un 'm' soit '_m%'.
+## LIKE
+>Sélectionne les éléments dont le début commence par 'm' et sont suivis par autre chose d'où le '%' ou qui finissent par 'm' mais précédés par autre chose '%m' ou encore dont le deuxième élément est un 'm' soit '_m%'.
 
 	SELECT name, address FROM user WHERE name LIKE 'm%';
 
->La clause IN sert à éviter les clauses OR ou AND à répétition, par exemple ici on évite d'écrire  
+## IN
+>Evite les clauses OR ou AND à répétition, par exemple ici on évite d'écrire  
 >WHERE age=20 OR age=21 OR age=22 OR age=23 OR age=24 OR age=25;  
 >Il est possible d'y ajouter NOT devant pour écarter toute les valeurs comprise dans cette intervalle avec NOT IN.
 
 	SELECT name, age FROM user WHERE age 
 	IN (20,21,22,23,24,25) ORDER BY name DESC;
 
->La clause BETWEEN sert à sélectionner les éléments compris dans un interval de valeurs, on peut aussi exclure avec NOT BETWEEN.
+## BETWEEN
+>Sélectionner les éléments compris dans un interval de valeurs, on peut aussi exclure avec NOT BETWEEN.
 
 	SELECT name, address FROM user WHERE age BETWEEN 6 AND 12;
 
->La clause AVG permet d'avoir la moyenne totale de tout les éléments d'une table ou portion grâce à la clause WHERE. On arrondis avec ROUND au besoin.
+## AVG
+>Avoir la moyenne totale de tout les éléments d'une table ou portion grâce à la clause WHERE. On arrondis avec ROUND au besoin.
 
 	SELECT AVG age FROM user;
 	SELECT ROUND(AVG(price),2) FROM sale;
@@ -85,21 +91,24 @@
 	La clause MIN le minimum.
 	On appelle ces clauses les Agrégations.
 
->La clause GROUP BY sert à regroupe sous l'agrégation voulu, ici le total des achats, par utilisateur. Si aucune agrégation n'est utilisée il faut grouper par les même colonnes utilisées que pour le SELECT:
+## GROUP BY
+>Regroupe sous l'agrégation voulu, ici le total des achats, par utilisateur. Si aucune agrégation n'est utilisée il faut grouper par les même colonnes utilisées que pour le SELECT:
 
 	SELECT user_name, ROUND(SUM(sale_price), 2) FROM sale GROUP BY user_name;
 	SELECT user_name, sale_price FROM sale GROUP BY user_name, sale_price;
-	SELECT user_name, AVG(sale_price) FROM sale
 
 >Ici on veut retourner les users groupés selon la moyenne de leurs achats triés du plus grand montant au plus bas, '2' faisant référence ici à 'AVG(sale_price)'
 
+    SELECT user_name, AVG(sale_price) FROM sale
 	GROUP BY user_name ORDER BY 2 DESC;
 
->La clause HAVING qui s'utilise sur des groupes à l'inverse de WHERE qui s'utilise sur des lignes sert a sélectionner une portion dans un groupe donné, ici par exemple on veut les users qui ont dépensés plus de 200 euros dans le groupe que l'on a crée.
+## HAVING
+>S'utilise sur des groupes à l'inverse de WHERE qui s'utilise sur des lignes sert a sélectionner une portion dans un groupe donné, ici par exemple on veut les users qui ont dépensés plus de 200 euros dans le groupe que l'on a crée.
 
 	SELECT user_name, ROUND(SUM(sale_price), 2) FROM sale GROUP BY user_name
 	HAVING ROUND(SUM(sale_price), 2) > 200;
 
+## Les sous-requêtes
 >Ici nous avons un exemple simple de sous-requête. Elles sont très utiles afin d'économiser du temps et de l'énergie en termes d'opérations.
 
 	SELECT user_name, sale_price FROM sale
@@ -113,7 +122,7 @@
 image.png
 
 ## INSERT INTO
->Cette clause sert à insérer des valeurs dans une table.
+>Insérer des valeurs dans une table.
 
 	INSERT INTO user(name, address, tel)
 	VALUES('Joe', '10 rue du fion 75000 Paris', '555-623-458');
@@ -126,22 +135,22 @@ image.png
 		  ('Marc', '25 rue du zgeg 45000 Montargis', '356-233-878');
 
 ## UPDATE
->Cette clause va nous permettre de changer les valeurs de colonne choisis.
+>Changer les valeurs d'une' colonne.
 
 	UPDATE table
 	SET colonne1='nouvelle valeur'
 	WHERE colonne2='valeur';
 
 ## DELETE
->Cette clause va nous permettre de supprimer les valeurs de colonne choisis.
+>Supprimer les valeurs d'une colonne.
 
 	DELETE FROM table
 	WHERE colonne1='valeur';
 
 ## ALTER
->Cette clause va nous permettre de modifier selon le critère une table.
+>Modifier selon le critère une table.
 
-	ALTER TABLE table
+	ALTER TABLE user
 		ADD COLUMN 'nouvelle_colonne';
 	(ou)DROP COLUMN 'name';
 	(ou)RENAME COLUMN 'age';
@@ -149,8 +158,6 @@ image.png
     (ou)RENAME COLUMN 'address';
 
 ## DROP TABLE
->Cette clause nous permet de supprimer une table
+>Supprimer une table, IF EXIST permet d'éviter une erreur si la table n'existe pas
 
 	DROP TABLE IF EXIST 'la table';
-
->IF EXIST nous permet d'éviter une erreur si la table n'existe pas
