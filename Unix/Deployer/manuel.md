@@ -13,7 +13,7 @@ Pour ce faire on crée un fichier de configuration par site dans le répertoire 
 Une fois le fichier crée il faut ajouter le lien symbolique dans le répertoire "/sites-enabled/" grâce à la commande 'ln' suivante:
 >Attention le chemin doit partir de la racine.
 
-	sudo ln -s etc/nginx/sites-available/le_nom_du_fichier etc/nginx/sites-enabled 
+	sudo ln -s etc/nginx/sites-available/mon_site etc/nginx/sites-enabled 
 
 Une fois le fichier et le lien crées, ne pas oublier de relancer le serveur pour qu'il prenne en compte les modifications:
 
