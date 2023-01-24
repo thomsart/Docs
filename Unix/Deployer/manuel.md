@@ -70,9 +70,9 @@ Dailleurs voici à quoi ressemble le fichier par defaut de nginx dans "/sites-en
 		server_name _;
 
 		location / {
-				# First attempt to serve request as file, then
-				# as directory, then fall back to displaying a 404.
-				try_files $uri $uri/ =404;
+			# First attempt to serve request as file, then
+			# as directory, then fall back to displaying a 404.
+			try_files $uri $uri/ =404;
 		}
 
 		# pass PHP scripts to FastCGI server
@@ -113,6 +113,8 @@ Exemple typique d'un fichier X pour une application Y:
 		location / {
 				try_files $uri $uri/ =404;
 		}
+	}
+
 
 ## 2.Servir du script Python:
 
