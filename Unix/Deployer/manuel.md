@@ -106,6 +106,9 @@ Voila le contenu que doit avoir notre fichier de configuration mon_site:
 		listen [::]:80;
 		server_name mon_site.com 92.222.167.113;
 		root /home/ubuntu/mon_site/;
+		location /static {
+			alias /home/ubuntu/mon_site/staticfiles/;
+		}
 
 		location / {
 			proxy_set_header Host $http_host;
@@ -123,6 +126,11 @@ Voila le contenu que doit avoir notre fichier de configuration mon_site:
 `X-Forwarder-For` transmet l'adresse IP du client qui a fait la requête originale.  
 Ces lignes sont nécessaires à Django par exemple.  
 `proxy_pass http://127.0.0.1:8000` donne l'adresse finale au port duquel notre application tourne quand tout se passe bien.  
+
+Il est important après chaque modification de relancer nginx qu'il prenne bien en compte les informations:  
+
+	sudo service nginx reload
+
 
 
 ## 2.Servir du script Python:
