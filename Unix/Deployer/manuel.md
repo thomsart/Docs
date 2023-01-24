@@ -94,9 +94,9 @@ Dailleurs voici à quoi ressemble le fichier par defaut de nginx dans "/sites-en
 		#}
 	}
 
-Exemple typique d'un fichier X pour une application Y:
+Voila le contenu que doit avoir notre fichier de configuration mon_site:
 
-	#Virtual Host configuration for example.com
+	#Virtual Host configuration for mon_site.com
 
 	#You can move that to a different file under sites-available/ and symlink that
 	#to sites-enabled/ to enable it.
@@ -104,16 +104,25 @@ Exemple typique d'un fichier X pour une application Y:
 	server {
 		listen 80;
 		listen [::]:80;
-
-		server_name example.com;
-
-		root /var/www/example.com;
-		index index.html;
+		server_name mon_site.com 92.222.167.113;
+		root /home/ubuntu/mon_site/;
 
 		location / {
-				try_files $uri $uri/ =404;
+			proxy_set_header Host $http_host;
+			proxy_set_header X-Forwarder-For $proxy_add_x_forwarder_for;
+			proxy_redirect off;
+			proxy_pass http://127.0.0.1:8000;
 		}
 	}
+
+explications:
+`listen 80;` veut dire que nginx écoute à ce port car toutes les requêtes HTTP qui entrent sur notre VPS y arrivent.  
+`server_name mon_site.com 92.222.167.113;` veut dire qu'il cible toutes les requêtes dont le nom d'hôte est mon_site.com et si il ne les trouve pas il utilise le numero du serveur dans ce cas ci.  
+`root /home/ubuntu/mon_site/;` indique la racine du projet dans lequel les fichiers seront demandé. Ainsi tout les autres demande de fichier suivront ce chemin de manière relative.  
+`proxy_set_header` réecrit les headers de la requête HTTP.  
+`X-Forwarder-For` transmet l'adresse IP du client qui a fait la requête originale.  
+Ces lignes sont nécessaires à Django par exemple.  
+`proxy_pass http://127.0.0.1:8000` donne l'adresse finale au port duquel notre application tourne quand tout se passe bien.  
 
 
 ## 2.Servir du script Python:
