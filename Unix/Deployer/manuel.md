@@ -1,5 +1,5 @@
 ## Manuel pour déployer sur Unix
-> On présume ici que le projet à été cloné et que les dépendances sont installées sur notre espace serveur.
+>On présume ici que le projet à été cloné et que les dépendances sont installées sur notre espace serveur.
 
 ## 1.Diriger le trafic entrant:
 
@@ -11,7 +11,7 @@ C'est pourquoi on créer un fichier de configuration par site dans le répertoir
 	sudo touch sites-available/mon_site
 
 Une fois le fichier crée il faut ajouter le lien symbolique dans le répertoire 'sites-enabled' grâce à la commande 'ln' suivante:
->le chemin doit partir de la racine.
+>U+26A0 le chemin doit partir de la racine.
 
 	sudo ln -s etc/nginx/sites-available/le_nom_du_fichier etc/nginx/sites-enabled 
 
