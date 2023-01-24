@@ -10,7 +10,7 @@ C'est pourquoi on créer un fichier de configuration par site dans le répertoir
 
 	sudo touch sites-available/mon_site
 
-Une fois le fichier crée il faut ajouter le lien symbolique dans le répertoire 'sites-enabled' grâce à la commande 'ln' suivante:
+Une fois le fichier crée il faut ajouter le lien symbolique dans le répertoire 'sites-enabled' grâce à la commande 'ln' suivante:U+26A0
 >U+26A0 le chemin doit partir de la racine.
 
 	sudo ln -s etc/nginx/sites-available/le_nom_du_fichier etc/nginx/sites-enabled 
