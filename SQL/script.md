@@ -114,13 +114,6 @@
 	SELECT user_name, sale_price FROM sale
 	WHERE sale_price > (SELECT AVG(sale_price) FROM sale);
 
-## Les Jointures
->Les jointures sont la puissance des bases de données dites relationnelles. Elles permettent de regrouper des requêtes faites sur des tables différentes en une seule et unique requête, permettant ainsi un gain de temps et d'économie.
-
-### Voici les différents types de jointures:
-
-image.png
-
 ## INSERT INTO
 >Insérer des valeurs dans une table.
 
@@ -161,3 +154,10 @@ image.png
 >Supprimer une table, IF EXIST permet d'éviter une erreur si la table n'existe pas
 
 	DROP TABLE IF EXIST users;
+
+## JOINTURES
+>Les jointures sont la puissance des bases de données dites relationnelles. Elles permettent de regrouper des requêtes faites sur des tables différentes en une seule et unique requête, permettant ainsi un gain de temps et d'économie.
+
+### Voici les différents types de jointures:
+
+![Texte alternatif](/les_jointures.png "Les Différents Types de Jointures")
