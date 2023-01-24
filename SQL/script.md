@@ -160,4 +160,4 @@
 
 ### Voici les différents types de jointures:
 
-![Texte alternatif](/les_jointures.png "Les Différents Types de Jointures")
+![les_jointures.png](/les_jointures.png "Les Différents Types de Jointures")
