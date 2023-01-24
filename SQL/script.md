@@ -86,10 +86,10 @@
 	SELECT AVG age FROM user;
 	SELECT ROUND(AVG(price),2) FROM sale;
 
-	La clause SUM la somme.
-	La clause MAX le maximum.
-	La clause MIN le minimum.
-	On appelle ces clauses les Agrégations.
+        SUM pour la somme.
+        MAX pour le maximum.
+        MIN pour le minimum.
+        -> On appelle ces clauses 'les Agrégations'.
 
 ## GROUP BY
 >Regroupe sous l'agrégation voulu, ici le total des achats, par utilisateur. Si aucune agrégation n'est utilisée il faut grouper par les même colonnes utilisées que pour le SELECT:
