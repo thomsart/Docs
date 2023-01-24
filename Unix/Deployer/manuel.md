@@ -131,13 +131,12 @@ Il est important après chaque modification de relancer nginx qu'il prenne bien 
 
 	sudo service nginx reload
 
-
-
 ## 2.Servir du script Python:
 
-Nginx n'étant pas fait pour interpreter le Python il nous faut un serveur Python pour dialoguer avec lui: Gunicorn.  
-Ce serveur (fait pour les projets Python déployés sur Unix) utilise les spécifications WSGI (Web Server Gateway Interface). Il est déjà dans le requirements de Django nativement.  
-On peut le démarrer en tapant:
+Nginx ne peut pas interpreter le Python il faut donc qu'il dialogue avec un serveur qui en est capable:  Gunicorn.  
+Ce serveur (fait pour les projets Python déployés sur Unix) utilise les spécifications WSGI (Web Server Gateway Interface). Il est déjà dans le requirements de Django nativement par exemple.  
+On peut le démarrer en tapant laa commande:
 
 	gunicorn mon_projet.wsgi:application
 
+...
