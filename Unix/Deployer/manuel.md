@@ -11,7 +11,7 @@ Pour ce faire on crée un fichier de configuration par site dans le répertoire 
 	sudo touch mon_site
 
 Une fois le fichier crée il faut ajouter le lien symbolique dans le répertoire "/sites-enabled/" grâce à la commande 'ln' suivante:
->\u26a0 Attention le chemin doit partir de la racine.
+>U+26A0Attention le chemin doit partir de la racine.
 
 	sudo ln -s etc/nginx/sites-available/mon_site etc/nginx/sites-enabled 
 
