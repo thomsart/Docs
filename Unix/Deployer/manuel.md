@@ -178,7 +178,7 @@ Une fois rédigé Supervisor va le lancer directement. Il est dailleurs possible
 
 	sudo supervisorctl status
 
-Il faut garder à l'esprit qu'après chaque réecriture du fichier il est nécessaire d'avertir Supervisor tout comme on le fait aussi avec Nginx par les deux commandes suivantes: 
+Il faut garder à l'esprit qu'après chaque réecriture du fichier il est nécessaire d'avertir __Supervisor__ tout comme on le fait aussi avec __Nginx__ par les deux commandes suivantes: 
 
 	sudo supervisorctl reread
 	sudo supervisorctl reload
