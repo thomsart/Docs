@@ -140,4 +140,37 @@ On peut le démarrer en tapant la commande :
 
 	gunicorn mon_projet.wsgi:application
 
-...
+Evidement cela marche mais n'est pas viable, si l'appli s'arrête pour X raisons qui la relance ?  
+Il est clair que le mieux serai de trouver un middleware fait pour ce genre de tâche.  
+
+## 3.Automatiser le process
+
+Comme dit précédement il serai plus judicieux de trouver un programme  qui va se charger de lancer ou relancer après un arrêt notre appli fraîchement déploiée, car on a autre chose à foutre, si les applis s'accumulent on va quand même pas passer la journée à relancer tout à la main ! Et c'est la qu'entre en jeux Supervisor. Chaque fichier situés dans "etc/supervisors/conf.d" est un processus à surveiller.  
+On s'y rend donc et en créeont donc un nouveau:  
+
+	cd etc/supervisors/conf.d
+	sudo touch mon_site-gunicorn.conf
+
+Une fois ouvert voilà à quoi il doit ressembler:
+
+	[program:mon_site]
+	commande=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application
+	user=ubuntu
+	directory=/home/ubuntu/mon_site
+	autostart=true
+	autorestart=true
+	startsecs = 0
+	environment= ENV="production",SECRET_KEY="tartenpion62caca848pipi"
+	stderr_logfile=/var/log/urvcard.log
+
+### explications:  
+`[program:mon_site]` ca c'est le nom du programme pour Supervisor lorsque l'on fait nos commandes.  
+`commande=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path compet suivit de la commande que va éxecuter Supervisor.  
+`user=ubuntu` .  
+`directory=/home/ubuntu/mon_site` .  
+`autostart=true` .  
+`autorestart=true` . 
+`startsecs` .  
+`environment= ENV="production",SECRET_KEY="tartenpion62caca848pipi"` .  
+`stderr_logfile=/var/log/urvcard.log`  .  
+ 
