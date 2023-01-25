@@ -166,10 +166,19 @@ Une fois ouvert voilà à quoi il doit ressembler:
 ### explications:  
 `[program:mon_site]` ça c'est le nom du programme pour Supervisor lorsque l'on fait nos commandes.  
 `user=ubuntu` it can be someone else if we want.  
-`directory=/home/ubuntu/mon_site` la racine du projet. 
+`directory=/home/ubuntu/mon_site` la racine du projet.  
 `environment=ENV="production",SECRET_KEY="tartenpion62caca848pipi"` on peut indiquer le user et sa clé si il y en a un, juste il faut que ce soit raccord avec le user. 
 `command=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path complet suivis de la commande que va éxecuter Supervisor.  
 `autostart=true` on lui dit de se lancer tout seul.  
 `autorestart=true` on lui dit relance toi tout seul si l'appli s'est arrêtée.  
 `startsecs=0` on peut determiner le temps d'éxecution d'un programme, 0 veut dire sans limite de temps.  
 `stderr_logfile=/var/log/mon_site.log`  le fichier dans lequel se trouvera tout nos log à cette destination.  
+
+Une fois rédigé Supervisor va le lancer directement. Il est dailleurs possible de voir le process grâce à la commande :
+
+	sudo supervisorctl status
+
+il faut garder à l'esprit qu'après chaque réecriture du fichier il est nécessaire d'avertir supervisors tout comme nginx. On le fait avec les deux commandes suivantes: 
+
+	sudo supervisorctl reread
+	sudo supervisorctl reload
