@@ -168,7 +168,7 @@ Une fois ouvert voilà à quoi il doit ressembler:
 `user=ubuntu` it can be someone else if we want.  
 `directory=/home/ubuntu/mon_site` la racine du projet.  
 `environment=ENV="production",SECRET_KEY="tartenpion62caca848pipi"` on peut indiquer le user et sa clé si il y en a un, juste il faut que ce soit raccord avec le user.  
-`command=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path complet suivis de la commande que va éxecuter Supervisor.  
+`command=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path complet suivis de la commande à éxecuter. On peux lancer aussi du python comme suit => `command=/home/ubuntu/mon_site/env/bin/python3 mon_module.py`.  
 `autostart=true` on lui dit de se lancer tout seul.  
 `autorestart=true` on lui dit relance toi tout seul si l'appli s'est arrêtée.  
 `startsecs=0` on peut determiner le temps d'éxecution d'un programme, 0 veut dire sans limite de temps.  
