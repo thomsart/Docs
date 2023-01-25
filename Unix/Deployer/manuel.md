@@ -165,7 +165,7 @@ Une fois ouvert voilà à quoi il doit ressembler:
 
 ### explications:  
 `[program:mon_site]` ça c'est le nom du programme pour Supervisor lorsque l'on fait nos commandes.  
-`user=ubuntu` it can be someone else if we want.  
+`user=ubuntu` ca peut être un autre user bien sur.  
 `directory=/home/ubuntu/mon_site` la racine du projet.  
 `environment=ENV="production",SECRET_KEY="tartenpion62caca848pipi"` on peut indiquer le user et sa clé si il y en a un, juste il faut que ce soit raccord avec le user.  
 `command=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path complet suivis de la commande à éxecuter. On peux lancer aussi du python comme suit => `command=/home/ubuntu/mon_site/env/bin/python3 mon_module.py`.  
@@ -182,3 +182,5 @@ Il faut garder à l'esprit qu'après chaque réecriture du fichier il est néces
 
 	sudo supervisorctl reread
 	sudo supervisorctl reload
+
+>Il est important de mentionner que l'on peut bien entendu mettre plusieurs commande dans le même fichier si l'appli en à besoin.
