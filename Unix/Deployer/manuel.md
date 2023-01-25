@@ -167,7 +167,7 @@ Une fois ouvert voilà à quoi il doit ressembler:
 `[program:mon_site]` ça c'est le nom du programme pour Supervisor lorsque l'on fait nos commandes.  
 `user=ubuntu` it can be someone else if we want.  
 `directory=/home/ubuntu/mon_site` la racine du projet.  
-`environment=ENV="production",SECRET_KEY="tartenpion62caca848pipi"` on peut indiquer le user et sa clé si il y en a un, juste il faut que ce soit raccord avec le user. 
+`environment=ENV="production",SECRET_KEY="tartenpion62caca848pipi"` on peut indiquer le user et sa clé si il y en a un, juste il faut que ce soit raccord avec le user.  
 `command=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path complet suivis de la commande que va éxecuter Supervisor.  
 `autostart=true` on lui dit de se lancer tout seul.  
 `autorestart=true` on lui dit relance toi tout seul si l'appli s'est arrêtée.  
