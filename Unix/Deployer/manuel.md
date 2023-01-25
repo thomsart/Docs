@@ -156,21 +156,20 @@ Une fois ouvert voilà à quoi il doit ressembler:
 	[program:mon_site]
 	commande=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application
 	user=ubuntu
+	environment= ENV="production",SECRET_KEY="tartenpion62caca848pipi"
 	directory=/home/ubuntu/mon_site
 	autostart=true
 	autorestart=true
-	startsecs = 0
-	environment= ENV="production",SECRET_KEY="tartenpion62caca848pipi"
+	startsecs=0
 	stderr_logfile=/var/log/urvcard.log
 
 ### explications:  
-`[program:mon_site]` ca c'est le nom du programme pour Supervisor lorsque l'on fait nos commandes.  
-`commande=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path compet suivit de la commande que va éxecuter Supervisor.  
+`[program:mon_site]` ça c'est le nom du programme pour Supervisor lorsque l'on fait nos commandes.  
+`directory=/home/ubuntu/mon_site` la racine du projet.  
+`commande=/home/ubuntu/mon_site/env/bin/gunicorn project.wsgi:application` le path complet suivis de la commande que va éxecuter Supervisor.  
 `user=ubuntu` .  
-`directory=/home/ubuntu/mon_site` .  
-`autostart=true` .  
-`autorestart=true` . 
-`startsecs` .  
-`environment= ENV="production",SECRET_KEY="tartenpion62caca848pipi"` .  
-`stderr_logfile=/var/log/urvcard.log`  .  
- 
+`environment= ENV="production",SECRET_KEY="tartenpion62caca848pipi"` on peut indiquer le user et sa clé si il y en a un, juste il faut que ce soit raccord avec le user.  
+`autostart=true` on lui dit de se lancer tout seul.  
+`autorestart=true` on lui dit relance toi tout seul si l'appli s'est arrêtée.  
+`startsecs=0` on peut mettre un temps de pause après un crash avant de se relancer automatiquement.  
+`stderr_logfile=/var/log/mon_site.log`  le fichier dans lequel se trouvera tout nos log à cette destination.  
