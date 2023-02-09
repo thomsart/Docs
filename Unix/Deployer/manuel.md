@@ -174,6 +174,8 @@ Une fois ouvert voilà à quoi il doit ressembler:
 `startsecs=0` on peut determiner le temps d'éxecution d'un programme, 0 veut dire sans limite de temps.  
 `stderr_logfile=/var/log/mon_site.log`  le fichier dans lequel se trouvera tout nos log à cette destination.  
 
+>Il est important de mentionner que l'on peut bien entendu mettre plusieurs commande dans le même fichier si l'appli en à besoin.
+
 Une fois rédigé Supervisor va le lancer directement. Il est dailleurs possible de voir le process grâce à la commande :
 
 	sudo supervisorctl status
@@ -183,4 +185,6 @@ Il faut garder à l'esprit qu'après chaque réecriture du fichier il est néces
 	sudo supervisorctl reread
 	sudo supervisorctl reload
 
->Il est important de mentionner que l'on peut bien entendu mettre plusieurs commande dans le même fichier si l'appli en à besoin.
+Si le projet évolue supervisor ne peux le deviner. Certaines librairies comme Django se charge de relancer supervisors pour relancer Gunicorn mais d'autres comme Bottle ne le font pas. Il est donc nécessaire dans ce genre de cas de relancer le projet gràce à la commande: 
+
+	sudo supervisorctl mon_projet restart
