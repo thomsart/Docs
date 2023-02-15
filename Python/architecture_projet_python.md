@@ -49,4 +49,12 @@ Il est important de stipuler que dès lors que l'on importe un package, le code 
 
 ## Lancer un module
 
-Comme vu précédement il est mieux d'oganiser son projet par paquet et d'y mettre les modules associés. On constate du coup que depuis la racine nous ne disposons pas nécessairement à porté de main de module de lancement qui du coup peut être niché dans un paquet et souspaquet. On a du coup le réflexe de faire `python3 paquet/souspaquet/module.py` ce qui bien évidement génère une erreur d'import car le contexte de lancement n'est pas le même. La bonne pratique consiste à préciser à python qu'on le lance comme un module en faisant `python3 -m paquet.souspaquet.module`. Ici c'est `-m` qui indique à python que c'est un module. Du coup on faisant comme ceci on indique à python l'endroit de référence qui est l'endroit ou on éxécute la commande donc la racine du projet idéalement
+Comme vu précédement il est mieux d'oganiser son projet par paquet et d'y mettre les modules associés. On constate du coup que depuis la racine nous ne disposons pas nécessairement à porté de main de module de lancement qui du coup peut être niché dans un paquet et souspaquet.  
+On a du coup le réflexe de faire  
+`python3 paquet/souspaquet/module.py`  
+ce qui bien évidement génère une erreur d'import car le contexte de lancement n'est pas le même.  
+La bonne pratique consiste donc à préciser à python qu'on le lance comme un module en faisant  
+`python3 -m paquet.souspaquet.module`.  
+>Ici c'est '-m' qui indique à python que c'est un module.
+
+Du coup en faisant comme ceci on indique à python l'endroit de référence qui est l'endroit ou on éxécute la commande donc la racine du projet idéalement. Ce qui crée une total symétrie avec la référence des imports dans les modules et le répertoire courant 'cwd' (curent work directory) qui est la racine du projet.
