@@ -1,3 +1,17 @@
 env
+
 __pycache__/
-locals.py
+# ignorera tout les dossiers '__pycache__' partout ou ils se trouvent par rapport au .gitignore
+dossier/__pycache__
+# ignorera seulement le '__pycache__' qui se trouve dans 'dossier'
+
+**/foo
+# veut dire ignore les dossiers ou fichiers 'foo' de n'importe ou
+**/foo/bar
+# veut dire ignore les dossiers ou fichiers 'bar' dans le dossier 'foo'
+
+abc/**
+# ignore tout les fichiers dans le dossier 'abc'
+
+main.*
+# ignorera tout les fichiers commencant par 'main.'

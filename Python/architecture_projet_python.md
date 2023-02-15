@@ -9,23 +9,42 @@ Attention, seuls les paquets d'espace de nom ne doivent pas contenir ce fameux *
 ## A la racine on a...
 
     env
-    .gitignore
-    readme.md
     LICENCE.txt
+    readme.md
+    requirements.txt
     setup.cfg
+    .gitignore
     app
         | __init__.py
         | classes.py
         | launch.py
         | model.py
-        | test.py
         | tools.py
+        manager
+            | __init__.py
+            | command.py
         db
             | __init__.py
             | create.py
             | model.py
             | populate.py
-            | test.py
+    tests
+        | __init__.py
+        app
+            | __init__.py
+            | test_classes.py
+            | test_launch.py
+            | test_model.py
+            | test_tools.py
+            manager
+                | __init__.py
+                | test_command.py
+            db
+                | __init__.py
+                | test_create.py
+                | test_model.py
+                | test_populate.py
+
 
 ## Le .gitignore
 > Voici un exemple d'un .gitignore de base
