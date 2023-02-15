@@ -2,7 +2,8 @@
 
 Ici est expliqué comment fonctionne un projet du point de vu de son architeture => les paquets et modules.  
 Il est recommandé à la racine d'un projet de structurer par thematique.  
-Un dossier (paquet) pour la base de donnée par exemple "data_base" dans lequel on y mettrai un *__init__.py* et d'autre modules comme *create_db.py* ou encore *populate_db.py*. 
+Un dossier (paquet) pour la base de donnée par exemple "data_base" dans lequel on y mettrai un *__init__.py* et d'autre modules comme *create_db.py* ou encore *populate_db.py*.  
+
 Attention, seuls les paquets d'espace de nom ne doivent pas contenir ce fameux *__init__.py* car ils sont destinés à distribuer plusieurs projets comme django-rest pour le back par exemple et react pour le front pour le même espace (ici on dit espace mais en réalité ce serait le projet dans son ensemble qui en contiendrai d'autres plus petits).
 
 ## A la racine on a...
