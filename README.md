@@ -1,12 +1,12 @@
-#  Titre 1
+# Titre 1
 ## Titre 2
-###  Titre 3
+### Titre 3
 #### Titre 4
-#####  Titre 5
+##### Titre 5
 ###### Titre 6
 
 - **Texte qui sera** en gras
-- __Texte qui sera__  en gras
+- __Texte qui sera__ en gras
 - *Texte qui sera* en italique
 - _Texte qui sera_ en italique
 - ***Texte qui sera*** en italique et en gras
