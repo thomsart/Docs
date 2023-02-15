@@ -41,9 +41,9 @@ Voici la règle pour les imports dans les modules.
 ou  
 `from module import function`  
 ou  
-`from package.souspackage.module import function` 
-on évite de faire  
+`from package.souspackage.module import function`  
+A éviter  
 `from module import *`  
->à éviter pour des raisons de lisibilité (PEP8)
+> La PEP8 interdit ce genre d'import tant pour des raisons de clarté que de probleme de résolution d'import.
 
 Il est important de stipuler que dès lors que l'on importe un package, le code qui se trouve dans le *__init__.py* est éxécuté. De ce fait il peut être une bonne idée d'y mettre certaines variables ou autre script.
