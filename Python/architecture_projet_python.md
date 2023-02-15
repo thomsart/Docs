@@ -49,7 +49,7 @@ Il est important de stipuler que dès lors que l'on importe un package, le code 
 
 ## Lancer un module
 
-Comme vu précédement il est mieux d'oganiser son projet par paquet et d'y mettre les modules associés. On constate du coup que depuis la racine nous ne disposons pas nécessairement à porté de main de module de lancement qui du coup peut être niché dans un paquet et souspaquet.  
+Comme vu précédement il est mieux d'oganiser son projet par paquet et d'y mettre les modules associés. On constate du coup que depuis la racine nous ne disposons pas nécessairement à porté de main de module de lancement tel que le fameux 'main.py' qui du coup peut être niché dans le souspaquet d'un paquet.  
 On a du coup le réflexe de faire  
 `python3 paquet/souspaquet/module.py`  
 ce qui bien évidement génère une erreur d'import car le contexte de lancement n'est pas le même.  
