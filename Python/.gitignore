@@ -11,7 +11,16 @@ dossier/__pycache__
 # veut dire ignore les dossiers ou fichiers 'bar' dans le dossier 'foo'
 
 abc/**
-# ignore tout les fichiers dans le dossier 'abc'
+# ignore tout les fichiers dans le dossier 'abc' mais pas le dossier lui même
+abc/**/def
+# ignore tout les fichiers entre les dossiers 'abc' et 'def'
 
 main.*
-# ignorera tout les fichiers commencant par 'main.'
+# ignorera tout les dossiers ou fichiers commencant par 'main.'
+
+*.py[lmn]
+# ignorera tous les fichiers ayant l’extension .pyl, .pym et .pyn
+
+temp*
+!template
+# ignorera tous les fichiers commençant par temp sauf template
