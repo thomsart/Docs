@@ -21,13 +21,14 @@ class Vehicle:
     """ Les méthodes statiques sont des méthodes qui peuvent être appelées 
     même si aucune instance de la classe où elles sont définies n'a été 
     créée. Les méthodes statiques sont souvent employées pour créer des 
-    instances spécifiques d'une classe. ex: """
+    instances spécifiques à la classe en tant que telle et non à l'objet 
+    de manière isolée. ex: """
 
     @staticmethod
     def in_wich_country():
         """ This static method allows to know the country where all cars 
-        came from. """
-        return print(f"All vehicle here came from {Vehicle.country}.")
+        come from. """
+        return print(f"All vehicle here come from {Vehicle.country}.")
 
     @staticmethod
     def nb_vehicles_in_circulation():
@@ -35,26 +36,25 @@ class Vehicle:
         return print(f"There is {Vehicle.total_vehicle} vehicle in circulation.")
 
     def __init__(self):
-        self.__class__.total_vehicle += 1
+        self.__class__.total_vehicle += 1 # à chaque instance créée, on implèmente 'total_vehicle'
         self.build_year = datetime.date.today()
         self.driving_licence_required = True
-        self.driving_licence_type = "B"
+        self.driving_licence_type = ["A", "B", "AM", "C", "D", "E"]
         self.energy = None
-        self.color = None # can be "red"
+        self.color = None
         self.weight_kg = 1200
         self.seat_nb = 1
         self.nb_weels = None
         self.price = 0
         self.second_hand = False
         self.owner = None
-        self.immatriculation = None
         self.kilometrage_counter = 0
         self.in_circulation = True
-        self._private = "attribut privé"
-                # en déclarant ce genre d'attribut en previens le developpeur
-                # que cet attribut est privé et que l'on ne doit pas y acceder
-                # directement par l'objet mais par une methode comme un getter
-                # ou setter.
+        self._immatriculation = "attribut privé"
+            # en déclarant ce genre d'attribut en previens le developpeur
+            # que cet attribut est privé et que l'on ne doit pas y acceder
+            # directement par l'objet mais par une methode comme un getter
+            # ou setter.
 
     @property
     def age(self):
@@ -64,15 +64,16 @@ class Vehicle:
         return self.build_year
 
     @property
-    def private(self):
-        """ Le getter de l'attribut privé '_private'. """
-        return self._private
-    
-    @private.setter
-    def private(self, new_value):
-        """ Le setter de l'attribut privé '_private'. """
-        # traitement possible de 'new_value'
-        self._private = new_value
+    def immatriculation(self):
+        """ Le getter de l'attribut privé '_immatriculation'. """
+        return self._immatriculation
+
+    @immatriculation.setter
+    def immatriculation(self, new_immatriculation):
+        """ Le setter de l'attribut privé '_immatriculation'. """
+        # traitement possible de 'new_immatriculation' afin de s'assurer par
+        # exemple que le numéro soit aux normes.
+        self._immatriculation = new_immatriculation
 
     def sale_vehicle(self, new_owner):
         if self.owner != None:
@@ -120,6 +121,7 @@ class Car(Vehicle):
         super().__init__()
         self.constructor = None # "renault"
         self.type = None # "clio"
+        self.driving_licence = self.driving_licence_type[1] # "B"
 
 
 ###############################################################################
@@ -133,6 +135,7 @@ class Bicycle(Vehicle):
         Vehicle.__init__(self)
         self.constructor = None # "peugeot"
         self.type = None # "course"
+        self.driving_licence = None
 
 
 ###############################################################################
