@@ -28,7 +28,7 @@ class Vehicle:
     def vehicles_country():
         """ This static method allows to know the country where all cars 
         come from. """
-        return print(f"All vehicles come from {Vehicle.country}.")
+        return print(f"This vehicle come from {Vehicle.country}.")
 
     @staticmethod
     def nb_vehicles():
@@ -83,12 +83,13 @@ class Vehicle:
         self.kilometrage_counter + km
 
     def get_owner(self):
+        name = self.__class__.__name__
         if self.owner == None:
             if self.in_circulation == False:
-                return print(f"This {self.__class__.__name__} is now destroyed.")
+                return print(f"This {name} is now destroyed.")
             else:
-                return print(f"This {self.__class__.__name__} doesn't belongs to someone yet.")
-        return print(f"This {self.__class__.__name__} belongs to {self.owner}.")
+                return print(f"This {name} doesn't belongs to someone yet.")
+        return print(f"This {name} belongs to {self.owner}.")
 
     def sale(self, new_owner):
         self.owner = new_owner
@@ -117,8 +118,7 @@ class Car(Vehicle):
     """ Represent a car. """
 
     def __init__(self, constructor, type):
-        # super().__init__()
-        Vehicle.__init__(self)
+        super().__init__()
         self.constructor = None # "renault"
         self.type = None # "clio"
         self.driving_licence = self.driving_licence_type[2] # "B"
@@ -144,23 +144,27 @@ class Bicycle(Vehicle):
 ###############################################################################
 ###############################################################################
 
-
+print("############################################")
 Vehicle.nb_vehicles()
+print("############################################")
 car_01 = Car("peugeot", "3008")
 car_01.get_owner()
 print(car_01.age)
+print("############################################")
 Vehicle.nb_vehicles()
-print()
-
-bicycle = Bicycle("peugeot", "course")
+bicycle_01 = Bicycle("peugeot", "course")
+print("############################################")
 Vehicle.nb_vehicles()
-bicycle.get_owner()
-bicycle.sale("George")
-bicycle.get_owner()
-bicycle.destroy()
-bicycle.get_owner()
+print("############################################")
+bicycle_01.get_owner()
+bicycle_01.sale("George")
+bicycle_01.get_owner()
+bicycle_01.destroy()
+bicycle_01.get_owner()
+print("############################################")
 Vehicle.nb_vehicles()
-Vehicle.vehicles_country()
+print("############################################")
+bicycle_01.vehicles_country()
 
 
 
