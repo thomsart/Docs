@@ -25,22 +25,21 @@ class Vehicle:
     de manière isolée. ex: """
 
     @staticmethod
-    def in_wich_country():
+    def vehicles_country():
         """ This static method allows to know the country where all cars 
         come from. """
-        return print(f"All vehicle here come from {Vehicle.country}.")
+        return print(f"All vehicles come from {Vehicle.country}.")
 
     @staticmethod
-    def nb_vehicles_in_circulation():
+    def nb_vehicles():
         """ This static method allows to know how many cars there is. """
-        return print(f"There is {Vehicle.total_vehicle} vehicle in circulation.")
+        return print(f"There is {Vehicle.total_vehicle} vehicles in circulation.")
 
     def __init__(self):
         self.__class__.total_vehicle += 1 # à chaque instance créée, on implèmente 'total_vehicle'
         self.build_year = datetime.date.today()
-        self.driving_licence_required = True
-        self.driving_licence_type = ["A", "B", "AM", "C", "D", "E"]
-        self.energy = None
+        self.driving_licence_type = [None, "A", "B", "AM", "C", "D", "E"]
+        self.energy_type = ["muscular", "electric", "gasoil", "kerosene"]
         self.color = None
         self.weight_kg = 1200
         self.seat_nb = 1
@@ -50,7 +49,7 @@ class Vehicle:
         self.owner = None
         self.kilometrage_counter = 0
         self.in_circulation = True
-        self._immatriculation = "attribut privé"
+        self._immatriculation = "undefined"
             # en déclarant ce genre d'attribut en previens le developpeur
             # que cet attribut est privé et que l'on ne doit pas y acceder
             # directement par l'objet mais par une methode comme un getter
@@ -86,10 +85,10 @@ class Vehicle:
     def get_owner(self):
         if self.owner == None:
             if self.in_circulation == False:
-                return print("This vehicle is now destroyed.")
+                return print(f"This {self.__class__.__name__} is now destroyed.")
             else:
-                return print("This vehicle doesn't belongs to someone yet.")
-        return print(f"This vehicle belongs to {self.owner}.")
+                return print(f"This {self.__class__.__name__} doesn't belongs to someone yet.")
+        return print(f"This {self.__class__.__name__} belongs to {self.owner}.")
 
     def sale(self, new_owner):
         self.owner = new_owner
@@ -118,10 +117,12 @@ class Car(Vehicle):
     """ Represent a car. """
 
     def __init__(self, constructor, type):
-        super().__init__()
+        # super().__init__()
+        Vehicle.__init__(self)
         self.constructor = None # "renault"
         self.type = None # "clio"
-        self.driving_licence = self.driving_licence_type[1] # "B"
+        self.driving_licence = self.driving_licence_type[2] # "B"
+        self.energy = self.energy_type[2] # "gasoil"
 
 
 ###############################################################################
@@ -135,7 +136,8 @@ class Bicycle(Vehicle):
         Vehicle.__init__(self)
         self.constructor = None # "peugeot"
         self.type = None # "course"
-        self.driving_licence = None
+        self.driving_licence = self.driving_licence_type[0] # "None"
+        self.energy = self.energy_type[0] # "muscular"
 
 
 ###############################################################################
@@ -143,20 +145,22 @@ class Bicycle(Vehicle):
 ###############################################################################
 
 
-Vehicle.nb_vehicles_in_circulation()
-first_vehicle = Car("peugeot", "3008")
-first_vehicle.get_owner()
-print(first_vehicle.age)
-Vehicle.nb_vehicles_in_circulation()
-second_vehicle = Vehicle()
-Vehicle.nb_vehicles_in_circulation()
-second_vehicle.get_owner()
-second_vehicle.sale("George")
-second_vehicle.get_owner()
-second_vehicle.destroy()
-second_vehicle.get_owner()
-Vehicle.nb_vehicles_in_circulation()
-Vehicle.in_wich_country()
+Vehicle.nb_vehicles()
+car_01 = Car("peugeot", "3008")
+car_01.get_owner()
+print(car_01.age)
+Vehicle.nb_vehicles()
+print()
+
+bicycle = Bicycle("peugeot", "course")
+Vehicle.nb_vehicles()
+bicycle.get_owner()
+bicycle.sale("George")
+bicycle.get_owner()
+bicycle.destroy()
+bicycle.get_owner()
+Vehicle.nb_vehicles()
+Vehicle.vehicles_country()
 
 
 
