@@ -1,7 +1,7 @@
 """ Dans ce module nous traiterons de toutes les choses importantes a savoir sur les classes ."""
 
 import datetime
-
+import random
 
 ###############################################################################
 ###############################################################################
@@ -89,13 +89,15 @@ class Vehicle:
         # exemple que le numéro soit aux normes.
         self._immatriculation = new_immatriculation
 
-    def sale_vehicle(self, new_owner: str, price: int):
+    def sale(self, new_owner: str, price: int):
         if self.owner != None:
             self.second_hand = True
         self.owner = new_owner
+        if self.immatriculation == "undefined":
+            self.immatriculation = self.owner[0].lower() + self.owner[-1] + str(self.build_year)[4:] + "-" + str(random.randint(1, 99))
         self.price = price
 
-    def drive(self, km):
+    def drive(self, km: int):
         self.kilometrage_counter + km
 
     def get_owner(self):
@@ -106,9 +108,6 @@ class Vehicle:
             else:
                 return print(f"This {name} doesn't belongs to someone yet.")
         return print(f"This {name} belongs to {self.owner}.")
-
-    def sale(self, new_owner):
-        self.owner = new_owner
 
     def destroy(self):
         """ Même si un attribut est statique, il peut être utilisé avec la 
@@ -122,7 +121,7 @@ class Vehicle:
     def _private_methode(self):
         ...
 
-    def __super_private_methode(self):
+    def __superprivate_methode__(self):
         ...
 
 
@@ -133,14 +132,13 @@ class Vehicle:
 class Car(Vehicle):
     """ Represent a car. """
 
-    def __init__(self, brand: str, model: str, color: str, price: int):
+    def __init__(self, brand: str, model: str, color: str):
         super().__init__()
         self.constructor = brand # "ex: renault"
         self.type = model # "ex: clio"
         self.driving_licence = self.driving_licence_type[2] # "B"
         self.energy = self.energy_type[2] # "gasoil"
         self.color = color
-
 
 ###############################################################################
 ###############################################################################
@@ -149,7 +147,7 @@ class Car(Vehicle):
 class Bicycle(Vehicle):
     """ Represent a bicycle. """
 
-    def __init__(self, brand: str, model: str, color: str, price: int):
+    def __init__(self, brand: str, model: str, color: str):
         Vehicle.__init__(self)
         self.constructor = brand # "ex: peugeot"
         self.type = model # "ex: course"
@@ -164,17 +162,19 @@ class Bicycle(Vehicle):
 print("############################################")
 Vehicle.stc_nb_vehicles()
 print("############################################")
-car_01 = Car("peugeot", "3008")
+car_01 = Car("peugeot", "3008", "red")
 car_01.get_owner()
 print(car_01.age)
 print("############################################")
 Vehicle.cls_nb_vehicles()
-bicycle_01 = Bicycle("peaugeot", "vtt")
+bicycle_01 = Bicycle("peaugeot", "vtt", "white")
 print("############################################")
 Vehicle.stc_nb_vehicles()
 print("############################################")
 bicycle_01.get_owner()
-bicycle_01.sale("George")
+print(bicycle_01.immatriculation)
+bicycle_01.sale("George", 1000)
+print(bicycle_01.immatriculation)
 bicycle_01.get_owner()
 bicycle_01.destroy()
 bicycle_01.get_owner()
