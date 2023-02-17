@@ -15,7 +15,6 @@ class Vehicle:
     """ Les attributs statiques sont des attributs qui peuvent être utilisés 
     même si aucune instance de la classe où ils sont définis n'a été créée.
     Ces attributs sont partagés par toutes les instances. ex: """
-
     country = "England"
     total_vehicle = 0
 
@@ -23,28 +22,34 @@ class Vehicle:
 
     """ Les méthodes statiques sont des méthodes qui peuvent être appelées 
     même si aucune instance de la classe où elles sont définies n'a été 
-    créée. Les méthodes statiques sont souvent employées pour créer des 
-    instances spécifiques à la classe en tant que telle et non à l'objet 
-    de manière isolée. ex: """
-
+    créée. Ces méthodes ont une connexion logique avec la classe, 
+    mais n'utilisent pas l'état de la classe ou de l'objet.
+    On les utilise donc lorsque nous avons besoin de fonctionnalités non pas
+    par rapport à un objet mais par rapport à la classe.
+    C'est assez avantageux lorsque nous devons créer des méthodes utiles 
+    car elles ne sont généralement pas liées au cycle de vie d'un objet.
+    ex: """
     @staticmethod
-    def vehicles_country():
+    def stc_country_vehicles():
         """ This static method allows to know the country where all cars 
         come from. """
         return print(f"All vehicles come from {Vehicle.country}.")
-
     @staticmethod
-    def nb_vehicles():
+    def stc_nb_vehicles():
         """ This class method allows to know how many cars there is. """
         return print(f"There is {Vehicle.total_vehicle} vehicles in circulation.")
 
 
 
-    """ Les méthodes de classe sont des méthodes qui  """
-
+    """ Les méthodes de classe sont souvent utilisées comme constructeurs 
+    alternatifs ou comme méthodes de construction, c'est-à-dire pour créer 
+    des instances basées sur différents cas d'utilisation. """
     @classmethod
-    def the_mehod(cls):
-        ...
+    def cls_country_vehicles(cls):
+        return print(f"All vehicles come from {cls.country}.")
+    @classmethod
+    def cls_nb_vehicles(cls):
+        return print(f"There is {cls.total_vehicle} vehicles in circulation.")
 
 
 
@@ -52,17 +57,13 @@ class Vehicle:
         # à chaque instance de classe créée héritant de Vehicle, on implèmente 'total_vehicle'
         Vehicle.total_vehicle += 1
         self.build_year = datetime.date.today()
+        self.in_circulation = True
         self.driving_licence_type = [None, "A", "B", "AM", "C", "D", "E"]
         self.energy_type = ["muscular", "electric", "gasoil", "kerosene"]
-        self.color = None
-        self.weight_kg = 1200
-        self.seat_nb = 1
-        self.nb_weels = None
-        self.price = 0
+        self.kilometrage_counter = 0
         self.second_hand = False
         self.owner = None
-        self.kilometrage_counter = 0
-        self.in_circulation = True
+        self.price = 0
         self._immatriculation = "undefined"
             # en déclarant ce genre d'attribut en previens le developpeur
             # que cet attribut est privé et que l'on ne doit pas y acceder
@@ -88,10 +89,11 @@ class Vehicle:
         # exemple que le numéro soit aux normes.
         self._immatriculation = new_immatriculation
 
-    def sale_vehicle(self, new_owner):
+    def sale_vehicle(self, new_owner: str, price: int):
         if self.owner != None:
             self.second_hand = True
         self.owner = new_owner
+        self.price = price
 
     def drive(self, km):
         self.kilometrage_counter + km
@@ -131,12 +133,13 @@ class Vehicle:
 class Car(Vehicle):
     """ Represent a car. """
 
-    def __init__(self, constructor, type):
+    def __init__(self, brand: str, model: str, color: str, price: int):
         super().__init__()
-        self.constructor = None # "renault"
-        self.type = None # "clio"
+        self.constructor = brand # "ex: renault"
+        self.type = model # "ex: clio"
         self.driving_licence = self.driving_licence_type[2] # "B"
         self.energy = self.energy_type[2] # "gasoil"
+        self.color = color
 
 
 ###############################################################################
@@ -146,29 +149,29 @@ class Car(Vehicle):
 class Bicycle(Vehicle):
     """ Represent a bicycle. """
 
-    def __init__(self, constructor, type):
+    def __init__(self, brand: str, model: str, color: str, price: int):
         Vehicle.__init__(self)
-        self.constructor = None # "peugeot"
-        self.type = None # "course"
+        self.constructor = brand # "ex: peugeot"
+        self.type = model # "ex: course"
         self.driving_licence = self.driving_licence_type[0] # "None"
         self.energy = self.energy_type[0] # "muscular"
-
+        self.color = color
 
 ###############################################################################
 ###############################################################################
 ###############################################################################
 
 print("############################################")
-Vehicle.nb_vehicles()
+Vehicle.stc_nb_vehicles()
 print("############################################")
 car_01 = Car("peugeot", "3008")
 car_01.get_owner()
 print(car_01.age)
 print("############################################")
-Vehicle.nb_vehicles()
-bicycle_01 = Bicycle("peugeot", "course")
+Vehicle.cls_nb_vehicles()
+bicycle_01 = Bicycle("peaugeot", "vtt")
 print("############################################")
-Vehicle.nb_vehicles()
+Vehicle.stc_nb_vehicles()
 print("############################################")
 bicycle_01.get_owner()
 bicycle_01.sale("George")
@@ -176,9 +179,11 @@ bicycle_01.get_owner()
 bicycle_01.destroy()
 bicycle_01.get_owner()
 print("############################################")
-Vehicle.nb_vehicles()
+Vehicle.cls_nb_vehicles()
 print("############################################")
-Vehicle.vehicles_country()
+Vehicle.stc_country_vehicles()
+print("############################################")
+Vehicle.cls_country_vehicles()
 
 
 
@@ -193,24 +198,24 @@ __module__
 Contient le nom du module dans lequel est incluse la classe (voir chapitre Modules).
 
 __class__
-Contient le nom de la classe de l’instance. Ce nom est précédé du nom du module suivi d’un point.
+Contient le nom de la classe de l'instance. Ce nom est précédé du nom du module suivi d'un point.
 
-    L’attribut __class__ contient lui même d’autres d’attributs :
+    L'attribut __class__ contient lui même d'autres d'attributs :
 
     __doc__
     Contient un commentaire associé à la classe (voir paragraphe Commentaires, aide.
 
     __dict__
-    Contient la liste des attributs statiques (définis hors d’une méthode) et des méthodes (voir paragraphe Attributs statiques.
+    Contient la liste des attributs statiques (définis hors d'une méthode) et des méthodes (voir paragraphe Attributs statiques.
 
     __name__
-    Contient le nom de l’instance.
+    Contient le nom de l'instance.
 
     __bases__
-    Contient les classes dont la classe de l’instance hérite (voir paragraphe Héritage.
+    Contient les classes dont la classe de l'instance hérite (voir paragraphe Héritage.
 
 __dict__
-Contient la liste des attributs de l’instance (voir paragraphe Liste des attributs.
+Contient la liste des attributs de l'instance (voir paragraphe Liste des attributs.
 
 __doc__
 Contient un commentaire associé à la classe (voir paragraphe Commentaires, aide.
