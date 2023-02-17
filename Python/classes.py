@@ -8,7 +8,8 @@ import datetime
 ###############################################################################
 
 class Vehicle:
-    """ This class is used to represent a vehicle in a general form. """
+    """ Doc: This class is used to represent a vehicle in a general form. """
+
 
 
     """ Les attributs statiques sont des attributs qui peuvent être utilisés 
@@ -17,6 +18,8 @@ class Vehicle:
 
     country = "England"
     total_vehicle = 0
+
+
 
     """ Les méthodes statiques sont des méthodes qui peuvent être appelées 
     même si aucune instance de la classe où elles sont définies n'a été 
@@ -34,6 +37,16 @@ class Vehicle:
     def nb_vehicles():
         """ This class method allows to know how many cars there is. """
         return print(f"There is {Vehicle.total_vehicle} vehicles in circulation.")
+
+
+
+    """ Les méthodes de classe sont des méthodes qui  """
+
+    @classmethod
+    def the_mehod(cls):
+        ...
+
+
 
     def __init__(self):
         # à chaque instance de classe créée héritant de Vehicle, on implèmente 'total_vehicle'
