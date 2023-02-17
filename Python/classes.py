@@ -28,15 +28,16 @@ class Vehicle:
     def vehicles_country():
         """ This static method allows to know the country where all cars 
         come from. """
-        return print(f"This vehicle come from {Vehicle.country}.")
+        return print(f"All vehicles come from {Vehicle.country}.")
 
     @staticmethod
     def nb_vehicles():
-        """ This static method allows to know how many cars there is. """
+        """ This class method allows to know how many cars there is. """
         return print(f"There is {Vehicle.total_vehicle} vehicles in circulation.")
 
     def __init__(self):
-        self.__class__.total_vehicle += 1 # à chaque instance créée, on implèmente 'total_vehicle'
+        # à chaque instance de classe créée héritant de Vehicle, on implèmente 'total_vehicle'
+        Vehicle.total_vehicle += 1
         self.build_year = datetime.date.today()
         self.driving_licence_type = [None, "A", "B", "AM", "C", "D", "E"]
         self.energy_type = ["muscular", "electric", "gasoil", "kerosene"]
@@ -101,7 +102,7 @@ class Vehicle:
 
         self.in_circulation = False
         self.owner = None
-        self.__class__.total_vehicle -= 1
+        Vehicle.total_vehicle -= 1
 
     def _private_methode(self):
         ...
@@ -164,7 +165,7 @@ bicycle_01.get_owner()
 print("############################################")
 Vehicle.nb_vehicles()
 print("############################################")
-bicycle_01.vehicles_country()
+Vehicle.vehicles_country()
 
 
 
