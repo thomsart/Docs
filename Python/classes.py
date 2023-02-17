@@ -50,15 +50,37 @@ class Vehicle:
         self.immatriculation = None
         self.kilometrage_counter = 0
         self.in_circulation = True
+        self._private = "attribut privé"
+                # en déclarant ce genre d'attribut en previens le developpeur
+                # que cet attribut est privé et que l'on ne doit pas y acceder
+                # directement par l'objet mais par une methode comme un getter
+                # ou setter.
+
+    @property
+    def age(self):
+        """ Les property servent à créer des attributs dynamique sous la forme
+        de methode ayant le fonctionnement d'un attribut dans l'utilisation.
+        On l'utilise lorsque un attribut évolue dans le temps. """
+        return self.build_year
+
+    @property
+    def private(self):
+        """ Le getter de l'attribut privé '_private'. """
+        return self._private
+    
+    @private.setter
+    def private(self, new_value):
+        """ Le setter de l'attribut privé '_private'. """
+        # traitement possible de 'new_value'
+        self._private = new_value
 
     def sale_vehicle(self, new_owner):
+        if self.owner != None:
+            self.second_hand = True
         self.owner = new_owner
 
     def drive(self, km):
         self.kilometrage_counter + km
-
-    def get_age(self):
-        return self.build_year
 
     def get_owner(self):
         if self.owner == None:
@@ -66,7 +88,6 @@ class Vehicle:
                 return print("This vehicle is now destroyed.")
             else:
                 return print("This vehicle doesn't belongs to someone yet.")
-
         return print(f"This vehicle belongs to {self.owner}.")
 
     def sale(self, new_owner):
@@ -96,6 +117,7 @@ class Car(Vehicle):
     """ Represent a car. """
 
     def __init__(self, constructor, type):
+        super().__init__()
         self.constructor = None # "renault"
         self.type = None # "clio"
 
@@ -108,6 +130,7 @@ class Bicycle(Vehicle):
     """ Represent a bicycle. """
 
     def __init__(self, constructor, type):
+        Vehicle.__init__(self)
         self.constructor = None # "peugeot"
         self.type = None # "course"
 
@@ -118,8 +141,9 @@ class Bicycle(Vehicle):
 
 
 Vehicle.nb_vehicles_in_circulation()
-first_vehicle = Vehicle()
-print(type(first_vehicle))
+first_vehicle = Car("peugeot", "3008")
+first_vehicle.get_owner()
+print(first_vehicle.age)
 Vehicle.nb_vehicles_in_circulation()
 second_vehicle = Vehicle()
 Vehicle.nb_vehicles_in_circulation()
