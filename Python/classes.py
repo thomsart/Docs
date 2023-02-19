@@ -2,7 +2,6 @@
 
 import datetime
 import random
-from functools import wraps
 
 
 ###############################################################################
@@ -110,29 +109,19 @@ class Vehicle:
         except TypeError:
             return False
 
-    """ On créer un decorateur pour s'assurer que le vehicule est en regle
-    pour pouvoir le conduire ou l'assurer. """
-    def legal_to_drive(self):
-        """ Le decorateur interne de notre fonction. """
-        def internal_decorator(self, function):
-            """ On recupere les arguments passés et la doc. """
-            @wraps(function)
-            def wrapper(*args, **kwargs):
-                if self.__class__.__name__ == "Bicycle":
-                    returned_value = function(*args, **kwargs)
-                else:
-                    if self.certificate:
-                        returned_value = function(*args, **kwargs)
-                    else:
-                        raise ValueError("This vehicle doesn't have certificate.")
-                return returned_value
-            return wrapper
-        return internal_decorator
+
+    def _is_legal_to_drive(self):
+        if self.__class__.__name__ != "Bicycle" and self.certificate == False:
+            return False
+        else:
+            return True
 
 
-    @legal_to_drive
     def drive(self, km: int):
-        self.kilometrage_counter + km 
+        if self._is_legal_to_drive():
+            self.kilometrage_counter += km
+        else:
+            raise TypeError(f"This {self.__class__.__name__} doesn't have certificate to drive.")
 
 
     def get_km(self):
@@ -149,7 +138,7 @@ class Vehicle:
 
 
     def get_owner(self):
-        name = self.__class__.__name__
+        name = self.__class__.__name__ + " "  + self.constructor + " " + self.type
         if self.owner == None:
             if self.in_circulation == False:
                 return print(f"This {name} is now destroyed.")
@@ -168,13 +157,6 @@ class Vehicle:
             self.owner = None
             Vehicle.total_vehicle -= 1
 
-
-    def _private_methode(self):
-        ...
-
-
-    def __forbidden_methode__(self):
-        ...
 
 
 ###############################################################################
@@ -216,7 +198,11 @@ Vehicle.stc_nb_vehicles()
 print("############################################")
 car_01 = Car("peugeot", "3008", "red")
 car_01.get_owner()
+car_01.sale("Marc", 10000)
+print(car_01.certificate)
 print(car_01.age)
+car_01.drive(24000)
+print(car_01.get_km())
 print("############################################")
 Vehicle.cls_nb_vehicles()
 bicycle_01 = Bicycle("peaugeot", "vtt", "white")
@@ -224,52 +210,10 @@ print("############################################")
 Vehicle.stc_nb_vehicles()
 print("############################################")
 bicycle_01.get_owner()
-bicycle_01.drive(100)
 bicycle_01.sale("George", 1000)
-bicycle_01.get_km()
 bicycle_01.get_owner()
+bicycle_01.drive(100)
+bicycle_01.get_km()
 bicycle_01.destroy()
 bicycle_01.get_owner()
 print("############################################")
-Vehicle.cls_nb_vehicles()
-print("############################################")
-Vehicle.stc_country_vehicles()
-print("############################################")
-Vehicle.cls_country_vehicles()
-
-
-
-
-"""
-
-clio = Car()
-dir(clio)
-donne toutes les methodes spéciales de clio qui est un objet de ma classe Car() héritant de Vehicle()
-
-__module__
-Contient le nom du module dans lequel est incluse la classe (voir chapitre Modules).
-
-__class__
-Contient le nom de la classe de l'instance. Ce nom est précédé du nom du module suivi d'un point.
-
-    L'attribut __class__ contient lui même d'autres d'attributs :
-
-    __doc__
-    Contient un commentaire associé à la classe (voir paragraphe Commentaires, aide.
-
-    __dict__
-    Contient la liste des attributs statiques (définis hors d'une méthode) et des méthodes (voir paragraphe Attributs statiques.
-
-    __name__
-    Contient le nom de l'instance.
-
-    __bases__
-    Contient les classes dont la classe de l'instance hérite (voir paragraphe Héritage.
-
-__dict__
-Contient la liste des attributs de l'instance (voir paragraphe Liste des attributs.
-
-__doc__
-Contient un commentaire associé à la classe (voir paragraphe Commentaires, aide.
-
-"""

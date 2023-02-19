@@ -3,6 +3,7 @@
 
 from functools import wraps
 
+
 # Quand je declare une fonction je fais :
 def mult(x, y):
     return x * y
