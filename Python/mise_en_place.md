@@ -15,3 +15,8 @@ Si le requirements est déjà en place on peut importer les libs en tapant :<br>
 Lorsque l'on importe des libs on tape derrière :<br>
 `pip freeze > requirements.txt`<br>
 ...
+
+Si lors d'un pip install psycopg2, une erreur survient il faut installer libpq-dev:
+
+    sudo apt update
+    sudo apt-get install libpq-dev
