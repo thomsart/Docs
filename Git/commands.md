@@ -7,7 +7,7 @@
 
     git config --global user.email sam@google.com
 
-Git init:
+## Git init:<br>
     Cette commande est utilisée pour créer un nouveau dépôt GIT :
 
     git init
