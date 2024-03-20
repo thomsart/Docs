@@ -2,7 +2,7 @@
 
 **Rappel des commandes de bases**
 
-Git config:
+## Git config: 
     L’une des commandes git les plus utilisées est git config. On l’utilise pour configurer les préférences de l’utilisateur : son adresse email, l’algorithme utilisé pour diff, le nom d’utilisateur et le format de fichier etc. Par exemple, la commande suivante peut être utilisée pour définir le mail d’un utilisateur:
 
     git config --global user.email sam@google.com
