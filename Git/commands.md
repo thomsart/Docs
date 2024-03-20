@@ -4,18 +4,22 @@
 
 ### Git config: 
 >L’une des commandes git les plus utilisées est git config. On l’utilise pour configurer les préférences de l’utilisateur : son adresse email, l’algorithme utilisé pour diff, le nom d’utilisateur et le format de fichier etc. Par exemple, la commande suivante peut être utilisée pour définir le mail d’un utilisateur:
+
     git config --global user.email sam@google.com
 
 ### Git init:<br>
 >Cette commande est utilisée pour créer un nouveau dépôt GIT :
+
     git init
 
 ### Git clone:
 >Cette commande clone un repo distant avec le protocole https:
+
     git clone https://github.com/thomsart/tools.git
 
 ### Git add:
 >La commande git add peut être utilisée pour ajouter des fichiers à l’index. Par exemple, la commande suivante ajoutera un fichier nommé temp.txt dans le répertoire local de l’index:
+
     git add temp.txt (ou git add * pour tout additionner d'un coup)
 
 ### Git commit:
