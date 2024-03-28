@@ -7,6 +7,10 @@
 
     git config --global user.email sam@google.com
 
+>On peut utiliser cette commande pour lister les parametres de son compte en local:
+
+    git config --list
+
 ### Git init:<br>
 >Cette commande est utilisée pour créer un nouveau dépôt GIT :
 
