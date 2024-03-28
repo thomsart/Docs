@@ -176,3 +176,20 @@
 >Pour effectuer une vérification d’intégrité du système de fichiers git, utilisez la commande git fsck . Tous les fichiers corrompus seront identifiés:
 
     git fsck
+
+
+### Cas d'usage speciale
+>Si lors d'une mission on vous cree un compte Git sur une plateforme  que celle de votre compte personel il vous faudra faire une modification dans votre .gitconfig afin de rediriger vers un aute utilisateur definis dans un .gitconfig-entreprise:
+
+    (dans le .gitconfig)
+    [includeIf "gitdir:~/workspaces/entreprise/projet_dans_lequel_se_trouve_le_dossier_.git/"]
+    path = ~/.gitconfig-entreprise
+    [user]
+    name = thomsart
+    email = toto@gmail.com
+
+
+    (dans le .gitconfig-entreprise)
+    [user]
+    name = thomas
+    email = thomas@gmail.com
