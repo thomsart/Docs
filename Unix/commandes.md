@@ -10,7 +10,7 @@ Afficher touts les fichiers masqués `ls -a`<br>
 Créer un fichier `touch fichier.txt`<br>
 Pour le copier `cp fichier.txt fichier_copie.txt`<br>
 Pour le deplacer `mv fichier.txt new/path/`<br>
-Pour le renomer `mv fichier.txt new_fichier.txt`<br>
+Pour le renomer `mv fichier.txt new_name.txt`<br>
 Pour le vider `truncate -s0 fichier.txt`<br>
 Pour le supprimer `rm fichier.txt`<br><br>
 
