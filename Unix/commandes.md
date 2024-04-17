@@ -4,7 +4,8 @@
 Afficher le dossier dans lequel on se trouve `pwd`<br>
 Lister tout les fichers du dossier `ls`<br>
 Afficher toutes les infos du fichier `ls -l`<br>
-Afficher touts les fichiers masqués `ls -a`<br>
+Afficher touts les fichiers dont les masqués `ls -a`<br>
+Afficher touts les fichiers dont les masqués en mode path `l -a`<br>
 
 ## Créer, modifier et supprimer
 Créer un fichier `touch fichier.txt`<br>
