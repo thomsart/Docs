@@ -64,3 +64,8 @@ La commande **id** affiche les informations du compte utilisteur connecte.
 
 La commande **history** sert a afficher l'historique des commandes executees dans le shell.
 Une fonctionnalite bien utile consiste a tapper **CTRL+r** et commencer a taper le debut d'une commande dont on se souvient vaguement le nom en utilisant **TAB**.
+Dailleur a chaque fois que l'on fait **CTRL+r** on remonte plus haut dans l'historique si le premier resultat n'est pas celui desire.
+
+Dans Linux il existe la notion d'alias bien pratique. Mettons que vous en avez marre de taper a chaque fois **ls -lrtha**, et bien il est possible de creer un nom, un alias, qui vas le remplacer. Le mieux est de le rajouter dans le **.bashrc** pour qu'il persiste, ex:
+    alias ll='ls -lrtha';
+Maintenant on aurra juste a taper **ll**.
