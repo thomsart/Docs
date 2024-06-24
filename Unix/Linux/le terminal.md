@@ -5,7 +5,8 @@ Linux propose 7 terminaux physiques accessibles lorsque l'on est en presence du 
 En presence du serveur on utilise donc les 7 et en s'y connectant a distance via le reseau on utilise un emulateur de terminal, un programme que l'on lance sur son OS, tel que BASH, ZSH, Powershell, etc...
 Le rôle principal du shell est d'exécuter les commandes saisies par l'administrateur lui permettant d'effectuer des appels systèmes vers le noyau.
 Par exemple, la possibilité de traiter de manière automatique les résultats des commandes saisies, ou encore de rediriger ces informations dans des fichiers ou vers d'autres commandes.
-Le shell exécuté lors de la connexion d'un utilisateur sur un terminal est configuré dans le fichier  /etc/passwd.
+Le shell exécuté lors de la connexion d'un utilisateur sur un terminal est configuré dans le fichier<br>
+/etc/passwd.
 
 Taper cette commande pour afficher le shell utilise par thomas: 
     grep thomas /etc/passwd
@@ -69,3 +70,4 @@ Dailleur a chaque fois que l'on fait **CTRL+r** on remonte plus haut dans l'hist
 Dans Linux il existe la notion d'alias bien pratique. Mettons que vous en avez marre de taper a chaque fois **ls -lrtha**, et bien il est possible de creer un nom, un alias, qui vas le remplacer. Le mieux est de le rajouter dans le **.bashrc** pour qu'il persiste, ex:
     alias ll='ls -lrtha';
 Maintenant on aurra juste a taper **ll**.
+On peut faire **alias** pour tous les afficher.
