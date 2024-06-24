@@ -22,7 +22,9 @@ connecte a l'hote 'hp-pavillon'
 Toute cette configuration est stockée dans un fichier **.bashrc** et dans une variable **$PS1** gérée par le shell.
 Si on fait **echo $PS1** on obtient donc:
     \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$
-La commande echo ici affiche le contenu de deux variable  $PS1
+La commande echo ici affiche le contenu de de la variable $PS1
+La variable **$PATH** contient tout les path des binaires donc des fichiers de commandes.
+En faisant **export PATH=$PATH:/home/thomas/Bureau/projets/Tetris/** on rajoute tout les binaires executables qui se trouvent dans le repertoire 'Tetris' comme le 'main.py', du coup on pourra lancer de n'importe ou **Tetris** dans l'OS. en faisant **main**, a savoir que ce n'est pas un nom de commande tres pertinant bien sur. Sachant que cette commande la est rajoutee juste pour la session en cours, si on veut qu'elle soit persistante il faudra modifier le '.bashrc'
 
 ## Les commandes de base
 
@@ -31,6 +33,13 @@ Il y a deux types de commandes, celles integrees a Linux qui possedent leur fich
     echo est une primitive du shell
     thomas@hp-pavillon:~$ type bash
     bash est /usr/bin/bash
+**type** par exemple qui est une primitive du shell permet justement de s'en assurer.
+Pour avoir des infos sur une commande integree au shell on fait:
+    help la_commande
+Pour celles qui sont integree a l'OS on fait:
+    la_commande --help
+Et si on desire plus d'info on peut aussi taper:
+    man la_commande
 
 Afficher une variable `echo $SHELL` (afficher le shell utilise apres authentification)<br>
 Afficher le dossier dans lequel on se trouve `pwd`<br>
@@ -43,6 +52,15 @@ Pour le copier `cp fichier.txt fichier_copie.txt`<br>
 Pour le deplacer `mv fichier.txt new/path/`<br>
 Pour le renomer `mv fichier.txt new_name.txt`<br>
 Pour le vider `truncate -s0 fichier.txt`<br>
-Pour le supprimer `rm fichier.txt`<br><br>
+Pour le supprimer `rm fichier.txt`<br>
+Pour avoir les infos dessus `file /usr/bin/bash`<br>
 Créer un dossier `mkdir dossier`<br>
 Pour le supprimer `rm -r dossier`<br>
+
+Il est possible d'executer plusieur commandes a la fois grace a **&&**, ex:
+    cd /home/thomas/Bureau/projets && file *
+Nous enmenera dans le dossier 'projets' et ensuite affichera tout les fichiers qui s'y trouvent.
+La commande **id** affiche les informations du compte utilisteur connecte.
+
+La commande **history** sert a afficher l'historique des commandes executees dans le shell.
+Une fonctionnalite bien utile consiste a tapper **CTRL+r** et commencer a taper le debut d'une commande dont on se souvient vaguement le nom en utilisant **TAB**.
