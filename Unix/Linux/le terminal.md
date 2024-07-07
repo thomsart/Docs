@@ -1,6 +1,7 @@
 # Le Terminal
 
 ## Les terminaux
+
 Linux propose 7 terminaux physiques accessibles lorsque l'on est en presence du serveur. Ils sont geres via sa console avec les combinaisons de touches CTRL+ALT+F1 a F7.
 En presence du serveur on utilise donc les 7 et en s'y connectant a distance via le reseau on utilise un emulateur de terminal, un programme que l'on lance sur son OS, tel que BASH, ZSH, Powershell, etc...
 Le rôle principal du shell est d'exécuter les commandes saisies par l'administrateur lui permettant d'effectuer des appels systèmes vers le noyau.
@@ -9,7 +10,7 @@ Le shell exécuté lors de la connexion d'un utilisateur sur un terminal est con
 /etc/passwd.
 
 Taper cette commande pour afficher le shell utilise par thomas: 
-    grep thomas /etc/passwd
+    `grep thomas /etc/passwd`
 Qui donne:
 "thomas:x:1000:1000:thomas,,,:/home/thomas:/bin/bash"
 Le shell exécuté à la connexion de l'utilisateur est indiqué dans le dernier champ (les champs sont séparés par des :).

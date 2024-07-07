@@ -1,6 +1,6 @@
-# Les fichiers
-
-## L'arborescence Linux
+############################################################################################################
+############################################################################################################
+# L'arborescence Linux
 
 La fondation Linux est l'organisme responsable du maintien de la norme définissant l'arborescence des systèmes Unix/Linux. Cette norme est appelée FHS pour Filesystem Hierarchy Standard et est disponible sous plusieurs formats.  
 
@@ -81,14 +81,14 @@ Ce qui fait que :
 1. certains sous-répertoires de/var seront marqués variablesunshareable  (par exemple/var/log)
 2. alors que d'autres seront marqués variablesshareable(comme/var/mail ou /var/www par exemple).  
 
-## Identifiez le rôle des systèmes de fichiers virtuels de Linux
+# Identifiez le rôle des systèmes de fichiers virtuels de Linux
 
 Traditionnellement, il existe aussi sur les systèmes Linux des arborescences un peu particulières. Elles correspondent à une organisation des informations maintenues en temps réel par le noyau Linux, sous la forme d'une arborescence.
 Imaginez la vitrine d'un magasin : le noyau met à disposition beaucoup d'informations : elles sont visibles (certaines accessibles uniquement en lecture seule). Mais pour certaines d'entre elles, il est possible de rentrer dans la boutique pour les manipuler.
 Il est ainsi possible de changer certaines variables du noyau, et donc certains comportements du système global en modifiant le contenu de ces fichiers “virtuels” placés dans ces arborescences.
 Ces arborescences n'existent pas sur périphérique physique de type bloc, et l'analyse indépendante du disque d'un système Linux ne les fera pas apparaître. Elles existent uniquement parce que le noyau vous les propose gracieusement.
 
-### Le répertoire  /proc
+## Le répertoire  /proc
 
 Cette arborescence contient toutes les informations concernant le processus ! Et il y en a beaucoup…
 Pour lister le contenu de cette arborescence, lancez la commande suivante : `ls /proc`
@@ -131,4 +131,8 @@ Cette arborescence contient les informations sur les périphériques gérés par
 
 Le répertoire **/sys/kernel** contient une arborescence de fichiers représentant des variables du noyau accessibles en écriture et permettant de modifier le comportement à chaud du système. Par exemple, le répertoire **/sys/kernel/debug** contient des fichiers permettant d'activer des fonctions de traces et de débogage du noyau.
 
-Sur les distributions principales de Linux, le répertoire **/proc/sys/** est également accessible en écriture sur certains paramètres. En effet, d'un point de vue historique, seule l'arborescence **/proc** existait. **/sys** a été ajoutée à partir des versions 2.6 du noyau, notamment pour différencier la gestion des informations concernant les périphériques.
+Sur les distributions principales de Linux, le répertoire **/proc/sys/** est également accessible en écriture sur certains paramètres. En effet, d'un point de vue historique, seule l'arborescence **/proc** existait. **/sys** a été ajoutée à partir des versions 2.6 du noyau, notamment pour différencier la gestion des informations concernant les périphériques.  
+
+############################################################################################################
+############################################################################################################
+# Visualisez des fichiers
