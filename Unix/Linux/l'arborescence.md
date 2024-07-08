@@ -2,30 +2,29 @@
 ############################################################################################################
 # L'arborescence Linux
 
-La fondation Linux est l'organisme responsable du maintien de la norme définissant l'arborescence des systèmes Unix/Linux. Cette norme est appelée FHS pour Filesystem Hierarchy Standard et est disponible sous plusieurs formats.  
+La fondation Linux est l'organisme responsable du maintien de la norme définissant l'arborescence des systèmes Unix|Linux. Cette norme est appelée FHS pour Filesystem Hierarchy Standard et est disponible sous plusieurs formats.  
 
-Le respect de ce standard permet :
-aux administrateurs d'anticiper les répertoires contenant les informations recherchées, quelle que soit la distribution utilisée. 
+Le respect de ce standard permet aux administrateurs d'anticiper les répertoires contenant les informations recherchées, quelle que soit la distribution utilisée. 
 aux développeurs système d'utiliser une arborescence commune et connue pour déployer, installer ou configurer les programmes qu'ils éditent. Pratique lorsque l'on exploite des milliers de fichiers.  
 
-Le document va donc :
-recenser les répertoires identifiables qui proposent un usage clair et défini,
+Le document va donc recenser les répertoires identifiables qui proposent un usage clair et défini,
 puis indiquer éventuellement la liste minimale des répertoires, sous-répertoires et fichiers attendus pour chacun.  
 
-Les répertoires contenant des informations stockées sur un équipement mais utilisées par d'autres équipements seront identifiés par le mot-clé "shareable" (partageables). Par exemple, le répertoire /home contient traditionnellement les répertoires personnels des comptes utilisateurs du système, et ces données peuvent être partagées entre utilisateurs sur le même serveur, voire entre utilisateurs sur un serveur différent.  
+Les répertoires contenant des informations stockées sur un équipement mais utilisées par d'autres équipements seront identifiés par le mot-clé "shareable" (partageables). Par exemple, le répertoire **/home** contient traditionnellement les répertoires personnels des comptes utilisateurs du système, et ces données peuvent être partagées entre utilisateurs sur le même serveur, voire entre utilisateurs sur un serveur différent.  
 
-Les répertoires contenant des fichiers qui ne peuvent pas ou ne doivent pas être partagés entre plusieurs équipements seront marqués "unshareable". Nous pouvons citer ici /boot qui contient notamment le noyau Linux exploité sur l'équipement.  
+Les répertoires contenant des fichiers qui ne peuvent pas ou ne doivent pas être partagés entre plusieurs équipements seront marqués "unshareable". Nous pouvons citer ici **/boot** qui contient notamment le noyau Linux exploité sur l'équipement.  
 
-Les répertoires contenant des données qui ne peuvent pas changer d'elles-mêmes, ou sans l'intervention de l'administrateur, avec nécessité d'une élévation de privilèges sont marqués "static". On peut à nouveau citer ici /boot bien entendu, mais également /etc, par exemple, qui contient traditionnellement les fichiers de configuration du système et des services.  
+Les répertoires contenant des données qui ne peuvent pas changer d'elles-mêmes, ou sans l'intervention de l'administrateur, avec nécessité d'une élévation de privilèges sont marqués "static". On peut à nouveau citer ici **/boot** bien entendu, mais également **/etc**, par exemple, qui contient traditionnellement les fichiers de configuration du système et des services.  
 
-Les répertoires qui ne sont pas marqués statiques sont marqués "variable" (variables). On peut retrouver ici le répertoire  /home  évidemment, mais également /var/www pour les sources d'un site web par exemple.  
+Les répertoires qui ne sont pas marqués statiques sont marqués "variable" (variables). On peut retrouver ici le répertoire  **/home**  évidemment, mais également **/var/www** pour les sources d'un site web par exemple.  
 
-Tous les exemples de répertoires cités ici sont adressés de manière absolue, c'est-à-dire à partir de la racine du système /. 
+Tous les exemples de répertoires cités ici sont adressés de manière absolue, c'est-à-dire à partir de la racine du système **/**. 
 
-La norme FHS adresse ces recommandations à partir d'un système monté sur la racine /. L'administrateur peut quant à lui adresser les répertoires et les fichiers de manière relative à un emplacement courant. Pour cela, chaque répertoire sous la racine /possède deux fichiers spéciaux nommés '.' pour se  désigner soi-même, et '..' pour désigner son parent dans l'arborescence.
+La norme FHS adresse ces recommandations à partir d'un système monté sur la racine **/**.  
+L'administrateur peut quant à lui adresser les répertoires et les fichiers de manière relative à un emplacement courant. Pour cela, chaque répertoire sous la racine **/** possède deux fichiers spéciaux nommés '.' pour se  désigner soi-même, et '..' pour désigner son parent dans l'arborescence.
 
 Selon FHS, voici la liste minimale de tous les éléments devant être présents
-directement sous la racine / :  
+directement sous la racine **/** :  
 **bin** : répertoire contenant les commandes pouvant être utilisées à la fois par le système et par un administrateur ;  
 **boot** : répertoire contenant tout le nécessaire pour démarrer le système => la configuration du bootloader, le noyau, les fichiers ramfs… ;  
 **dev** : répertoire contenant traditionnellement tous les points d'accès aux périphériques, terminaux, disques, supports amovibles etc. ;  
@@ -78,21 +77,21 @@ Il y a quelques sous-répertoires de/var qu'il est important de mentionner :
 
 Certains programmes vont stocker par défaut leurs données temporaires dans l'arborescence/var. Ainsi, le serveur web Apache HTTPD par exemple, lorsqu'il est installé via les packages des distributions majeures est configuré avec un docroot(répertoire contenant par défaut les sources des sites web) pointant vers/var/www.
 Ce qui fait que :
-1. certains sous-répertoires de/var seront marqués variablesunshareable  (par exemple/var/log)
-2. alors que d'autres seront marqués variablesshareable(comme/var/mail ou /var/www par exemple).  
+* certains sous-répertoires de/var seront marqués **variablesunshareable** (exemple /var/log)
+* alors que d'autres seront marqués **variablesshareable** (comme /var/mail ou /var/www).  
 
 # Identifiez le rôle des systèmes de fichiers virtuels de Linux
 
-Traditionnellement, il existe aussi sur les systèmes Linux des arborescences un peu particulières. Elles correspondent à une organisation des informations maintenues en temps réel par le noyau Linux, sous la forme d'une arborescence.
-Imaginez la vitrine d'un magasin : le noyau met à disposition beaucoup d'informations : elles sont visibles (certaines accessibles uniquement en lecture seule). Mais pour certaines d'entre elles, il est possible de rentrer dans la boutique pour les manipuler.
-Il est ainsi possible de changer certaines variables du noyau, et donc certains comportements du système global en modifiant le contenu de ces fichiers “virtuels” placés dans ces arborescences.
+Traditionnellement, il existe aussi sur les systèmes Linux des arborescences un peu particulières. Elles correspondent à une organisation des informations maintenues en temps réel par le noyau Linux, sous la forme d'une arborescence.  
+Imaginez la vitrine d'un magasin : le noyau met à disposition beaucoup d'informations : elles sont visibles (certaines accessibles uniquement en lecture seule). Mais pour certaines d'entre elles, il est possible de rentrer dans la boutique pour les manipuler.  
+Il est ainsi possible de changer certaines variables du noyau, et donc certains comportements du système global en modifiant le contenu de ces fichiers “virtuels” placés dans ces arborescences.  
 Ces arborescences n'existent pas sur périphérique physique de type bloc, et l'analyse indépendante du disque d'un système Linux ne les fera pas apparaître. Elles existent uniquement parce que le noyau vous les propose gracieusement.
 
-## Le répertoire  /proc
+## Le répertoire /proc
 
 Cette arborescence contient toutes les informations concernant le processus ! Et il y en a beaucoup…
-Pour lister le contenu de cette arborescence, lancez la commande suivante : `ls /proc`
-Vous pouvez remarquer que **/proc** présente aussi des fichiers et des répertoires. Je vous propose d'observer un peu plus dans le détail quelques fichiers intéressants. 
+Pour lister le contenu de cette arborescence, lancez la commande suivante : `ls /proc`  
+Vous pouvez remarquer que **/proc** présente aussi des fichiers et des répertoires. Je vous propose d'observer un peu plus dans le détail quelques fichiers intéressants.  
 Par exemple, **/proc/cpuinfo** contient les informations sur le(s) processeur(s) maintenues par le noyau. Pour consulter ce fichier, utilisez la commande `cat` telle que:
 
     seb@thor:~$ cat /proc/cpuinfo
@@ -109,7 +108,7 @@ Et pourtant, lorsque vous lancez la commande file sur ce même fichier :
     /proc/cpuinfo: empty
 
 Ces fichiers étant virtuels, ils ont une taille de 0.
-D'autres fichiers sont intéressants à relever dans cette arborescence :
+D'autres fichiers sont intéressants à relever dans cette arborescence :  
 
 **/proc/version** contient la version exacte du noyau en exécution,  
 **/proc/meminfo**, les informations détaillés sur la mémoire vive gérée par le noyau,  
@@ -119,20 +118,21 @@ D'autres fichiers sont intéressants à relever dans cette arborescence :
 Ainsi ce dernier met à disposition les informations concernant chaque processus dans le répertoire portant son numéro associé.  
 
 Observons par exemple le contenu du répertoire **/proc/1** qui est le premier processus du noyau :
-seb@thor:~$ cat /proc/1/cmdline
-/lib/systemd/systemd--system--deserialize18
+
+    seb@thor:~$ cat /proc/1/cmdline
+    /lib/systemd/systemd--system--deserialize18
 
 Vous obtenez ici le premier processus lancé par le noyau : **systemd**, le programme d'initialisation principal de Linux (le résultat de cette commande peut varier en fonction des distributions).  
 **/sys**: cette seconde arborescence fonctionne sur le même principe que sa petite sœur **/proc**. Elle présente des informations maintenues en temps réel par le noyau. À une différence fondamentale près :  
 certains éléments de cette arborescence sont accessibles en écriture aux comptes privilégiés du système et notamment les variables systèmes du noyau dans le répertoire **kernel**.  
 
 Cette arborescence contient les informations sur les périphériques gérés par le noyau, notamment :  
-1. les périphériques de type bloc ou caractères dans les répertoires /sys/block ou /sys/dev,
-2. les drivers dans /sys/devices,
-3. les différents systèmes de fichiers dans /sys/fs,
-4. les modules du noyau dans /sys/module.
+* les périphériques de type bloc ou caractères dans les répertoires /sys/block ou /sys/dev,
+* les drivers dans /sys/devices,
+* les différents systèmes de fichiers dans /sys/fs,
+* les modules du noyau dans /sys/module.
 
-Le répertoire **/sys/kernel** contient une arborescence de fichiers représentant des variables du noyau accessibles en écriture et permettant de modifier le comportement à chaud du système. Par exemple, le répertoire **/sys/kernel/debug** contient des fichiers permettant d'activer des fonctions de traces et de débogage du noyau.
+Le répertoire **/sys/kernel** contient une arborescence de fichiers représentant des variables du noyau accessibles en écriture et permettant de modifier le comportement à chaud du système. Par exemple, le répertoire **/sys/kernel/debug** contient des fichiers permettant d'activer des fonctions de traces et de débogage du noyau.  
 
 Sur les distributions principales de Linux, le répertoire **/proc/sys/** est également accessible en écriture sur certains paramètres. En effet, d'un point de vue historique, seule l'arborescence **/proc** existait. **/sys** a été ajoutée à partir des versions 2.6 du noyau, notamment pour différencier la gestion des informations concernant les périphériques.  
 
