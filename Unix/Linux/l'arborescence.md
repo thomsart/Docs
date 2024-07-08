@@ -94,6 +94,7 @@ Cette arborescence contient toutes les informations concernant le processus ! Et
 Pour lister le contenu de cette arborescence, lancez la commande suivante : `ls /proc`
 Vous pouvez remarquer que **/proc** présente aussi des fichiers et des répertoires. Je vous propose d'observer un peu plus dans le détail quelques fichiers intéressants. 
 Par exemple, **/proc/cpuinfo** contient les informations sur le(s) processeur(s) maintenues par le noyau. Pour consulter ce fichier, utilisez la commande `cat` telle que:
+
     seb@thor:~$ cat /proc/cpuinfo
     processor : 0
     vendor_id : GenuineIntel
@@ -103,6 +104,7 @@ Par exemple, **/proc/cpuinfo** contient les informations sur le(s) processeur(s)
     ...
 
 Et pourtant, lorsque vous lancez la commande file sur ce même fichier :
+
     seb@thor:~$ file /proc/cpuinfo
     /proc/cpuinfo: empty
 
@@ -116,8 +118,8 @@ D'autres fichiers sont intéressants à relever dans cette arborescence :
 Ainsi ce dernier met à disposition les informations concernant chaque processus dans le répertoire portant son numéro associé.  
 
 Observons par exemple le contenu du répertoire **/proc/1** qui est le premier processus du noyau :
->seb@thor:~$ cat /proc/1/cmdline
->/lib/systemd/systemd--system--deserialize18
+seb@thor:~$ cat /proc/1/cmdline
+/lib/systemd/systemd--system--deserialize18
 
 Vous obtenez ici le premier processus lancé par le noyau : **systemd**, le programme d'initialisation principal de Linux (le résultat de cette commande peut varier en fonction des distributions).  
 **/sys**: cette seconde arborescence fonctionne sur le même principe que sa petite sœur **/proc**. Elle présente des informations maintenues en temps réel par le noyau. À une différence fondamentale près :  
