@@ -25,20 +25,21 @@ L'administrateur peut quant à lui adresser les répertoires et les fichiers de 
 
 Selon FHS, voici la liste minimale de tous les éléments devant être présents
 directement sous la racine **/** :  
-**bin** : répertoire contenant les commandes pouvant être utilisées à la fois par le système et par un administrateur ;  
-**boot** : répertoire contenant tout le nécessaire pour démarrer le système => la configuration du bootloader, le noyau, les fichiers ramfs… ;  
-**dev** : répertoire contenant traditionnellement tous les points d'accès aux périphériques, terminaux, disques, supports amovibles etc. ;  
-**etc** : répertoire contenant les fichiers de configuration des programmes et services exploités sur le système ;  
-**lib** : répertoire contenant les librairies partagées par les différentes commandes de /bin ou /sbin ;  
-**media** : répertoire contenant les points de montage des périphériques amovibles (clé USB, disques externes, etc.) ;  
-**mnt** : répertoire contenant les points de montage temporaires de systèmes de fichiers requis à un instant donné par l'administrateur ;  
-**opt** : répertoire contenant les applications installées par-dessus le système d'exploitation minimal ;  
-**run** : répertoire contenant les données gérées par le système depuis le démarrage, ce répertoire est ré-initialisé entre chaque démarrage ;  
-**sbin** : répertoire contenant les commandes utilisées uniquement par l'administrateur (pas par le système) ;  
-**srv** : répertoire contenant les données gérées par les services exploités sur le système ;  
-**tmp** : répertoire servant de dépôt de fichiers temporaires pour le système, les utilisateurs et les administrateurs ;  
-**usr** : répertoire complexe détaillé un peu plus loin.
-**var** : répertoire contenant toutes les données variables du système, qu'elles soient produites par les utilisateurs, les administrateurs ou le système lui-même (comme les fichiers de traces).  
+
+**bin** => répertoire contenant les commandes pouvant être utilisées à la fois par le système et par un administrateur ;  
+**boot** => répertoire contenant tout le nécessaire pour démarrer le système => la configuration du bootloader, le noyau, les fichiers ramfs… ;  
+**dev** => répertoire contenant traditionnellement tous les points d'accès aux périphériques, terminaux, disques, supports amovibles etc. ;  
+**etc** => répertoire contenant les fichiers de configuration des programmes et services exploités sur le système ;  
+**lib** => répertoire contenant les librairies partagées par les différentes commandes de /bin ou /sbin ;  
+**media** => répertoire contenant les points de montage des périphériques amovibles (clé USB, disques externes, etc.) ;  
+**mnt** => répertoire contenant les points de montage temporaires de systèmes de fichiers requis à un instant donné par l'administrateur ;  
+**opt** => répertoire contenant les applications installées par-dessus le système d'exploitation minimal ;  
+**run** => répertoire contenant les données gérées par le système depuis le démarrage, ce répertoire est ré-initialisé entre chaque démarrage ;  
+**sbin** => répertoire contenant les commandes utilisées uniquement par l'administrateur (pas par le système) ;  
+**srv** => répertoire contenant les données gérées par les services exploités sur le système ;  
+**tmp** => répertoire servant de dépôt de fichiers temporaires pour le système, les utilisateurs et les administrateurs ;  
+**usr** => répertoire complexe détaillé un peu plus loin.
+**var** => répertoire contenant toutes les données variables du système, qu'elles soient produites par les utilisateurs, les administrateurs ou le système lui-même (comme les fichiers de traces).  
 
 ## Root
 
@@ -55,7 +56,8 @@ FHS précise néanmoins que les fichiers de configuration nécessaires aux utili
 ## Usr
 
 Ce répertoire est devenu avec le temps une arborescence majeure des distributions Linux. Il contient lui-même des répertoires bin et sbin dans lesquels se situent également des commandes !  
-Résumons un peu la logique de tous ces répertoires contenant des commandes :
+Résumons un peu la logique de tous ces répertoires contenant des commandes :  
+
 **/bin**: ce sont les commandes critiques pour le bon fonctionnement du système, quel que soit son objectif. Elles sont lancées par le système et par l'administrateur ;  
 **/sbin**: ce sont les commandes uniquement à destination de l'administrateur pour la gestion du système.  
 **/usr/bin**: ce répertoire contient majoritairement les commandes à destination de tous les utilisateurs du système, privilégiés ou non.  
@@ -70,6 +72,7 @@ L'objectif de ce répertoire est simple : stocker toutes les informations utilis
 Normalement, avec une utilisation classique de **/var**, **/usr** devrait pouvoir être utilisé en lecture seule ! Ce qui est un gage de sécurité très important.  
 
 Il y a quelques sous-répertoires de **/var** qu'il est important de mentionner :  
+
 **/var/log** => répertoire contenant l'arborescence de toutes les traces systèmes et applicatives. C'est dans ce répertoire qu'il est possible de consulter les traces des historiques de démarrage du système, de connexion des comptes utilisateurs, d'activité des services réseaux (SSH, HTTPD, SMTP, etc.) ainsi que les traces du noyau. Généralement les applications installées sur le système disposent de leur propre sous-répertoire (/var/log/apache2par exemple).  
 **/var/run** => répertoire contenant toutes les données relatives aux processus en cours d'exécution, les sémaphores, les données applicatives, les fichiers numéro de processus, etc.  
 **/var/spool** => répertoire contenant des données stockées de manière temporaire entre processus. Souvent, ce répertoire est utilisé pour stocker des données relatives à des actions ou tâches à effectuer dans un futur proche par les processus en cours d'exécution.  
@@ -102,17 +105,18 @@ Par exemple, **/proc/cpuinfo** contient les informations sur le(s) processeur(s)
     model name : Intel(R) Xeon(R) CPU E3-1220 v5 @ 3.00GHz
     ...
 
-Et pourtant, lorsque vous lancez la commande file sur ce même fichier :
+Et pourtant, lorsque vous lancez la commande `file` sur ce même fichier :
 
     seb@thor:~$ file /proc/cpuinfo
     /proc/cpuinfo: empty
 
 Ces fichiers étant virtuels, ils ont une taille de 0.
 D'autres fichiers sont intéressants à relever dans cette arborescence :  
+
 **/proc/version** contient la version exacte du noyau en exécution,  
-**/proc/meminfo**, les informations détaillés sur la mémoire vive gérée par le noyau,  
-**/proc/uptime**, le temps d'exécution cumulé,  
-**/proc/cmdline**, les paramètres passés au démarrage du noyau, etc.  
+**/proc/meminfo** les informations détaillés sur la mémoire vive gérée par le noyau,  
+**/proc/uptime** le temps d'exécution cumulé,  
+**/proc/cmdline** les paramètres passés au démarrage du noyau, etc.  
 **/proc** contient également beaucoup de répertoires, dont la grande majorité porte des noms à base de chiffres.En effet, tous les processus en exécution sur le système sont identifiés par un numéro unique géré par le noyau.
 Ainsi ce dernier met à disposition les informations concernant chaque processus dans le répertoire portant son numéro associé.  
 
