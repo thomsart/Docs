@@ -110,11 +110,12 @@ Et pourtant, lorsque vous lancez la commande file sur ce même fichier :
 
 Ces fichiers étant virtuels, ils ont une taille de 0.
 D'autres fichiers sont intéressants à relever dans cette arborescence :
-**/proc/version** contient la version exacte du noyau en exécution, 
-**/proc/meminfo**, les informations détaillés sur la mémoire vive gérée par le noyau,
-**/proc/uptime**, le temps d'exécution cumulé,
-**/proc/cmdline**, les paramètres passés au démarrage du noyau, etc.
-**/proc** contient également beaucoup de répertoires, dont la grande majorité porte des noms à base de chiffres. En effet, tous les processus en exécution sur le système sont identifiés par un numéro unique géré par le noyau. 
+
+**/proc/version** contient la version exacte du noyau en exécution,  
+**/proc/meminfo**, les informations détaillés sur la mémoire vive gérée par le noyau,  
+**/proc/uptime**, le temps d'exécution cumulé,  
+**/proc/cmdline**, les paramètres passés au démarrage du noyau, etc.  
+**/proc** contient également beaucoup de répertoires, dont la grande majorité porte des noms à base de chiffres.En effet, tous les processus en exécution sur le système sont identifiés par un numéro unique géré par le noyau.
 Ainsi ce dernier met à disposition les informations concernant chaque processus dans le répertoire portant son numéro associé.  
 
 Observons par exemple le contenu du répertoire **/proc/1** qui est le premier processus du noyau :
