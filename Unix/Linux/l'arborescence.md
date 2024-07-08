@@ -67,23 +67,23 @@ Le répertoire **/usr** est très important, il est marqué "shareable" et "stat
 ## Var
 
 L'objectif de ce répertoire est simple : stocker toutes les informations utilisateurs, administrateurs et systèmes variables.  
-Normalement, avec une utilisation classique de /var,/usr devrait pouvoir être utilisé en lecture seule ! Ce qui est un gage de sécurité très important.  
+Normalement, avec une utilisation classique de **/var**, **/usr** devrait pouvoir être utilisé en lecture seule ! Ce qui est un gage de sécurité très important.  
 
-Il y a quelques sous-répertoires de/var qu'il est important de mentionner :  
-**/var/log**: répertoire contenant l'arborescence de toutes les traces systèmes et applicatives. C'est dans ce répertoire qu'il est possible de consulter les traces des historiques de démarrage du système, de connexion des comptes utilisateurs, d'activité des services réseaux (SSH, HTTPD, SMTP, etc.) ainsi que les traces du noyau. Généralement les applications installées sur le système disposent de leur propre sous-répertoire (/var/log/apache2par exemple).  
-**/var/run**: répertoire contenant toutes les données relatives aux processus en cours d'exécution, les sémaphores, les données applicatives, les fichiers numéro de processus, etc.  
-**/var/spool**: répertoire contenant des données stockées de manière temporaire entre processus. Souvent, ce répertoire est utilisé pour stocker des données relatives à des actions ou tâches à effectuer dans un futur proche par les processus en cours d'exécution.  
-**/var/mail**: c'est le répertoire de stockage des messageries électroniques locales des comptes utilisateurs du système.  
+Il y a quelques sous-répertoires de **/var** qu'il est important de mentionner :  
+**/var/log** => répertoire contenant l'arborescence de toutes les traces systèmes et applicatives. C'est dans ce répertoire qu'il est possible de consulter les traces des historiques de démarrage du système, de connexion des comptes utilisateurs, d'activité des services réseaux (SSH, HTTPD, SMTP, etc.) ainsi que les traces du noyau. Généralement les applications installées sur le système disposent de leur propre sous-répertoire (/var/log/apache2par exemple).  
+**/var/run** => répertoire contenant toutes les données relatives aux processus en cours d'exécution, les sémaphores, les données applicatives, les fichiers numéro de processus, etc.  
+**/var/spool** => répertoire contenant des données stockées de manière temporaire entre processus. Souvent, ce répertoire est utilisé pour stocker des données relatives à des actions ou tâches à effectuer dans un futur proche par les processus en cours d'exécution.  
+**/var/mail** => c'est le répertoire de stockage des messageries électroniques locales des comptes utilisateurs du système.  
 
-Certains programmes vont stocker par défaut leurs données temporaires dans l'arborescence/var. Ainsi, le serveur web Apache HTTPD par exemple, lorsqu'il est installé via les packages des distributions majeures est configuré avec un docroot(répertoire contenant par défaut les sources des sites web) pointant vers/var/www.
-Ce qui fait que :
+Certains programmes vont stocker par défaut leurs données temporaires dans l'arborescence **/var**. Ainsi, le serveur web Apache HTTPD par exemple, lorsqu'il est installé via les packages des distributions majeures est configuré avec un docroot (répertoire contenant par défaut les sources des sites web) pointant vers **/var/www**.
+Ce qui fait que :  
 * certains sous-répertoires de/var seront marqués **variablesunshareable** (exemple /var/log)
 * alors que d'autres seront marqués **variablesshareable** (comme /var/mail ou /var/www).  
 
 # Identifiez le rôle des systèmes de fichiers virtuels de Linux
 
 Traditionnellement, il existe aussi sur les systèmes Linux des arborescences un peu particulières. Elles correspondent à une organisation des informations maintenues en temps réel par le noyau Linux, sous la forme d'une arborescence.  
-Imaginez la vitrine d'un magasin : le noyau met à disposition beaucoup d'informations : elles sont visibles (certaines accessibles uniquement en lecture seule). Mais pour certaines d'entre elles, il est possible de rentrer dans la boutique pour les manipuler.  
+Imaginez la vitrine d'un magasin, le noyau met à disposition beaucoup d'informations, elles sont visibles (certaines accessibles uniquement en lecture seule). Mais pour certaines d'entre elles, il est possible de rentrer dans la boutique pour les manipuler.  
 Il est ainsi possible de changer certaines variables du noyau, et donc certains comportements du système global en modifiant le contenu de ces fichiers “virtuels” placés dans ces arborescences.  
 Ces arborescences n'existent pas sur périphérique physique de type bloc, et l'analyse indépendante du disque d'un système Linux ne les fera pas apparaître. Elles existent uniquement parce que le noyau vous les propose gracieusement.
 
@@ -109,7 +109,6 @@ Et pourtant, lorsque vous lancez la commande file sur ce même fichier :
 
 Ces fichiers étant virtuels, ils ont une taille de 0.
 D'autres fichiers sont intéressants à relever dans cette arborescence :  
-
 **/proc/version** contient la version exacte du noyau en exécution,  
 **/proc/meminfo**, les informations détaillés sur la mémoire vive gérée par le noyau,  
 **/proc/uptime**, le temps d'exécution cumulé,  
@@ -122,7 +121,7 @@ Observons par exemple le contenu du répertoire **/proc/1** qui est le premier p
     seb@thor:~$ cat /proc/1/cmdline
     /lib/systemd/systemd--system--deserialize18
 
-Vous obtenez ici le premier processus lancé par le noyau : **systemd**, le programme d'initialisation principal de Linux (le résultat de cette commande peut varier en fonction des distributions).  
+Vous obtenez ici le premier processus lancé par le noyau => **systemd**, le programme d'initialisation principal de Linux (le résultat de cette commande peut varier en fonction des distributions).  
 **/sys**: cette seconde arborescence fonctionne sur le même principe que sa petite sœur **/proc**. Elle présente des informations maintenues en temps réel par le noyau. À une différence fondamentale près :  
 certains éléments de cette arborescence sont accessibles en écriture aux comptes privilégiés du système et notamment les variables systèmes du noyau dans le répertoire **kernel**.  
 
