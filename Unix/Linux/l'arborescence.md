@@ -116,8 +116,8 @@ D'autres fichiers sont intéressants à relever dans cette arborescence :
 Ainsi ce dernier met à disposition les informations concernant chaque processus dans le répertoire portant son numéro associé.  
 
 Observons par exemple le contenu du répertoire **/proc/1** qui est le premier processus du noyau :
-    seb@thor:~$ cat /proc/1/cmdline
-    /lib/systemd/systemd--system--deserialize18
+>seb@thor:~$ cat /proc/1/cmdline
+>/lib/systemd/systemd--system--deserialize18
 
 Vous obtenez ici le premier processus lancé par le noyau : **systemd**, le programme d'initialisation principal de Linux (le résultat de cette commande peut varier en fonction des distributions).  
 **/sys**: cette seconde arborescence fonctionne sur le même principe que sa petite sœur **/proc**. Elle présente des informations maintenues en temps réel par le noyau. À une différence fondamentale près :  
