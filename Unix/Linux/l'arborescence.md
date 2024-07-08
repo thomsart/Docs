@@ -70,7 +70,7 @@ Le répertoire **/usr** est très important, il est marqué "shareable" et "stat
 L'objectif de ce répertoire est simple : stocker toutes les informations utilisateurs, administrateurs et systèmes variables.  
 Normalement, avec une utilisation classique de /var,/usr devrait pouvoir être utilisé en lecture seule ! Ce qui est un gage de sécurité très important.  
 
-Il y a quelques sous-répertoires de/var qu'il est important de mentionner :
+Il y a quelques sous-répertoires de/var qu'il est important de mentionner :  
 **/var/log**: répertoire contenant l'arborescence de toutes les traces systèmes et applicatives. C'est dans ce répertoire qu'il est possible de consulter les traces des historiques de démarrage du système, de connexion des comptes utilisateurs, d'activité des services réseaux (SSH, HTTPD, SMTP, etc.) ainsi que les traces du noyau. Généralement les applications installées sur le système disposent de leur propre sous-répertoire (/var/log/apache2par exemple).  
 **/var/run**: répertoire contenant toutes les données relatives aux processus en cours d'exécution, les sémaphores, les données applicatives, les fichiers numéro de processus, etc.  
 **/var/spool**: répertoire contenant des données stockées de manière temporaire entre processus. Souvent, ce répertoire est utilisé pour stocker des données relatives à des actions ou tâches à effectuer dans un futur proche par les processus en cours d'exécution.  
