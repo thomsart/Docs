@@ -157,8 +157,7 @@ Dans la majorité des cas, tous les programmes exécutés sous Linux disposent d
 
 * stderr(pour standard error) : c'est le canal du flux concernant les erreurs, et par défaut, lorsque vous lancez une commande, c'est aussi l'écran. La commande va différencier les données “normales” des données “erreur” et peut changer de canal pour diffuser ces informations.
 
-stdin (0) ------> Programme ------> stdout (1)  
-                      |-----------> stderr (2)
+stdin (0) ---> Programme ---> stdout (1) et/ou ---> stderr (2)
 
 Pour manipuler ces canaux on utilise les chevrons:  
 simples **>** et **<**,  
@@ -210,7 +209,7 @@ Parmi les méta-caractères les plus couramment utilisés on peut retrouver :
 
 `.` => Le point remplace n'importe quel caractère (hors retour chariot), par exemple l'expression régulière suivante : S.B, pourrait modéliser SEB ou SAB ou encore SSB, etc.  
 
-`?` => Le point d'interrogation indique que l'expression modélisée peut être présente 0 ou 1 fois. Par exemple, S.?B, pourrait correspondre à SB ouSEB, mais pas SEEB  
+`?` => Le point d'interrogation indique que l'expression modélisée peut être présente 0 ou 1 fois. Par exemple, S.?B, pourrait correspondre à SB ou SEB, mais pas SEEB  
 
 `*`  => L'étoile fonctionne comme le ?, mais autorise 0 ou n fois l'expression, par exemple S.* pourrait modéliser S.*B, mais aussi SEB, mais aussi SAEIOUYB  
 
@@ -223,5 +222,39 @@ Parmi les méta-caractères les plus couramment utilisés on peut retrouver :
 `[]` => Les crochets, accompagnés souvent de `-` permettent de modéliser un jeu de caractères, par exemple [a-z] pour modéliser l'ensemble des caractères minuscules de l'alphabet.  
 Il est possible également d'utiliser le caractère `^` avec les crochets, qui a alors une autre signification et permet d'omettre une expression. Par exemple [^abc], modélise tous les caractères sauf a, b et c.  
 
-La commande sed peut utiliser ces expressions régulières pour transformer un flux de données à la volée de manière non interactive (sed signifie Stream EDitor). Très pratique pour les traitements automatiques.  
+La commande `sed` peut utiliser ces expressions régulières pour transformer un flux de données à la volée de manière non interactive (sed signifie Stream EDitor). Très pratique pour les traitements automatiques.  
+
+exemple de transformation de flux:  
+`sed 's/Debian/Ubuntu/' /dossier/fichier`  
+Cette commande va remplacer tout les paterns 'Debian' par 'Ubuntu' dans le fichier 'fichier'  
+`sed 's/[D|d]ebian/Ubuntu/' /dossier/fichier`  
+cas meme prendre les 'Debian' ou les 'debian'  
+Si on veut reellement l'executer dans un fichier on peux faire:  
+`sed 's/[D|d]ebian/Ubuntu/' /dossier/fichier > /dossier/fichier sauvergarde`  
+Il est meme possible avec l'option **-i** de modifier directement dans le fichier:  
+`sed -i 's/[D|d]ebian/Ubuntu/' /dossier/fichier`  
+On peux aussi recuperer seulement une partie du fichier avec l'option '-n' comme suit:  
+`sed -n 2,6p /dossier/fichier`  
+'2,6p' veut dire print la ligne 2 a 6  
+
+## enchainer les commandes
+
+Maintenant que vous maîtrisez les différents canaux de données, entrée et sortie standard et erreur, ainsi que les différentes commandes permettant de filtrer un flux selon un motif, il est temps de passer à la vitesse supérieure et d'utiliser toutes ces notions en même temps.  
+
+Pour cela, Linux met à votre disposition une fonction permettant de lier entre eux les canaux de données des différentes commandes : **le pipe** (ou tube / tuyau).  
+Le principe est simple : il s'agit ici de rediriger un flux, en sortie d'une commande, vers le canal d'entrée de la commande suivante. Et ainsi de suite.  
+Pour lier ces commandes entres elles, on utilise le caractère **|** (prononcé pipe). Il correspond à la séquence de touches `ALTGR+6` sur les claviers standards français.
+
+Ainsi il est possible d'écrire quelque chose comme :  
+
+    commande options arguments | commande options arguments | commande options arguments | ...
+
+par exemple:  
+`cat /dossier/fichier | grep thomas`  
+Cette commande va rediriger la sortie std de `cat` vers l'entree de `grep`. Ne va s'afficher du coup que les lignes de 'fichier' contenant 'thomas'  
+On pourrait se dire quel est l'interet ? Pourquoi ne pas utiliser directement `grep` ? Et bien l'avantage c'est qu'on peut faire des traitements avec `cat` avant ou meme cumuler du coup un certain nombre de commande, exemple:  
+`cat /dossier/fichier | grep nologin | grep -E "[0-9][0-9]"`  
+Ici on filtre deux fois a la suite du coup. On pourrait meme trier:  
+`cat /dossier/fichier | grep nologin | grep -E "[0-9][0-9]" | sort`  
+
 
