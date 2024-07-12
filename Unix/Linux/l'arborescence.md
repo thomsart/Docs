@@ -130,15 +130,69 @@ Vous obtenez ici le premier processus lancé par le noyau => **systemd**, le pro
 certains éléments de cette arborescence sont accessibles en écriture aux comptes privilégiés du système et notamment les variables systèmes du noyau dans le répertoire **kernel**.  
 
 Cette arborescence contient les informations sur les périphériques gérés par le noyau, notamment :  
-* les périphériques de type bloc ou caractères dans les répertoires /sys/block ou /sys/dev,
-* les drivers dans /sys/devices,
-* les différents systèmes de fichiers dans /sys/fs,
-* les modules du noyau dans /sys/module.
+* les périphériques de type bloc ou caractères dans les répertoires **/sys/block** ou **/sys/dev**,
+* les drivers dans **/sys/devices**,
+* les différents systèmes de fichiers dans **/sys/fs**,
+* les modules du noyau dans **/sys/module**.
 
 Le répertoire **/sys/kernel** contient une arborescence de fichiers représentant des variables du noyau accessibles en écriture et permettant de modifier le comportement à chaud du système. Par exemple, le répertoire **/sys/kernel/debug** contient des fichiers permettant d'activer des fonctions de traces et de débogage du noyau.  
 
-Sur les distributions principales de Linux, le répertoire **/proc/sys/** est également accessible en écriture sur certains paramètres. En effet, d'un point de vue historique, seule l'arborescence **/proc** existait. **/sys** a été ajoutée à partir des versions 2.6 du noyau, notamment pour différencier la gestion des informations concernant les périphériques.  
+Sur les distributions principales de Linux, le répertoire **/proc/sys** est également accessible en écriture sur certains paramètres. En effet, d'un point de vue historique, seule l'arborescence **/proc** existait. **/sys** a été ajoutée à partir des versions 2.6 du noyau, notamment pour différencier la gestion des informations concernant les périphériques.  
 
 ############################################################################################################
 ############################################################################################################
 # Visualisez des fichiers
+
+Etant donné que Linux est un système d'exploitation orientée fichier, vous allez passer votre temps à consulter ces fichiers pour administrer votre serveur. Linux fournit des outils permettant de visualiser le contenu de ces fichiers.
+
+## Affichez le contenu des fichiers
+
+J'ai utilisé le mot-clé “sortie” pour évoquer les données transmises à l'écran sur le terminal par une commande. Sous Linux, cette notion est conceptualisée avec des canaux (streams).
+
+Dans la majorité des cas, tous les programmes exécutés sous Linux disposent de 3 canaux de données :
+
+* stdin(pour standard input) : c'est le canal de l'entrée standard, et par défaut, lorsque vous lancez une commande, c'est votre clavier. La commande sera éventuellement capable de lire les informations saisies avec le clavier via ce canal. Il porte le descripteur de fichier numéro 0 ;
+
+* stdout(pour standard output) : c'est le canal de la sortie standard, et lorsque vous lancez une commande depuis un terminal, c'est l'écran par défaut. Le résultat et les données affichées par la commande sont diffusés sur l'écran. Il porte le descripteur de fichier numéro 1 ;
+
+* stderr(pour standard error) : c'est le canal du flux concernant les erreurs, et par défaut, lorsque vous lancez une commande, c'est aussi l'écran. La commande va différencier les données “normales” des données “erreur” et peut changer de canal pour diffuser ces informations.
+
+stdin (0) ------> Programme ------> stdout (1)
+                      |-----------> stderr (2)
+
+Pour manipuler ces canaux on utilise les chevrons simples **>** et **<**
+Ou doubles **>>** et **<<**.
+
+En fait `cat /dossier/fichier` revient a taper `cat < /dossier/fichier` et meme pour etre plus precis `cat 0< /dossier/fichier` (l'argument **/dossier/fichier** est en realite ici le canal d'entree '0').
+Ce qui sort de cette commande (le canal de sortie '1') s'affiche par defaut dans le terminal mais on pourrait decider de l'envoyer dans un fichier comme suit: `cat /dossier/fichier 1> /dossier/fichier sortie` et la rien ne s'affichera dans le terminal car on a redirige la sortie dans un fichier et pour en voir le contenu il nous faudrait faire `cat /dossier/fichier sortie`. Nous pourrions meme decider de prendre en compte les erreurs en faisant `cat /dossier/fichier 1> /dossier/fichier sortie 2> /dossier/fichier sortie erreur`. Il est possible bien evidement d'afficher deux fichiers le contenu de deux fichiers la suite avec `cat /dossier/fichier1 /dossier/fichier2`. Imaginons maintenant que nous voulions envoyer le contenus de ces deux fichiers dans un seul fichier. On pourrait se dire qu'il faudrait faire `cat /dossier/fichier1 > /dossier/fichier sauvegarde` et ensuite `cat /dossier/fichier2 > /dossier/fichier sauvegarde`, si on l'affiche maintenant patatra on s'appercoit qu'il n'y a que le contenue du fichier2 dans le fichier de sauvegarde car la deuxieme commande a ecrasee la premiere. Pour pallier a ca il faut faire `cat /dossier/fichier1 > /dossier/fichier sauvegarde` **puis** `cat /dossier/fichier2 >> /dossier/fichier sauvegarde`, ici lors de la deuxieme commande l'emplois des doubles chevrons indique que la sortie doit etre ajoutee a la suite et non depuis le debut en ecrasant ce qui pourrait se trouver avant>.
+
+## Filtrez le contenu des fichiers
+
+Très souvent vous n'aurez besoin que d'une partie de l'information affichée à l'écran suite à l'exécution d'une commande. Par exemple sur la commande suivante :
+
+    seb@thor:~$ cat /etc/os-release
+    PRETTY_NAME="Debian GNU/Linux 9 (stretch)"
+    NAME="Debian GNU/Linux"
+    VERSION_ID="9"
+    VERSION="9 (stretch)"
+    ID=debian
+    HOME_URL="https://www.debian.org/"
+    SUPPORT_URL="https://www.debian.org/support"
+    BUG_REPORT_URL="https://bugs.debian.org/"
+
+Vous pourriez souhaiter récupérer uniquement la ligne contenant le champ NAME pour simplement connaître la distribution que vous exploitez. Pour cela, vous allez utiliser la commande `grep`. Cette commande permet de filtrer le flux de données selon un motif passé en paramètre, exemple:
+
+`grep -n debian /etc/os-release` va afficher:
+
+    6:ID=debian
+    7:HOME_URL="https://www.debian.org/"
+    8:SUPPORT_URL="https://www.debian.org/support"
+    9:BUG_REPORT_URL="https://bugs.debian.org/"
+
+ici '-n' est une option qui affiche le numero de ligne ou se trouve 'debian'.
+
+`grep -ni debian /etc/os-release` => 'i' pour insensible a la case, 'debian' ou 'Debian'
+`grep -nio debian /etc/os-release` => 'o' pour isoler juste le pattern 'debian' sans avoir ce qu'il y a autour
+`grep -rnio debian /etc/*` => 'r' pour filter de maniere recurssive sur tout les fichiers dans le rep **/etc**
+
+
