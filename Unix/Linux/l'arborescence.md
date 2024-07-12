@@ -195,4 +195,31 @@ ici '-n' est une option qui affiche le numero de ligne ou se trouve 'debian'.
 `grep -nio debian /etc/os-release` => 'o' pour isoler juste le pattern 'debian' sans avoir ce qu'il y a autour
 `grep -rnio debian /etc/*` => 'r' pour filter de maniere recurssive sur tout les fichiers dans le rep **/etc**
 
+Pour les deux commandes suivantes, il existe une petite bataille de geeks entre :
+les administrateurs pro commande sed;  
+et les administrateurs pro commande awk.  
+Souvent les utilisateurs de sed s'appliqueront à tout faire avec cette commande. Ce qui est vrai également pour les utilisateurs de awk.  
+
+Ces deux commandes sont très appréciées des administrateurs car elles permettent de réaliser des opérations sur les flux de données, fichiers, entrée et sortie de manière non interactive. Les deux s'appuyant sur les expressions régulières, qu'il est intéressant de rappeler ici.
+
+Une expression régulière est la modélisation d'un motif dans un flux de données à l'aide de méta-caractères, c'est-à-dire de caractères particuliers auxquels on ajoute une expression ou un opérateur.
+
+Parmi les méta-caractères les plus couramment utilisés on peut retrouver :
+
+`.` => Le point remplace n'importe quel caractère (hors retour chariot), par exemple l'expression régulière suivante : S.B, pourrait modéliser SEB ou SAB ou encore SSB, etc.  
+
+`?` => Le point d'interrogation indique que l'expression modélisée peut être présente 0 ou 1 fois. Par exemple, S.?B, pourrait correspondre à SB ouSEB, mais pas SEEB  
+
+`*`  => L'étoile fonctionne comme le ?, mais autorise 0 ou n fois l'expression, par exemple S.* pourrait modéliser S.*B, mais aussi SEB, mais aussi SAEIOUYB  
+
+`+` => Petit dernier de la famille, il permet de modéliser au moins une fois (1 ou n).  
+
+`^` => Nous l'avons vu précédemment en exemple, il permet de modéliser la première position, le début.  
+
+`$` => À l'inverse, ici, permet de modéliser la dernière position, la fin.  
+
+`[]` => Les crochets, accompagnés souvent de `-` permettent de modéliser un jeu de caractères, par exemple [a-z] pour modéliser l'ensemble des caractères minuscules de l'alphabet.  
+Il est possible également d'utiliser le caractère `^` avec les crochets, qui a alors une autre signification et permet d'omettre une expression. Par exemple [^abc], modélise tous les caractères sauf a, b et c.  
+
+La commande sed peut utiliser ces expressions régulières pour transformer un flux de données à la volée de manière non interactive (sed signifie Stream EDitor). Très pratique pour les traitements automatiques.  
 
