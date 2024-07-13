@@ -256,3 +256,24 @@ On pourrait se dire quel est l'interet ? Pourquoi ne pas utiliser directement `g
 `cat /dossier/fichier | grep nologin | grep -E "[0-9][0-9]"`  
 Ici on filtre deux fois a la suite du coup. On pourrait meme trier:  
 `cat /dossier/fichier | grep nologin | grep -E "[0-9][0-9]" | sort`  
+
+############################################################################################################
+############################################################################################################
+
+## Copiez, déplacez et supprimez des fichiers sous Linux
+
+Vous voilà équipé pour éditer un fichier sous Linux. Il est temps de se pencher sur la manipulation des fichiers, c'est-à-dire :  
+* la copie
+* le déplacement
+* la suppression  
+
+Pour bien comprendre ces manipulations et les commandes associées, une petite introduction sur le concept de fichier sous Linux me paraît nécessaire.   
+Linux est construit autour de la philosophie de fichier, si vous comprenez cette philosophie, vous aurez tout compris à Linux !  
+
+Sans entrer trop dans le détail, un fichier est une structure du langage C définie directement au niveau du code noyau de Linux. Oui ! Ne soyez pas choqué, ce lien pointe vers le code C officiel du noyau Linux !
+Cette structure est nommée inode. Elle peut se représenter par une liste de champs illustrée généralement sous la forme d’un tableau, que l'on va étudier par dézooms successifs.  
+
+Regardons de près l'inode, le fichier donc. On y voit ses informations (sa taille, son propriétaire et groupe propriétaire, ses permissions, la date de ses derniers accès (lecture, modification), etc.) :  
+
+![alt text](image.png)
+
