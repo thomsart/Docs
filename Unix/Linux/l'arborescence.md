@@ -256,5 +256,3 @@ On pourrait se dire quel est l'interet ? Pourquoi ne pas utiliser directement `g
 `cat /dossier/fichier | grep nologin | grep -E "[0-9][0-9]"`  
 Ici on filtre deux fois a la suite du coup. On pourrait meme trier:  
 `cat /dossier/fichier | grep nologin | grep -E "[0-9][0-9]" | sort`  
-
-
