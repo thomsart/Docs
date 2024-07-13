@@ -157,7 +157,7 @@ Dans la majorité des cas, tous les programmes exécutés sous Linux disposent d
 
 * stderr(pour standard error) : c'est le canal du flux concernant les erreurs, et par défaut, lorsque vous lancez une commande, c'est aussi l'écran. La commande va différencier les données “normales” des données “erreur” et peut changer de canal pour diffuser ces informations.
 
-stdin (0) ---> Programme ---> stdout (1) et/ou ---> stderr (2)
+![alt text](./png/image-1.png)
 
 Pour manipuler ces canaux on utilise les chevrons:  
 simples **>** et **<**,  
@@ -275,5 +275,13 @@ Cette structure est nommée inode. Elle peut se représenter par une liste de ch
 
 Regardons de près l'inode, le fichier donc. On y voit ses informations (sa taille, son propriétaire et groupe propriétaire, ses permissions, la date de ses derniers accès (lecture, modification), etc.) :  
 
-![alt text](image.png)
+![alt text](./png/image.png)
 
+L’adresse contenue dans la ligne 14 renvoie à un nouvel inode ou bloc de pointeurs de 128 lignes.  Chacune des adresses contenues dans ces lignes renvoient vers un nouvel inode contenant à nouveau 128 lignes (oui c’est énorme !) Et chaque adresse contenue dans chaque ligne renvoie vers un bloc de données. On dit que ces blocs de donnés sont doublement indirects :  
+
+![alt text](./png/image-2.png)
+
+Je vous laisse déduire pour la ligne 15... on parle ici de triple redirection !  
+Très simplement, on pourrait résumer la chose comme ça :  
+
+![alt text](./png/image-3.png)
