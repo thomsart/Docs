@@ -285,3 +285,6 @@ Je vous laisse déduire pour la ligne 15... on parle ici de triple redirection !
 Très simplement, on pourrait résumer la chose comme ça :  
 
 ![alt text](./png/image-3.png)
+
+En fait, il faut se rendre compte que toutes ces différentes vues sont des niveaux de zoom sur un même fichier, qui grossit au fur et à mesure qu’on va loin dans les redirections.  
+
