@@ -259,8 +259,7 @@ Ici on filtre deux fois a la suite du coup. On pourrait meme trier:
 
 ############################################################################################################
 ############################################################################################################
-
-## Copiez, déplacez et supprimez des fichiers sous Linux
+# Copiez, déplacez et supprimez des fichiers sous Linux
 
 Vous voilà équipé pour éditer un fichier sous Linux. Il est temps de se pencher sur la manipulation des fichiers, c'est-à-dire :  
 * la copie
@@ -288,3 +287,31 @@ Très simplement, on pourrait résumer la chose comme ça :
 
 En fait, il faut se rendre compte que toutes ces différentes vues sont des niveaux de zoom sur un même fichier, qui grossit au fur et à mesure qu’on va loin dans les redirections.  
 
+Cette commande affiche les inodes dans ce repertoire:  
+
+    thomas@hp-pavillon:~/Bureau/projets/Docs/Unix/Linux$ ls -li
+    total 44
+    25586161 -rw-rw-r-- 1 thomas thomas 25988 juil. 13 15:13 "l'arborescence.md"
+    25590258 -rw-rw-r-- 1 thomas thomas     0 juil.  6 14:46 'la supervision.md'
+    25590252 -rw-rw-r-- 1 thomas thomas     0 juil.  6 14:45 'le reseau.md'
+    25194250 -rw-rw-r-- 1 thomas thomas  4748 juil. 12 11:17 'le terminal.md'
+    25694243 drwxrwxr-x 2 thomas thomas  4096 juil. 13 15:10  png
+    25186062 -rw-rw-r-- 1 thomas thomas  1493 mai    3 14:34  vi.md
+
+Tout a gauche se trouvent les inodes le premier => '25586161' par exemple.
+
+Il faut differencier les liens des liens symboliques:  
+* `ln fichier1 fichier2` va produire un lien, c a d que les deux fichiers aurons le meme inodes et si on modifie **fichier2**, **fichier1** sera impacte et du coup modifie aussi.
+* `ln -s fichier1 fichier2` va quant a elle produire un lien symbolique comme suit:  
+
+    25586161 -rw-rw-r-- 1 thomas thomas 25988 juil. 12 15:13 "fichier1"
+    ...
+    25694256 lrwxrwxrwx 1 thomas thomas  4096 juil. 13 15:10  fichier2 -> fichier1
+
+Comme on peut le voir la pour le coup l'inode est different. Le lien symbolique est un peu comme un raccourcit et du coup dans l'inode du lien symbolique on a pas les donnees de fichier1 mais juste son adresse vers laquelle il pointe.
+
+En resume les liens augmentent les occurences d'un fichier avec le meme inode alors que les liens symboliques sont des objets a part entiere et crees des references supplementaires a un meme fichier.
+
+############################################################################################################
+############################################################################################################
+# Les Droits
