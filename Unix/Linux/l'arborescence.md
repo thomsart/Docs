@@ -304,10 +304,8 @@ Il faut differencier les liens des liens symboliques:
 * `ln fichier1 fichier2` va produire un lien, c a d que les deux fichiers aurons le meme inodes et si on modifie **fichier2**, **fichier1** sera impacte et du coup modifie aussi.
 * `ln -s fichier1 fichier2` va quant a elle produire un lien symbolique comme suit:  
 
-    25586161 -rw-rw-r-- 1 thomas thomas 25988 juil. 12 15:13 "fichier1"  
-    .
-    .
-    .
+    25586161 -rw-rw-r-- 1 thomas thomas 25988 juil. 12 15:13 "fichier1"<br>
+    ...<br>
     25694256 lrwxrwxrwx 1 thomas thomas  4096 juil. 13 15:10  fichier2 -> fichier1
 
 Comme on peut le voir la pour le coup l'inode est different. Le lien symbolique est un peu comme un raccourcit et du coup dans l'inode du lien symbolique on a pas les donnees de fichier1 mais juste son adresse vers laquelle il pointe.
