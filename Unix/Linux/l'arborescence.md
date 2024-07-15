@@ -315,3 +315,10 @@ En resume les liens augmentent les occurences d'un fichier avec le meme inode al
 ############################################################################################################
 ############################################################################################################
 # Les Droits
+
+Sous Linux, tout est fichier.  
+Bien entendu, les données sont stockées dans des fichiers, mais les périphériques sont aussi des fichiers, les disques, les cartes réseau, les répertoires, la représentation des processus, etc. Il est donc primordial de comprendre la gestion des droits associée à ces fichiers.  
+Le principe fondamental de la gestion des droits sous Linux est le **Discretionary Access Control** dit **DAC**.  
+
+
+
