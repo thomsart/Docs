@@ -356,4 +356,4 @@ Vous pouvez en déduire une expression générale des droits sur un objet à l'a
 2. rwx pour g
 3. rwx pour o 
 
-ex:
+video d'explication
