@@ -320,5 +320,40 @@ Sous Linux, tout est fichier.
 Bien entendu, les données sont stockées dans des fichiers, mais les périphériques sont aussi des fichiers, les disques, les cartes réseau, les répertoires, la représentation des processus, etc. Il est donc primordial de comprendre la gestion des droits associée à ces fichiers.  
 Le principe fondamental de la gestion des droits sous Linux est le **Discretionary Access Control** dit **DAC**.  
 
-Je comnprend pas pourquooi ca ne marche pas...
+## Appréhendez le principe régissant les droits sous Linux
 
+Le contrôle d'accès sous les systèmes Unix, et par héritage sous Linux, est dit “discrétionnaire“ : tous les objets (répertoires, fichiers, processus, etc.) sont la propriété d'un compte utilisateur ou système, ainsi que d'un groupe de comptes utilisateurs et/ou système.  
+
+Les droits associés à ces objets sont donc définis pour :
+
+* Le propriétaire de l'objet
+* Le groupe propriétaire de l'objet
+* Tous les autres soit comptes utilisateurs et/ou système qui ne sont pas le compte et le groupe propriétaire.  
+
+L'aspect discrétionnaire de la gestion de ces droits réside dans le fait que le propriétaire de l'objet (ainsi que le super utilisateur root) peut directement gérer les droits associés à cet objet.  
+
+Selon cette norme, un utilisateur peut donc créer, modifier ou supprimer ses propres objets, et définir quels autres comptes utilisateurs peuvent accéder en lecture ou modification à cet objet.  
+
+Associée à la présence d'un compte super utilisateur, généralement root, cette gestion de droits reste finalement assez simple. Mais on peut alors lui reprocher son manque de granularité. Par exemple, un processus lancé par un utilisateur hérite de ses droits même si ce processus n'en a pas forcément besoin.  
+
+## Maîtrisez le triplets des droits sous Linux
+
+Les droits sous Linux sont définis à l'aide de 3 bits :
+
+1. Un bit à la position 2, pour indiquer le droit de lecture, généralement noté r (pour "read").
+2. Un bit à la position 1, pour indiquer le droit en écriture, généralement noté w (pour "write").
+3. Un bit à la position 0, pour indiquer le droit en exécution, généralement noté x (pour "execute").
+
+Et nous avons vu ci-dessus que les droits étaient exprimés :
+
+* pour le propriétaire noté u (pour "user") ;
+* pour le groupe propriétaire noté g (pour "group") ;
+* et enfin pour tous les autres, notés eux o (pour "others" comme un très bon film d’ailleurs).
+
+Vous pouvez en déduire une expression générale des droits sur un objet à l'aide de 9 bits, répartis en 3 groupes de 3 dans l'ordre suivant :
+
+1. rwx pour u
+2. rwx pour g
+3. rwx pour o 
+
+ex:
