@@ -366,6 +366,8 @@ Ici "fichier1" appartient a thomas (u) et le groupe thomas (g) avec les droits "
 
 Attention ceci n'est possible que parceque je me suis connecte en tant que "thomas" et que je suis le proprietaite de ce fichier, si le fichier1 avait ete la propriete de l'utilisateur "root" une erreur de droit aurrai ete levee.
 
+## Simplifiez la gestion des droits avec leur valeur numérique
+
 Une autre facon plus rapide de proceder au lieu de taper 3 fois la commande pour gerer les troi utilisateurs different est de proceder ainsi grace a cette norme:
 
     - - -  ->  000  ->  0+0+0  ->  0
@@ -383,6 +385,8 @@ du coup on peut faire maintenant:
 
 chaque chiffre representant un user soit : Root-User-Other  
 
+## Changez le propriétaire d’un fichier sous Linux
+
 La seconde commande importante concernant la gestion des droits sous Linux est **chown** "change owner", pour modifier le proprietaire du fichier. Le seul a pouvoir faire cette manipulation est d'etre **Root**.
 
     root@hp-pavillon:/home/thomas# chown jean:thomas fichier1
@@ -397,4 +401,4 @@ On peut meme changer les proprios de tout les fichiers d'un rep avec l'argument 
 
     root@hp-pavillon:/home/thomas# chown -R jean:thomas *
 
-Attention tout les fichiers du rep "thomas" vont devenir la propriete de l'utilisateur "jean" mais aussi les fichiers de repertoir sous jacent et c'est la que ca devient dangeureux. A manipuler donc avec precaution...
+Attention tout les fichiers du rep "thomas" vont devenir la propriete de l'utilisateur "jean" mais aussi les fichiers de repertoire sous-jacent... A manipuler donc avec precaution.
