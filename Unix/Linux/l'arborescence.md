@@ -301,14 +301,14 @@ Cette commande affiche les inodes dans ce repertoire:
 Tout a gauche se trouvent les inodes le premier => '25586161' par exemple.
 
 Il faut differencier les liens des liens symboliques:  
-* `ln fichier1 fichier2` va produire un lien, c a d que les deux fichiers aurons le meme inodes et si on modifie **fichier2**, **fichier1** sera impacte et du coup modifie aussi.
+* `ln fichier1 fichier2` va produire un lien, c a d que les deux fichiers aurons le meme inodes et si on modifie **fichier2**, **fichier1** sera impacte et du coup modifie aussi.  
 * `ln -s fichier1 fichier2` va quant a elle produire un lien symbolique comme suit:  
 
     25586161 -rw-rw-r-- 1 thomas thomas 25988 juil. 12 15:13 "fichier1"  
     ...  
     25694256 lrwxrwxrwx 1 thomas thomas  4096 juil. 13 15:10  fichier2 -> fichier1
 
-Comme on peut le voir la pour le coup l'inode est different. Le lien symbolique est un peu comme un raccourcit et du coup dans l'inode du lien symbolique on a pas les donnees de fichier1 mais juste son adresse vers laquelle il pointe.
+Comme on peut le voir la pour le coup l'inode est different. Le lien symbolique est un peu comme un raccourcit et du coup dans l'inode du lien symbolique on a pas les donnees de fichier1 mais juste son adresse vers laquelle il pointe.  
 
 En resume les liens augmentent les occurences d'un fichier avec le meme inode alors que les liens symboliques sont des objets a part entiere et crees des references supplementaires a un meme fichier.
 
@@ -340,9 +340,9 @@ Associée à la présence d'un compte super utilisateur, généralement root, ce
 
 Les droits sous Linux sont définis à l'aide de 3 bits :
 
-1. Un bit à la position 2, pour indiquer le droit de lecture, généralement noté r (pour "read").
-2. Un bit à la position 1, pour indiquer le droit en écriture, généralement noté w (pour "write").
-3. Un bit à la position 0, pour indiquer le droit en exécution, généralement noté x (pour "execute").
+1. Un bit à la position 2, le droit "read" => r
+2. Un bit à la position 1, le droit "write" => w
+3. Un bit à la position 0, le droit "execute" => x
 
 Et nous avons vu ci-dessus que les droits étaient exprimés :
 
@@ -356,4 +356,12 @@ Vous pouvez en déduire une expression générale des droits sur un objet à l'a
 2. rwx pour g
 3. rwx pour o 
 
-video d'explication
+soit apres un "ls" dans le terminal on obtient par exemple:
+
+    25586161 -rw-rw-r-- 1 thomas thomas 25988 juil. 12 15:13 "fichier1"
+
+Ici "fichier1" appartient a thomas (u) et le groupe thomas (g) avec les droits "read" et "write" desssus et que les autres (o) quant a eux ne peuvent que le lire "read". Si je voulais accorder le droit en execution a thomas je devrais faire la commande suivante:
+
+    thomas@hp-pavillon:~$ chmod u+rwx fichier1
+
+Attention ceci n'est possible que parceque je me suis connecte en tant que "thomas" et que je suis le proprietaite de ce fichier, si le fichier1 avait ete la propriete de l'utilisateur "root" une erreur de droit aurrai ete levee.
