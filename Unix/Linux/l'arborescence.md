@@ -383,4 +383,12 @@ du coup on peut faire maintenant:
 
 chaque chiffre representant un user soit : Root-User-Other  
 
-La seconde commande importante concernant la gestion des droits sous Linux est **chown** (pour "change owner", modification du compte propriétaire).
+La seconde commande importante concernant la gestion des droits sous Linux est **chown** "change owner", pour modifier le proprietaire du fichier. Le seul a pouvoir faire cette manipulation est d'etre **Root**.
+
+    root@hp-pavillon:/home/thomas# chown jean:thomas fichier1
+
+Il faut comprendre le proprio "jean" a la place de "thomas"
+
+On peut de la meme maniere changer le **groupe** proprietaire en faisant:
+
+    root@hp-pavillon:/home/thomas# chgrp thomas fichier1
