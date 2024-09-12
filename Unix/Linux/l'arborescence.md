@@ -392,3 +392,9 @@ Il faut comprendre le proprio "jean" a la place de "thomas"
 On peut de la meme maniere changer le **groupe** proprietaire en faisant:
 
     root@hp-pavillon:/home/thomas# chgrp thomas fichier1
+
+On peut meme changer les proprios de tout les fichiers d'un rep avec l'argument -R:
+
+    root@hp-pavillon:/home/thomas# chown -R jean:thomas *
+
+Attention tout les fichiers du rep "thomas" vont devenir la propriete de l'utilisateur "jean" mais aussi les fichiers de repertoir sous jacent et c'est la que ca devient dangeureux. A manipuler donc avec precaution...
