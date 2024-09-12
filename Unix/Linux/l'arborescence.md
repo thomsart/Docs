@@ -360,8 +360,27 @@ soit apres un "ls" dans le terminal on obtient par exemple:
 
     25586161 -rw-rw-r-- 1 thomas thomas 25988 juil. 12 15:13 "fichier1"
 
-Ici "fichier1" appartient a thomas (u) et le groupe thomas (g) avec les droits "read" et "write" desssus et que les autres (o) quant a eux ne peuvent que le lire "read". Si je voulais accorder le droit en execution a thomas je devrais faire la commande suivante:
+Ici "fichier1" appartient a thomas (u) et le groupe thomas (g) avec les droits "read" et "write" desssus et que les autres (o) quant a eux ne peuvent que le lire "read". Si je voulais accorder le droit en execution a thomas je devrais faire la commande **chmod**:
 
     thomas@hp-pavillon:~$ chmod u+rwx fichier1
 
 Attention ceci n'est possible que parceque je me suis connecte en tant que "thomas" et que je suis le proprietaite de ce fichier, si le fichier1 avait ete la propriete de l'utilisateur "root" une erreur de droit aurrai ete levee.
+
+Une autre facon plus rapide de proceder au lieu de taper 3 fois la commande pour gerer les troi utilisateurs different est de proceder ainsi grace a cette norme:
+
+    - - -  ->  000  ->  0+0+0  ->  0
+    - - x  ->  001  ->  0+0+1  ->  1
+    - w -  ->  010  ->  0+2+0  ->  2
+    - w x  ->  011  ->  0+2+1  ->  3
+    r - -  ->  100  ->  4+0+0  ->  4
+    r - x  ->  101  ->  4+0+1  ->  5
+    r w -  ->  110  ->  4+2+0  ->  6
+    r w x  ->  111  ->  4+2+1  ->  7
+
+du coup on peut faire maintenant:
+
+    thomas@hp-pavillon:~$ chmod 644 fichier1
+
+chaque chiffre representant un user soit : Root-User-Other  
+
+La seconde commande importante concernant la gestion des droits sous Linux est **chown** (pour "change owner", modification du compte propriétaire).
