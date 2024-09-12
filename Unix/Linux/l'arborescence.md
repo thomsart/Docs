@@ -1,5 +1,5 @@
-############################################################################################################
-############################################################################################################
+#################################################################################################
+#################################################################################################
 # L'arborescence Linux
 
 La fondation Linux est l'organisme responsable du maintien de la norme définissant l'arborescence des systèmes Unix|Linux. Cette norme est appelée FHS pour Filesystem Hierarchy Standard et est disponible sous plusieurs formats.  
@@ -139,8 +139,8 @@ Le répertoire **/sys/kernel** contient une arborescence de fichiers représenta
 
 Sur les distributions principales de Linux, le répertoire **/proc/sys** est également accessible en écriture sur certains paramètres. En effet, d'un point de vue historique, seule l'arborescence **/proc** existait. **/sys** a été ajoutée à partir des versions 2.6 du noyau, notamment pour différencier la gestion des informations concernant les périphériques.  
 
-############################################################################################################
-############################################################################################################
+#################################################################################################
+#################################################################################################
 # Visualisez des fichiers
 
 Etant donné que Linux est un système d'exploitation orientée fichier, vous allez passer votre temps à consulter ces fichiers pour administrer votre serveur. Linux fournit des outils permettant de visualiser le contenu de ces fichiers.
@@ -257,8 +257,8 @@ On pourrait se dire quel est l'interet ? Pourquoi ne pas utiliser directement `g
 Ici on filtre deux fois a la suite du coup. On pourrait meme trier:  
 `cat /dossier/fichier | grep nologin | grep -E "[0-9][0-9]" | sort`  
 
-############################################################################################################
-############################################################################################################
+#################################################################################################
+#################################################################################################
 # Copiez, déplacez et supprimez des fichiers sous Linux
 
 Vous voilà équipé pour éditer un fichier sous Linux. Il est temps de se pencher sur la manipulation des fichiers, c'est-à-dire :  
@@ -312,8 +312,8 @@ Comme on peut le voir la pour le coup l'inode est different. Le lien symbolique 
 
 En resume les liens augmentent les occurences d'un fichier avec le meme inode alors que les liens symboliques sont des objets a part entiere et crees des references supplementaires a un meme fichier.
 
-############################################################################################################
-############################################################################################################
+#################################################################################################
+#################################################################################################
 # Les Droits
 
 Sous Linux, tout est fichier.  
