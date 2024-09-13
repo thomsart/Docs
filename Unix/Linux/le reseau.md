@@ -52,9 +52,32 @@ Bon, une fois le nom d’hôte positionné, il est ensuite nécessaire de passer
 
 ## Détectez les interfaces réseaux de votre système
 
+Avant toute configuration, il est nécessaire de s'assurer que le noyau Linux a bien détecté les cartes réseaux connectées d'une manière ou d'une autre sur la machine.
+La commande **dmesg**(pour "display message") permet d'afficher les messages du noyau :
 
+* pendant le processus de démarrage,
+* et notamment lorsque ce dernier charge les pilotes des périphériques qui vérifient si un matériel connecté leur est compatible.
+
+La commande **dmesg** détecte les cartes réseaux reconnues par le noyau lors du démarrage.
+On peut aussi consulter le système de fichier virtuel/sys pour lister les interfaces réseaux.
+Constate d'ailleurs une évolution liée à Systemd dans le nommage par défaut de ces interfaces. 
 
 ## Configurez les cartes réseaux de manière dynamique
+
+Avant etait utiliser le paquet **net-tools** mais il n'est plus maintenus depuis 2009. Les commandes **ifconfig** ou encore **netstat** ont du coup disparus. Maintenant il y a le paquet **iproute2** qui s'en charge a la place.  
+Pour configurer les cartes reseaux on a maintenant la commande **ip**.  
+
+Si on tape:
+
+    thomas@hp-pavillon:~$ ip link (suivit de deux fois la tabulation)
+
+On obtiens:
+
+    add     delete  help    set     show
+
+Ce qui nous montre les differentes options associees.  
+
+
 
 ## Configurez des interfaces reseaux..
 
