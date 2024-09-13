@@ -99,11 +99,30 @@ pour la supprimer.
 ## Configurez des interfaces reseaux...
 
 Toutes les configurations de réseau sur les cartes gérées par la commande **ip** sont dynamiques. Elles seront donc perdues entre chaque "reboot" du serveur.
-Pour configurer de manière statique les cartes réseaux de Linux, il est nécessaire de saisir les informations dans des fichiers de configuration qui vont être lus pendant le boot du serveur.
-Sous Debian et ses dérivés, le répertoire de configuration des interfaces réseaux est **/etc/network**.
-Le fichier **interfaces** permet de déclarer cette configuration de manière statique.
+Pour configurer de manière statique les cartes réseaux de Linux, il est nécessaire de saisir les informations dans des fichiers de configuration qui vont être lus pendant le boot du serveur. On utilise donc pour ca le système de configuration **Netplan**.
+Netplan est un système de configuration YAML qui remplace le fichier **/etc/network/interfaces** traditionnel. Il offre un moyen plus flexible et évolutif de configurer les interfaces réseau. Les fichiers de configuration sont stockés dans le répertoire **/etc/netplan**, et ils utilisent une syntaxe YAML pour définir les interfaces réseau et leurs paramètres.  
+
+Par conséquent, vous ne trouverez pas de fichier **/interfaces** dans Ubuntu 24.04. Au lieu de cela, vous devrez utiliser **Netplan** pour configurer vos interfaces réseau. Vous pouvez le faire en créant un fichier de configuration YAML dans le répertoire **/etc/netplan** et en redémarrant le service Netplan.
+
+Par exemple, si vous voulez configurer une adresse IP statique pour une interface réseau, vous créez un fichier.yaml comme ceci :
+
+    network:
+        version: 2
+        ethernets:
+            enx00e04c68425d:
+                addresses:
+                    - 192.168.1.100/24
+                gateway4: 192.168.1.1
+                nameservers:
+                    addresses:
+                        - 8.8.8.8
+                        - 8.8.4.4
+
+Ensuite, vous exécuteriez la commande **netplan apply** pour appliquer la configuration.
 
 ## Configurez les routes et les passerelles
+
+On en est la
 
 ## Configurez les resolutions de noms
 
