@@ -401,4 +401,37 @@ On peut meme changer les proprios de tout les fichiers d'un rep avec l'argument 
 
     root@hp-pavillon:/home/thomas# chown -R jean:thomas *
 
-Attention tout les fichiers du rep "thomas" vont devenir la propriete de l'utilisateur "jean" mais aussi les fichiers de repertoire sous-jacent... A manipuler donc avec precaution.
+Attention tout les fichiers du rep "thomas" vont devenir la propriete de l'utilisateur "jean" mais aussi les fichiers de repertoire sous-jacent... A manipuler donc avec precaution.  
+
+## Manipulez les droits spéciaux sous Linux
+
+Vous connaissez désormais les droits standard sous Linux, mais il existe deux droits spéciaux supplémentaires que je vous propose d'analyser :
+
+1. Le premier de ces droits particuliers se nomme le **SetUID bit**, et son petit frère le **SetGID bit**. Ce droit permet notamment d’exécuter un fichier avec les droits de son propriétaire ! C’est très important, car de nombreux aspects de la gestion des droits sous Linux utilisent cette propriété fondamentale.
+
+2. Le second est le **Sticky Bit**(le "bit collant"). Ce droit est une tentative de gestion d'espaces collaboratifs, proposé par la branche BSD de Unix au milieu des années 80 (même si une version antérieure de cette fonctionnalité existait déjà sur Unix dès les années 70, mais pas du tout avec le même objectif).
+
+et je vous propose d’illustrer le Sticky Bit avec son plus fervent représentant : le répertoire /tmp!
+
+Par exemple lorsque l'on change son mot de passe avec la commande **passwd** c'est le **SetUID bit** qui est a l'oeuvre:
+
+    thomas@hp-pavillon:~$ passwd
+
+Il permet momentanement d'executer une ecriture dans un fichier normalement ferme d'acces en ecriture a un utilisateur autre que root. Lorsque l'on vas voir le fichier de cette commande on a dailleur:
+
+    -rwsr-xr-x 1 root root 63960 7 fevr. 2020 /bin/passwd
+
+On voit ici que tout le monde peut executer cette commande (le dernier 'x' en temoigne) et que lorsqu'on le lance grace au bit 's', en lieu et place de 'x' de root, on vas heriter des droits du compte proprietaire 'root'. Pour donner cette fonctionnalite a une commande, on procede comme suit:
+
+    chmod 4755 fichier_de_ma_commande
+
+C'est le chiffre des milliers '4' qui le permet. En fait cette fonctionalite permet d'executer une modification momentanement par le biais ici de 'fichier_de_ma_commande' qui vas permettre cette modification (definit dans le script du fichier) sur un fichier sensible qui serait la propriete du user et du groupe 'root' par exemple.  
+
+Le **Sticky Bit** sert a partager un fichier propriete du user et groupe 'thomas' par exemple en laisant le droit de lecture d'ecriture aux autres sans qu'ils puissent pour autant le supprimer car habituellement le droit en ecriture 'w' le permet.
+Pour appliquer a un fichier cette propriete tapper la commande:
+
+    chmod 1744 fichier_de_ma_commande
+
+C'est le chiffre des milliers '1' qui permet cette modification. Si on regade maintenant ce fichier on verra apparaitre un 'T' en lieu et place du 'x' des autres utilisateurs:
+
+    -rwxr--r-T 1 thomas thomas 63961 7 fevr. 2020 fichier_de_ma_commande
