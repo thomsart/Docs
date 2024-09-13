@@ -64,22 +64,44 @@ Constate d'ailleurs une évolution liée à Systemd dans le nommage par défaut 
 
 ## Configurez les cartes réseaux de manière dynamique
 
-Avant etait utiliser le paquet **net-tools** mais il n'est plus maintenus depuis 2009. Les commandes **ifconfig** ou encore **netstat** ont du coup disparus. Maintenant il y a le paquet **iproute2** qui s'en charge a la place.  
+Avant etait utilise le paquet **net-tools** mais il n'est plus maintenus depuis 2009. Les commandes **ifconfig** ou encore **netstat** ont du coup disparus. Maintenant il y a le paquet **iproute2** qui s'en charge a la place.  
 Pour configurer les cartes reseaux on a maintenant la commande **ip**.  
 
 Si on tape:
 
     thomas@hp-pavillon:~$ ip link (suivit de deux fois la tabulation)
 
-On obtiens:
+On obtiens les differentes options associees:
 
-    add     delete  help    set     show
+    add  delete  help  set  show
 
-Ce qui nous montre les differentes options associees.  
+On peut par exemple lister les cartes:
 
+    thomas@hp-pavillon:~$ ip link show
 
+On pourrait par exemple eteindre ou remonter une carte reseau du nom de enp0s8:
 
-## Configurez des interfaces reseaux..
+    thomas@hp-pavillon:~$ ip link set enp0s8 down (ou up)
+
+Ceci de maniere dynamique car au rebootage de l'ordi (ou du serveur) la conf d'origine reprend.
+On peut aller plus loin que **ip link show** et avoir toutes les configuration plus detaille avec la commande:
+
+    thomas@hp-pavillon:~$ ip a
+
+Il est possible de creer une nouvelle adresse IP on faisant:
+
+    thomas@hp-pavillon:~$ ip addr add 192.128.1.24/24
+et
+    thomas@hp-pavillon:~$ ip addr del 192.128.1.24/24
+
+pour la supprimer.
+
+## Configurez des interfaces reseaux...
+
+Toutes les configurations de réseau sur les cartes gérées par la commande **ip** sont dynamiques. Elles seront donc perdues entre chaque "reboot" du serveur.
+Pour configurer de manière statique les cartes réseaux de Linux, il est nécessaire de saisir les informations dans des fichiers de configuration qui vont être lus pendant le boot du serveur.
+Sous Debian et ses dérivés, le répertoire de configuration des interfaces réseaux est **/etc/network**.
+Le fichier **interfaces** permet de déclarer cette configuration de manière statique.
 
 ## Configurez les routes et les passerelles
 
