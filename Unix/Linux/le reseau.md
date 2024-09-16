@@ -122,7 +122,24 @@ Ensuite, vous exécuteriez la commande **netplan apply** pour appliquer la confi
 
 ## Configurez les routes et les passerelles
 
-On en est la
+À ce stade, les cartes réseaux sont configurées, mais il est encore nécessaire d'indiquer les configurations pour les paquets qui en sortent. On parle de :  
+
+* routes pour désigner les chemins suivis par les paquets réseaux lors d'une communication,
+* passerelles (ou "gateway") pour indiquer les équipements (serveurs ou routeurs) permettant d'interconnecter des réseaux différents. 
+
+Pour gérer de manière dynamique les routes et passerelles sur le serveur Linux, encore une fois, le package **iproute2** est votre outil de préférence.
+
+En tapant **ip route list** on obtient:
+
+    default via 192.168.1.254 dev eno1 proto dhcp src 192.168.1.34 metric 100 
+    192.168.1.0/24 dev eno1 proto kernel scope link src 192.168.1.34 metric 100
+
+On pourrait vouloir changer la route default on faisant:
+
+    thomas@hp-pavillon:~$ ip route del default via 192.168.1.254
+    thomas@hp-pavillon:~$ ip route add default via 192.168.1.1 dev eno1 (on precise sur quelle interface, ici eno1)
+
+Sachant bien entendu que ces modifications dans le terminal ne persistent pas, si nous voulions qu'elles le soient il faudrait reconfigurer manuellement les fichiers qui s'en chargent, a savoir le rep **/etc/netplan**.
 
 ## Configurez les resolutions de noms
 
@@ -135,3 +152,9 @@ On en est la
 #################################################################################################
 #################################################################################################
 # Transferez des fichiers par le reseau
+
+
+
+
+
+thomas@hp-pavillon:~$
