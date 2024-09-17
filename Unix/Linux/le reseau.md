@@ -104,7 +104,7 @@ Netplan est un système de configuration YAML qui remplace le fichier **/etc/net
 
 Par conséquent, vous ne trouverez pas de fichier **/interfaces** dans Ubuntu 24.04. Au lieu de cela, vous devrez utiliser **Netplan** pour configurer vos interfaces réseau. Vous pouvez le faire en créant un fichier de configuration YAML dans le répertoire **/etc/netplan** et en redémarrant le service Netplan.
 
-Par exemple, si vous voulez configurer une adresse IP statique pour une interface réseau, vous créez un fichier.yaml comme ceci :
+Par exemple, si vous voulez configurer une adresse IP statique pour une interface réseau, vous créez un **fichier.yaml** comme ceci :
 
     network:
         version: 2
@@ -143,6 +143,17 @@ Sachant bien entendu que ces modifications dans le terminal ne persistent pas, s
 
 ## Configurez les resolutions de noms
 
+Dernier point de configuration réseau du serveur: les services de résolutions de noms de domaine, ou **DNS** pour **Domain Name System**. Ce service permet au serveur d'effectuer la résolution des noms de domaines en adresse IP, afin d'envoyer des requêtes selon le protocole du service destinataire.  
+
+Coome sur un navigateur web lorsque vous saisissez une URL dans la barre d’adresse afin d'accéder à un site web. Votre navigateur, par l'intermédiaire d'un service de résolution de nom, émet une requête pour demander la résolution de l'URL en une adresse IP identifiant de manière unique le serveur qui héberge le site web.  
+
+Sur un serveur Linux, il est nécessaire de configurer les services de résolutions de noms de domaine. En règle générale, il s'agit simplement d'indiquer dans un fichier de configuration les adresses IP des serveurs hébergeant les services de résolution de noms de domaine.  
+
+Cette configuration est identique entre les distributions **DEBIAN** et les distributions dérivées **REDHAT**. Cela se passe dans les fichiers **/etc/hosts** et **/etc/resolv.conf**.  
+
+C'est dans **/etc/nsswitch.conf** que se trouve la configuration qui permet au serveur(le Software comme par exemple Nginx) en tant que client de chercher les machines(dons le PC ou le VPS) autour de lui.
+
+Cette partie n'est pas finis car les concepts ici sont trop abstraits pour moi pour le moment...
 
 #################################################################################################
 #################################################################################################
