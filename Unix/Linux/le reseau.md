@@ -238,6 +238,11 @@ Le code source du service **SSH** est diffusé sous licence BSD et est porté po
 Ainsi, il est possible de trouver un package  **openssh-server** pour les distributions **Debian**, **RedHat** et leurs dérivées respectives. Néanmoins, il est également possible de trouver les sources du serveur.
 Le service **SSH** est un logiciel installé par défaut avec toutes les distributions. Même lorsqu'il s'agit d'une version minimale de la distribution, vous aurez la possibilité de l'installer dès le départ.
 
+On peut lister les port utilises en filtrant pour avoir ceux qui concernes le service ssh:
+
+    thomas@hp-pavillon:~$ ss -l | grep ssh
+    thomas@hp-pavillon:~$ sudo ss -nlp | grep :22
+
 
 #################################################################################################
 #################################################################################################
