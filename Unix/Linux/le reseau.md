@@ -159,6 +159,85 @@ Cette partie n'est pas finis car les concepts ici sont trop abstraits pour moi p
 #################################################################################################
 # Connectez vous a distancve avec SSH
 
+## Découvrez les protocoles de cryptographie asymétrique
+
+Rassurez-vous, l'idée derrière ces mots un peu barbares est simple : il s'agit de mettre en œuvre des mécanismes pour garantir la sécurité de l'échange entre vous et votre serveur sur deux aspects principaux :
+
+1. l'échange provient bien de votre serveur,
+2. vous êtes bien le seul à pouvoir lire les informations transmises.
+
+Avant toute chose, un peu de vocabulaire :
+
+Cryptologie  
+C'est la science du secret dans la transmission de l'information.
+
+Cryptographie 
+C'est une discipline de la cryptologie assurant notamment la confidentialité, l'authenticité et l'intégrité du message dans une transmission.
+Chiffrer
+On chiffre un message afin de s'assurer qu'il est secret.
+Déchiffrer
+On déchiffre un message afin de récupérer les données d'origine, lisibles et compréhensibles.
+Crypter
+On crypte lorsqu'on veut altérer un message dans l’objectif qu’il ne soit plus lisible, à jamais.
+Décrypter
+On essaie cependant de décrypter un message chiffré lorsqu'on ne connaît pas la clé de déchiffrement.
+
+Le principe de la cryptographie est le suivant :
+
+1. déterminer un algorithme permettant de chiffrer un message,
+2. communiquer cet algorithme à votre correspondant afin qu'il puisse déchiffrer le message. 
+
+L'informatique peut nous fournir assez facilement des algorithmes de chiffrement performants :
+
+* DES (Data Encryption Standard) d'IBM,
+* ou encore AES (Advanced Encryption Standard), qui est probablement le plus courant aujourd'hui.
+
+Pour résoudre le problème de la criticité de la clé de chiffrement symétrique, nous employons plutôt la cryptographie asymétrique, c'est à dire l'utilisation de deux clés plutôt qu'une :
+
+Une clé dite publique, qui va servir à chiffrer le message, et qui peut être diffusée sans criticité absolue, puisqu'elle ne sert qu'à chiffrer.
+
+Une clé dite privée, qui va servir à déchiffrer le message, et qui est conservée précieusement, sans nécessité de la diffuser :
+
+![alt text](./png/image-4.png)
+
+Comment la clé privée déchiffre-t-elle le message chiffré à partir de la clé publique ?
+Et bien, en utilisant un procédé mathématique nommé brèche secrète : La clé publique est générée à partir de la clé privée, qui y laisse une brèche secrète, soit un élément permettant de déchiffrer le message...
+Bref, sans trop rentrer dans le détail des mathématiques, retenez simplement que la clé publique sert à chiffrer et que la clé privée sert à déchiffrer.
+Ce processus présente l'avantage d'être très sécurisé, une personne lambda en possession de la clé publique (seul élément à être transmis) ne pourra pas déchiffrer le message. Ajoutons à cela l'avantage de pouvoir identifier de manière sûre la provenance du message en inversant la transmission.
+En effet, un message chiffré à l'aide de la clé privée présente une empreinte (on parle ici de condensat ou de hash) identique à celle du même message chiffré avec la clé publique.
+Le gros inconvénient de cette méthode réside dans ces performances. En effet, la cryptographie asymétrique est beaucoup plus gourmande en ressources de calcul que la cryptographie symétrique. Les deux principaux algorithmes de cryptographie asymétrique sont **RSA** et *DSA*, et ils sont environ 1 000 fois plus lents que **DES**…
+
+Le protocole SSH se définit par l'utilisation des deux procédés de cryptographie :
+
+1. asymétrique pour mettre en place un échange sécurisé avec le client,
+2. et symétrique pour gérer les données.
+
+Le principe de fonctionnement est le suivant :
+
+1. Le serveur écoute les demandes de connexions entrantes ;
+2. Un client demande une connexion, le serveur lui répond les algorithmes de chiffrement à sa disposition ;
+3. Le client valide un algorithme et le serveur fournit au client sa clé publique ;
+4. À partir de ce moment-là, le client peut vérifier que tous les messages qu'il va recevoir proviennent bien du serveur ;
+5. Le client et le serveur échangent grâce à la cryptographie asymétrique pour s'accorder sur une clé de chiffrement symétrique basée sur un très grand nombre premier, on l'appelle la **clé de session SSH** ;
+6. Une fois cette clé partagée, le client et le serveur peuvent l'utiliser pour tout le reste de la session.
+
+Voilà pour la théorie, passons maintenant à la pratique !
+
+## Installez un service SSH
+
+Parmi les nombreuses distributions Linux, **OpenBSD**, dérivée de la branche 4.4DSB, est l'une des plus anciennes (1994) et des plus réputées sur l'importance qu'elle accorde à la sécurité.
+L'équipe de développement de cette distribution a donc construit une brique logiciel basée sur le protocole SSH : **OpenSSH**. Cette brique logicielle fournit notamment les éléments suivants :
+
+* **sshd**: le service SSH ;
+* **ssh**: le client SSH ;
+* **ssh-keygen** et **ssh-copy-id**: les utilitaires de gestion de clé **RSA**, **DSA** ;
+* **scp** et **sftp**: les clients permettant le transfert de données via **SSH**.
+
+Nous allons nous intéresser à **sshd**, le processus service s'appuyant sur le protocole **SSH**.
+Le code source du service **SSH** est diffusé sous licence BSD et est porté pour les principales distributions Linux.
+Ainsi, il est possible de trouver un package  **openssh-server** pour les distributions **Debian**, **RedHat** et leurs dérivées respectives. Néanmoins, il est également possible de trouver les sources du serveur.
+Le service **SSH** est un logiciel installé par défaut avec toutes les distributions. Même lorsqu'il s'agit d'une version minimale de la distribution, vous aurez la possibilité de l'installer dès le départ.
+
 
 #################################################################################################
 #################################################################################################
