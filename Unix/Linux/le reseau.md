@@ -241,7 +241,8 @@ Le service **SSH** est un logiciel installé par défaut avec toutes les distrib
 On peut lister les port utilises en filtrant pour avoir ceux qui concernes le service ssh:
 
     thomas@hp-pavillon:~$ ss -l | grep ssh
-    thomas@hp-pavillon:~$ sudo ss -nlp | grep :22
+    (ou lorsque l'on connait le port utilise en l'occurence ici le 22)
+    thomas@hp-pavillon:~$ ss -nlp | grep :22
 
 
 #################################################################################################
