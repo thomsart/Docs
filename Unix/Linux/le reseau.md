@@ -244,10 +244,75 @@ On peut lister les port utilises en filtrant pour avoir ceux qui concernes le se
     (ou lorsque l'on connait le port utilise en l'occurence ici le 22)
     thomas@hp-pavillon:~$ ss -nlp | grep :22
 
+## Connectez-vous a un service SSH
+
+Bien entendu, les développeurs de la brique logicielle OpenSSH fournissent également la partie cliente, nommée SSH. Ce logiciel permet de se connecter à distance sur un serveur disposant d'un service SSH. Pour l'installer, il suffit de charger les packages associés.
+Vous allez sûrement constater un nombre d'options et de paramètres assez conséquent pour la commande ssh. Mais finalement, pour une utilisation basique du client, il suffit de lancer le programme en indiquant :
+
+* le compte avec lequel l'authentification doit s'effectuer,
+* l'adresse du serveur, évidemment.
+
+La partie la plus intéressante de la connexion SSH réside probablement dans la gestion et l’échange des clés dont je vous ai parlé plus haut. Mais le plus simple est encore de le voir en vidéo ! Nous allons :
+
+* initier une première connexion au service SSH,
+* étudier l’option -p de la commande ssh,
+* observer le condensat pendant le processus de connexion, et la gestion des clés échangées,
+* voir une erreur très classique des connexions via SSH : lorsque le serveur qui héberge le service a changé et que les clés ne correspondent plus ! Dans ces cas-là, la commande SSH-keygen est votre meilleure amie.
+
+Le service SSH vous permet de vous connecter de manière sécurisée, à distance, sur votre serveur Linux. C'est tout.
+Lorsque le processus de connexion/authentification est terminé, le service SSH rend la main en exécutant le shell associé au compte de connexion.Les données de la session shell sont ensuite chiffrées via le protocole SSH.
+
+Dernier point : la brique logicielle OpenSSH est disponible pour tous les Unix/Linux, si vous souhaitez utiliser un client SSH sur Windows, il est nécessaire d'installer PuTTY par exemple, qui permet d'obtenir avec le même logiciel un client SSH ainsi qu'un émulateur de terminal.
+
+(chapitre pas complet)
+
+## Sécurisez votre connexion SSH
+
+Allons maintenant un peu plus loin avec la connexion SSH.
+Le point faible de la connexion telle que décrite ci-dessus reste bien évidemment le mot de passe du compte utilisateur : lorsque vous allez multiplier les connexions sur différents serveurs, avec différents comptes utilisateurs, la gestion de ces mots de passe va se compliquer. Par ailleurs, la saisie d'un mot de passe est toujours une source de faille potentielle, que ce soit sur votre poste de travail, ou encore avec vos collègues...
+
+L'idée ici est une nouvelle fois d'utiliser les bienfaits de la cryptographie asymétrique. Il s'agit de générer, en tant que client, notre propre doublon de clé privée/clé publique. Cela permettra notamment de diffuser cette clé publique sur les serveurs pour faciliter notre authentification avec la clé privée associée. Le client va donc aussi diffuser sa clé publique sur le serveur...
+
+Attention : ce processus d’authentification par clés asymétriques est TRÈS important en termes de sécurité, et vous allez probablement le rencontrer très souvent en entreprise. Donc prenez bien le temps de le comprendre parfaitement.
+
+Pour generer une cle SSH on tape:
+
+    thomas@hp-pavillon:~$ ssh-keygen -t rsa -b 4096 -f /root/.ssh/id_rsa -N ''
+    -t rsa -b 4096 (ou ed25519 de 256 bits avec un algo plus robuste mais pas encore supporte partout)
+    -f /root/.ssh/id_rsa pour l'emplacement du fichier et son nom
+    -N '' pour indiquer que l'on ne veux pas taper de mot de passe a chaque connection
+
+Une fois creee on peut la diffuser sur un serveur via la commande suivante:
+
+    thomas@hp-pavillon:~$ ssh copy-id -i /root/.shh/id_rsa.pub ubuntu@127.92.156.32
+    -i la cle a distribuer
+    sur ubuntu@127.92.156.32 le serveur distant sur lequel on veut la partager
+
+A la premiere connexion le mot de passe sera demande car la cle n'y est pas encore, mais a la suite ce sera sans.
+Pour cela, il est nécessaire de modifier le comportement du serveur SSH via son fichier de configuration. Ici n'est abordé que la partie émergée de l’iceberg SSH. Il est possible de faire tellement de choses avec cette suite logicielle, comme les rebonds, les callbacks, les tunnels sur d’autres protocoles, bref… SSH est une brique logicielle absolument indispensable sous Linux !
 
 #################################################################################################
 #################################################################################################
 # Transferez des fichiers par le reseau
+
+Par définition, un serveur Linux ne sera pas installé en mode graphique. C'est normal, c'est un serveur. La couche graphique est inutile : elle représente des failles potentielles de sécurité supplémentaires, et prendra des ressources matérielles pour rien.
+Le seul outil de communication constant et fiable avec le serveur reste donc le terminal. Cependant, certaines tâches sont moins intuitives avec un terminal que lorsque vous disposez d'une belle interface graphique. Elles sont peut être moins intuitives, mais elles restent possibles. Dans ce chapitre, je vous propose d'étudier spécifiquement les tâches de téléchargement et de transfert de fichiers à partir d'un terminal. Nous verrons dans un premier temps les deux logiciels les plus utilisés pour télécharger des fichiers en HTTP sur le réseau, à savoir **wget** et **curl**.
+
+## Téléchargez sur internet avec  wget  et  curl
+
+Les deux logiciels les plus utilisés sous Linux pour télécharger des fichiers depuis un terminal sont **wget** et **curl**. Ces logiciels offrent des fonctionnalités assez similaires et font partie du trousseau des indispensables d'un administrateur Linux.
+**wget** est un projet GNU. Ce petit logiciel permet de télécharger des fichiers en utilisant les protocoles Internet communs, comme **HTTP**, ou **FTP**. **curl** s'appuie sur les librairies partagées libcurl, et diffusé sous licence MIT. Dans le périmètre des fonctionnalités de base, il est comparable à **wget**, à une différence non négligeable : il ne propose pas de téléchargement récursif. C'est la raison principale pour laquelle je choisis directement le premier plutôt que le second mais se distingue surtout pour la liste des protocoles compatibles (DICT, FILE, FTP, FTPS, Gopher, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMB, SMBS, SMTP, SMTPS, telnet and TFTP).
+
+Exemples:
+
+    thomas@hp-pavillon:~$ wget https://lesite.com
+    thomas@hp-pavillon:~$ wget https://lesite.com
+    thomas@hp-pavillon:~$ wget https://lesite.com
+    thomas@hp-pavillon:~$ wget https://lesite.com
+    thomas@hp-pavillon:~$ wget https://lesite.com
+
+
+
 
 
 
