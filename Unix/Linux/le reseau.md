@@ -303,16 +303,40 @@ Le seul outil de communication constant et fiable avec le serveur reste donc le 
 Les deux logiciels les plus utilisés sous Linux pour télécharger des fichiers depuis un terminal sont **wget** et **curl**. Ces logiciels offrent des fonctionnalités assez similaires et font partie du trousseau des indispensables d'un administrateur Linux.
 **wget** est un projet GNU. Ce petit logiciel permet de télécharger des fichiers en utilisant les protocoles Internet communs, comme **HTTP**, ou **FTP**. **curl** s'appuie sur les librairies partagées libcurl, et diffusé sous licence MIT. Dans le périmètre des fonctionnalités de base, il est comparable à **wget**, à une différence non négligeable : il ne propose pas de téléchargement récursif. C'est la raison principale pour laquelle je choisis directement le premier plutôt que le second mais se distingue surtout pour la liste des protocoles compatibles (DICT, FILE, FTP, FTPS, Gopher, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMB, SMBS, SMTP, SMTPS, telnet and TFTP).
 
-Exemples:
+Exemples **wget**:
 
-    thomas@hp-pavillon:~$ wget https://lesite.com
-    thomas@hp-pavillon:~$ wget https://lesite.com
-    thomas@hp-pavillon:~$ wget https://lesite.com
-    thomas@hp-pavillon:~$ wget https://lesite.com
-    thomas@hp-pavillon:~$ wget https://lesite.com
+    thomas@hp-pavillon:~$ wget https://lesite.com/fichier.iso
 
+    On peut lui indiquer un emplacement precis et meme le renomer :
+    thomas@hp-pavillon:~$ wget -O /home/thomas/bureau/projet/nouveau_nom_fichier.iso https://lesite.com/fichier.iso
 
+    On peut egalement passer par le protocole ftp :
+    thomas@hp-pavillon:~$ wget --ftp-user=user --ftp-password=password -O /home/thomas/bureau/projet/nouveau_nom_fichier.iso https://lesite.com/fichier.iso
 
+    On peut aller telecharger de maniere recursive tout les fichiers d'un rep en ligne a condition que le rep soit bien entendu browsable :
+    thomas@hp-pavillon:~$ wget -r https://lesite.com/images/
+    Ou en allant lire une liste de fichiers dans un fichier donne comme suit:
+    thomas@hp-pavillon:~$ wget -i /home/thomas/fichier_liste.txt
+
+Exemples **curl**:
+
+    On peut lui indiquer un emplacement precis et meme le renomer :
+    thomas@hp-pavillon:~$ curl -o /home/thomas/bureau/projet/nouveau_nom_fichier.iso -O https://lesite.com/fichier.iso
+
+    On peut egalement passer par le protocole ftp :
+    thomas@hp-pavillon:~$ curl --user=user:password -O ftp://lesite.com/fichier.iso
+
+    On peut aller telecharger de maniere recursive tout les fichiers d'un rep en ligne a condition que le rep soit bien entendu browsable :
+    thomas@hp-pavillon:~$ curl -O https://lesite.com/fichier1 -O https://lesite.com/fichier2
+
+    Le gros avantage de curl est l'option -C qui permet de reprendre un telechargement qui a ete interrompus pour x raison:
+    thomas@hp-pavillon:~$ curl -C https://lesite.com/fichier.iso
+
+## Transférez des fichiers par SSH
+
+Les utilitaires **curl** et **wget** vont surtout être utilisés pour les téléchargement de fichiers hébergés sur Internet ou via des services **HTTP** ou **FTP**. Mais il est également possible de transférer des fichiers d'un serveur ne disposant que du service SSH.
+
+Pour cela, nous allons utiliser un autre logiciel de la brique **OpenSSH** : <u>OK<u>***scp***.
 
 
 
