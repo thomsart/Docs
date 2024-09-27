@@ -168,18 +168,17 @@ Rassurez-vous, l'idée derrière ces mots un peu barbares est simple : il s'agit
 
 Avant toute chose, un peu de vocabulaire :
 
-Cryptologie  
+**Cryptologie**  
 C'est la science du secret dans la transmission de l'information.
-
-Cryptographie 
+**Cryptographie** 
 C'est une discipline de la cryptologie assurant notamment la confidentialité, l'authenticité et l'intégrité du message dans une transmission.
-Chiffrer
+**Chiffrer**
 On chiffre un message afin de s'assurer qu'il est secret.
-Déchiffrer
+**Déchiffrer**
 On déchiffre un message afin de récupérer les données d'origine, lisibles et compréhensibles.
-Crypter
+**Crypter**
 On crypte lorsqu'on veut altérer un message dans l’objectif qu’il ne soit plus lisible, à jamais.
-Décrypter
+**Décrypter**
 On essaie cependant de décrypter un message chiffré lorsqu'on ne connaît pas la clé de déchiffrement.
 
 Le principe de la cryptographie est le suivant :
@@ -189,8 +188,8 @@ Le principe de la cryptographie est le suivant :
 
 L'informatique peut nous fournir assez facilement des algorithmes de chiffrement performants :
 
-* DES (Data Encryption Standard) d'IBM,
-* ou encore AES (Advanced Encryption Standard), qui est probablement le plus courant aujourd'hui.
+* **DES** (Data Encryption Standard) d'IBM,
+* ou encore **AES** (Advanced Encryption Standard), qui est probablement le plus courant aujourd'hui.
 
 Pour résoudre le problème de la criticité de la clé de chiffrement symétrique, nous employons plutôt la cryptographie asymétrique, c'est à dire l'utilisation de deux clés plutôt qu'une :
 
@@ -238,7 +237,7 @@ Le code source du service **SSH** est diffusé sous licence BSD et est porté po
 Ainsi, il est possible de trouver un package  **openssh-server** pour les distributions **Debian**, **RedHat** et leurs dérivées respectives. Néanmoins, il est également possible de trouver les sources du serveur.
 Le service **SSH** est un logiciel installé par défaut avec toutes les distributions. Même lorsqu'il s'agit d'une version minimale de la distribution, vous aurez la possibilité de l'installer dès le départ.
 
-On peut lister les port utilises en filtrant pour avoir ceux qui concernes le service ssh:
+On peut lister les ports utilises en filtrant pour avoir ceux qui concernes le service ssh:
 
     thomas@hp-pavillon:~$ ss -l | grep ssh
     (ou lorsque l'on connait le port utilise en l'occurence ici le 22)
@@ -246,13 +245,13 @@ On peut lister les port utilises en filtrant pour avoir ceux qui concernes le se
 
 ## Connectez-vous a un service SSH
 
-Bien entendu, les développeurs de la brique logicielle OpenSSH fournissent également la partie cliente, nommée SSH. Ce logiciel permet de se connecter à distance sur un serveur disposant d'un service SSH. Pour l'installer, il suffit de charger les packages associés.
+Bien entendu, les développeurs de la brique logicielle **OpenSSH** fournissent également la partie cliente, nommée **SSH**. Ce logiciel permet de se connecter à distance sur un serveur disposant d'un service SSH. Pour l'installer, il suffit de charger les packages associés.
 Vous allez sûrement constater un nombre d'options et de paramètres assez conséquent pour la commande ssh. Mais finalement, pour une utilisation basique du client, il suffit de lancer le programme en indiquant :
 
 * le compte avec lequel l'authentification doit s'effectuer,
 * l'adresse du serveur, évidemment.
 
-La partie la plus intéressante de la connexion SSH réside probablement dans la gestion et l’échange des clés dont je vous ai parlé plus haut. Mais le plus simple est encore de le voir en vidéo ! Nous allons :
+La partie la plus intéressante de la connexion **SSH** réside probablement dans la gestion et l’échange des clés dont je vous ai parlé plus haut. Nous allons :
 
 * initier une première connexion au service SSH,
 * étudier l’option -p de la commande ssh,
@@ -262,7 +261,7 @@ La partie la plus intéressante de la connexion SSH réside probablement dans la
 Le service SSH vous permet de vous connecter de manière sécurisée, à distance, sur votre serveur Linux. C'est tout.
 Lorsque le processus de connexion/authentification est terminé, le service SSH rend la main en exécutant le shell associé au compte de connexion.Les données de la session shell sont ensuite chiffrées via le protocole SSH.
 
-Dernier point : la brique logicielle OpenSSH est disponible pour tous les Unix/Linux, si vous souhaitez utiliser un client SSH sur Windows, il est nécessaire d'installer PuTTY par exemple, qui permet d'obtenir avec le même logiciel un client SSH ainsi qu'un émulateur de terminal.
+Dernier point : la brique logicielle **OpenSSH** est disponible pour tous les Unix/Linux, si vous souhaitez utiliser un client SSH sur Windows, il est nécessaire d'installer **PuTTY** par exemple, qui permet d'obtenir avec le même logiciel un client SSH ainsi qu'un émulateur de terminal.
 
 (chapitre pas complet)
 
@@ -336,8 +335,22 @@ Exemples **curl**:
 
 Les utilitaires **curl** et **wget** vont surtout être utilisés pour les téléchargement de fichiers hébergés sur Internet ou via des services **HTTP** ou **FTP**. Mais il est également possible de transférer des fichiers d'un serveur ne disposant que du service SSH.
 
-Pour cela, nous allons utiliser un autre logiciel de la brique **OpenSSH** : <u>OK<u>***scp***.
+Pour cela, nous allons utiliser un autre logiciel de la brique **OpenSSH** : ***scp***.
+L'objectif de **scp** est de fournir une fonctionnalité de transfert de fichier sécurisée en s'appuyant sur le protocole SSH.
+Pour cela, *scp* va tout simplement utiliser le client *ssh*. La seule condition de son utilisation étant bien entendu de posséder un compte de connexion et un service SSH en écoute.  
 
+exemple d'utilisation:
+
+    thomas@hp-pavillon:~$ scp fichier_source fichier_destinatation
+    ex:
+
+
+
+
+
+## Transférez des fichiers par FTP/FTPS/SFTP
+
+id_ed25519_ovh_vps.pub
 
 
 
