@@ -263,7 +263,7 @@ Lorsque le processus de connexion/authentification est terminé, le service SSH 
 
 Dernier point : la brique logicielle **OpenSSH** est disponible pour tous les Unix/Linux, si vous souhaitez utiliser un client SSH sur Windows, il est nécessaire d'installer **PuTTY** par exemple, qui permet d'obtenir avec le même logiciel un client SSH ainsi qu'un émulateur de terminal.
 
-(chapitre pas complet)
+(pas complet)
 
 ## Sécurisez votre connexion SSH
 
@@ -278,12 +278,12 @@ Pour generer une cle SSH on tape:
 
     thomas@hp-pavillon:~$ ssh-keygen -t rsa -b 4096 -f /root/.ssh/id_rsa -N ''
     -t rsa -b 4096 (ou ed25519 de 256 bits avec un algo plus robuste mais pas encore supporte partout)
-    -f /root/.ssh/id_rsa pour l'emplacement du fichier et son nom
+    -f /root/.ssh/id_rsa pour l'emplacement du fichier et son nom (on peut la mettre aussi dans ~/.ssh pour un user en particulier)
     -N '' pour indiquer que l'on ne veux pas taper de mot de passe a chaque connection
 
 Une fois creee on peut la diffuser sur un serveur via la commande suivante:
 
-    thomas@hp-pavillon:~$ ssh copy-id -i /root/.shh/id_rsa.pub ubuntu@127.92.156.32
+    thomas@hp-pavillon:~$ ssh-copy-id -i /root/.shh/id_rsa.pub ubuntu@127.92.156.32
     -i la cle a distribuer
     sur ubuntu@127.92.156.32 le serveur distant sur lequel on veut la partager
 
@@ -342,15 +342,16 @@ Pour cela, *scp* va tout simplement utiliser le client *ssh*. La seule condition
 exemple d'utilisation:
 
     thomas@hp-pavillon:~$ scp fichier_source fichier_destinatation
-    ex:
 
-
-
-
+    Mais cela marche dans les deux sens, on peut prendre un fichier source a distance pour le mettre localement et vice verca :
+    thomas@hp-pavillon:~$ scp ubuntu@56.115.382.369:~/mondossier/fichier.txt /home/thomas/projets/fichier.txt
+    thomas@hp-pavillon:~$ scp /home/thomas/projets/fichier.txt ubuntu@56.115.382.369:~/mondossier/fichier.txt
+    et meme avec deux serveurs distants si on a les cles SSH:
+    thomas@hp-pavillon:~$ scp ubuntu@56.115.382.369:~/mondossier/fichier.txt ubuntu@56.548.381.899:~/home/thomas/projets/fichier.txt
+    deux options sont bien pratiques -P et -r:
+    -P pour le port lorsqu'il est different de 22 et -r pour envoyer de maniere recursive tout le contenu d'un dossier.
 
 ## Transférez des fichiers par FTP/FTPS/SFTP
-
-id_ed25519_ovh_vps.pub
 
 
 
