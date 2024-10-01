@@ -337,7 +337,7 @@ Les utilitaires **curl** et **wget** vont surtout être utilisés pour les tél�
 
 Pour cela, nous allons utiliser un autre logiciel de la brique **OpenSSH** : ***scp***.
 L'objectif de **scp** est de fournir une fonctionnalité de transfert de fichier sécurisée en s'appuyant sur le protocole SSH.
-Pour cela, *scp* va tout simplement utiliser le client *ssh*. La seule condition de son utilisation étant bien entendu de posséder un compte de connexion et un service SSH en écoute.  
+Pour cela, *scp* va tout simplement utiliser le client *ssh*. La seule condition de son utilisation étant bien entendu de posséder un compte de connexion et un service **SSH** en écoute.  
 
 exemple d'utilisation:
 
@@ -353,7 +353,15 @@ exemple d'utilisation:
 
 ## Transférez des fichiers par FTP/FTPS/SFTP
 
+Dernier cas de figure : vous disposez de manière tout à fait logique d'une interface graphique sur votre poste de travail. Vous pouvez alors profiter des logiciels clients graphiques permettant de transférer des fichiers.
+Dans certains cas, je pense notamment aux serveurs de fichiers publics, vous allez utiliser le protocole **FTP**. Mais ce dernier tend à disparaître, car par défaut les flux transitant sur le réseau pendant les échanges ne sont pas chiffrés. 
+Il est nécessaire de coupler le serveur **FTP** avec un certificat **TLS/SSL**, pour obtenir un service **FTPS**.
+Par contre, sur un serveur disposant d'un accès **SSH**, il est possible de faire du **“FTP par SSH”**, aussi nommé **SFTP**.
 
+Le principe est simple :
 
+* Définition d'un nouveau protocole de communication s'appuyant sur **SSH** spécialisé dans la gestion des fichiers,
+* Utilisation d'un programme comme client **SFTP**.
 
-thomas@hp-pavillon:~$
+Alors, idem que pour **scp**, **SFTP** reposant sur **SSH** va utiliser les principes de cryptographie asymétrique. Il suffit d'utiliser un logiciel compatible pour bénéficier de ses fonctionnalités.
+Par exemple, **FileZilla** est, à l'origine, un logiciel client pour **FTP** très connu, gratuit et proposé sous licence GNU, compatible avec **SFTP**.
